@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Thực Chiến | Tài Liệu Cuộc Thi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <a href="#" class="brand">
+        <div class="brand-logo">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="8" fill="url(#brand-grad)"/>
+            <path d="M9 16L14 21L23 11" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="brand-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#6366F1"/>
+                <stop offset="1" stop-color="#A855F7"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="brand-title">AI Thực Chiến</span>
+        <span class="badge">v3.9.1</span>
+      </a>
+    </div>
+
+    <div class="navbar-right">
+      <div class="search-box">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" placeholder="Tìm kiếm tài liệu... (Ctrl+K)" autocomplete="off">
+        <div id="searchResults" class="search-dropdown hidden"></div>
+      </div>
+
+      <button id="themeToggle" class="icon-btn" title="Chuyển đổi giao diện Sáng/Tối" aria-label="Toggle theme">
+        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+
+      <a href="https://docs.thucchien.ai/docs/round-2" target="_blank" class="nav-link external-link">
+        <span>Gốc</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- App Main Layout -->
+  <div class="app-layout">
+    <!-- Left Navigation Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <ul class="nav-tree">
+          <li class="nav-group expanded">
+            <div class="nav-group-header active">
+              <span class="group-title">Vòng Chung Khảo</span>
+              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+            <ul class="nav-sub">
+              <li><a href="#regulations-and-technical-guidelines" class="nav-item active">Quy định & Hướng dẫn kỹ thuật</a></li>
+              <li><a href="#suno-login-guidelines" class="nav-item">Hướng dẫn đăng nhập Suno</a></li>
+              <li><a href="#otp-generator" class="nav-item">Công cụ OTP</a></li>
+              <li class="nav-group expanded">
+                <div class="nav-group-header active">
+                  <span class="group-title">Sử dụng với Google GenAI</span>
+                  <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+                <ul class="nav-sub">
+                  <li><a href="#vibe-coding" class="nav-item">Tích hợp với công cụ AI Coding</a></li>
+                  <li><a href="#google-genai" class="nav-item">Sử dụng với Gemini/Vertex AI</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group expanded">
+            <div class="nav-group-header">
+              <span class="group-title">Vòng Bán Kết</span>
+              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+            <ul class="nav-sub">
+              <li><a href="#synthetic-data" class="nav-item">Kỹ thuật tạo dữ liệu</a></li>
+              <li class="nav-group expanded">
+                <div class="nav-group-header">
+                  <span class="group-title">Huấn luyện mô hình</span>
+                  <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+                <ul class="nav-sub">
+                  <li><a href="#model-training-introduction" class="nav-item">Giới Thiệu</a></li>
+                  <li><a href="#pre-training-strategy-and-setup" class="nav-item">Chiến Lược & Thiết Lập Tiền Huấn Luyện</a></li>
+                  <li><a href="#distributed-training" class="nav-item">Huấn Luyện Phân Tán</a></li>
+                  <li><a href="#post-training-alignment" class="nav-item">Hậu Huấn Luyện & Hiệu Chỉnh</a></li>
+                  <li><a href="#model-finalization-and-submission" class="nav-item">Hoàn Thiện & Nộp Mô Hình</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+                    <li class="nav-group expanded">
+            <div class="nav-group-header">
+              <span class="group-title">Luyện Tập Thực Chiến</span>
+              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+            <ul class="nav-sub">
+              <li><a href="#tuan-01-intro" class="nav-item">Tuần 1: Quy định & Đăng nhập Suno</a></li>
+              <li><a href="#tuan-02-synthetic-data" class="nav-item">Tuần 2: Kỹ thuật Tạo Dữ liệu Tổng hợp</a></li>
+              <li><a href="#tuan-03-data-filtering" class="nav-item">Tuần 3: Lọc dữ liệu & Pha trộn</a></li>
+              <li><a href="#tuan-04-model-tokenizer" class="nav-item">Tuần 4: Lựa chọn Mô hình & Tokenizer</a></li>
+              <li><a href="#tuan-05-sft-training" class="nav-item">Tuần 5: Tinh chỉnh Giám sát (SFT)</a></li>
+              <li><a href="#tuan-06-continued-pretraining" class="nav-item">Tuần 6: Tiền Huấn luyện Bổ sung</a></li>
+              <li><a href="#tuan-07-distributed" class="nav-item">Tuần 7: Cấu hình Huấn luyện Phân tán</a></li>
+              <li><a href="#tuan-08-preference-opt" class="nav-item">Tuần 8: Tối ưu Sở thích (DPO/ORPO)</a></li>
+              <li><a href="#tuan-09-evaluation" class="nav-item">Tuần 9: Đánh giá & Tránh Nhiễm dữ liệu</a></li>
+              <li><a href="#tuan-10-model-submission" class="nav-item">Tuần 10: Đóng gói & Nộp Mô hình</a></li>
+            </ul>
+          </li>
+          <li class="nav-group expanded">
+            <div class="nav-group-header">
+              <span class="group-title">Vòng Chung Kết</span>
+              <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+            <ul class="nav-sub">
+              <li><a href="#round-4" class="nav-item">Vòng 4: Phát triển ứng dụng</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Overlay backdrop for mobile -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- Main Content Container -->
+    <main class="main-content">
+      <div class="content-wrapper">
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumbs" aria-label="Breadcrumb" id="breadcrumbs">
+          <a href="#">Trang chủ</a>
+          <span class="sep">/</span>
+          <a href="#regulations-and-technical-guidelines">Vòng Chung Khảo</a>
+          <span class="sep">/</span>
+          <span class="current" id="breadcrumbCurrent">Quy định & Hướng dẫn kỹ thuật</span>
+        </nav>
+
+        <!-- Markdown Document View -->
+        <article class="doc-article" id="docArticle">
+          <div class="loading-spinner">Đang tải tài liệu...</div>
+        </article>
+
+        <!-- Pagination Footer -->
+        <footer class="doc-footer">
+          <div class="doc-pagination">
+            <a href="#" id="prevDocBtn" class="pagination-link prev hidden">
+              <span class="direction">« Trang trước</span>
+              <span class="title" id="prevDocTitle"></span>
+            </a>
+            <a href="#" id="nextDocBtn" class="pagination-link next hidden">
+              <span class="direction">Trang tiếp theo »</span>
+              <span class="title" id="nextDocTitle"></span>
+            </a>
+          </div>
+        </footer>
+      </div>
+
+      <!-- Right Table of Contents (On this page) -->
+      <aside class="toc-sidebar">
+        <div class="toc-container">
+          <div class="toc-title">MỤC LỤC TRANG</div>
+          <nav id="tocNav" class="toc-nav">
+            <!-- Dynamically populated -->
+          </nav>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

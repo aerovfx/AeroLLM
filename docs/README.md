@@ -79,10 +79,10 @@ Dưới đây là danh sách toàn bộ các học phần được sắp xếp t
 ---
 
 ## 📝 Tài liệu bổ trợ (Project Files)
-- [🎉 Tiến độ Visualization & Chapters](COMPLETION_VISUALIZATION_AND_CHAPTERS.md)
-- [🚀 Roadmap GPT-4 Expansion](ROADMAP_GPT4_EXPANSION.md)
-- [🎯 Visualization Spec](VISUALIZATION_SYSTEM_DESIGN_SPEC.md)
-- [🚀 Lộ trình Hybrid AI](roadmapHybridAI.md)
+- [🎉 Tiến độ Visualization & Chapters](project_logs/COMPLETION_VISUALIZATION_AND_CHAPTERS.md)
+- [🚀 Roadmap GPT-4 Expansion](project_logs/ROADMAP_GPT4_EXPANSION.md)
+- [🎯 Visualization Spec](project_logs/VISUALIZATION_SYSTEM_DESIGN_SPEC.md)
+- [🚀 Lộ trình Hybrid AI](project_logs/roadmapHybridAI.md)
 
 ---
 ## 🤝 Liên hệ & Đóng góp

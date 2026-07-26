@@ -56,19 +56,19 @@
 | Bài học | Liên kết |
 | :--- | :--- |
 | [� Kho Tài Liệu Aero-HowtoLLMs](README.md) | [Xem bài viết →](README.md) |
-| [🎉 HOÀN THIỆN VISUALIZATION & CHAPTERS!](completion_visualization_and_chapters.md) | [Xem bài viết →](completion_visualization_and_chapters.md) |
-| [🎉 100% LOCALIZATION COMPLETE!](localization_100_complete.md) | [Xem bài viết →](localization_100_complete.md) |
-| [✅ LOCALIZATION FOUNDATION COMPLETE!](localization_summary.md) | [Xem bài viết →](localization_summary.md) |
-| [✅ Việt Hóa Walkthrough - Self Attention Complete!](localization_walkthrough04.md) | [Xem bài viết →](localization_walkthrough04.md) |
-| [✅ Phase 1 - Week 1: Foundation Complete!](progress_week1.md) | [Xem bài viết →](progress_week1.md) |
-| [✅ Week 2 Progress: GPT-4 Integration Complete!](progress_week2.md) | [Xem bài viết →](progress_week2.md) |
-| [✅ Week 3 Progress: MoE Grid Layout Complete!](progress_week3.md) | [Xem bài viết →](progress_week3.md) |
-| [✅ Week 4 Complete: Router Visualization & Color Coding!](progress_week4_complete.md) | [Xem bài viết →](progress_week4_complete.md) |
-| [🎯 Week 4 Progress: Router Visualization (Part 1)](progress_week4_part1.md) | [Xem bài viết →](progress_week4_part1.md) |
-| [🚀 Roadmap: Mở Rộng LLM Visualization - GPT-4 & Modern Architectures](roadmap_gpt4_expansion.md) | [Xem bài viết →](roadmap_gpt4_expansion.md) |
-| [🚀 Roadmap Học Hybrid AI (6 Tháng)](roadmaphybridai.md) | [Xem bài viết →](roadmaphybridai.md) |
-| [🎯 LLM Training Pipeline - 3D Visualization System Design](visualization_system_design_spec.md) | [Xem bài viết →](visualization_system_design_spec.md) |
-| [🎯 Week 3-4 Implementation Plan: MoE Visualization Enhancement](week3_moe_implementation.md) | [Xem bài viết →](week3_moe_implementation.md) |
+| [🎉 HOÀN THIỆN VISUALIZATION & CHAPTERS!](project_logs/COMPLETION_VISUALIZATION_AND_CHAPTERS.md) | [Xem bài viết →](project_logs/COMPLETION_VISUALIZATION_AND_CHAPTERS.md) |
+| [🎉 100% LOCALIZATION COMPLETE!](project_logs/LOCALIZATION_100_COMPLETE.md) | [Xem bài viết →](project_logs/LOCALIZATION_100_COMPLETE.md) |
+| [✅ LOCALIZATION FOUNDATION COMPLETE!](project_logs/LOCALIZATION_SUMMARY.md) | [Xem bài viết →](project_logs/LOCALIZATION_SUMMARY.md) |
+| [✅ Việt Hóa Walkthrough - Self Attention Complete!](project_logs/LOCALIZATION_WALKTHROUGH04.md) | [Xem bài viết →](project_logs/LOCALIZATION_WALKTHROUGH04.md) |
+| [✅ Phase 1 - Week 1: Foundation Complete!](project_logs/PROGRESS_WEEK1.md) | [Xem bài viết →](project_logs/PROGRESS_WEEK1.md) |
+| [✅ Week 2 Progress: GPT-4 Integration Complete!](project_logs/PROGRESS_WEEK2.md) | [Xem bài viết →](project_logs/PROGRESS_WEEK2.md) |
+| [✅ Week 3 Progress: MoE Grid Layout Complete!](project_logs/PROGRESS_WEEK3.md) | [Xem bài viết →](project_logs/PROGRESS_WEEK3.md) |
+| [✅ Week 4 Complete: Router Visualization & Color Coding!](project_logs/PROGRESS_WEEK4_COMPLETE.md) | [Xem bài viết →](project_logs/PROGRESS_WEEK4_COMPLETE.md) |
+| [🎯 Week 4 Progress: Router Visualization (Part 1)](project_logs/PROGRESS_WEEK4_PART1.md) | [Xem bài viết →](project_logs/PROGRESS_WEEK4_PART1.md) |
+| [🚀 Roadmap: Mở Rộng LLM Visualization - GPT-4 & Modern Architectures](project_logs/ROADMAP_GPT4_EXPANSION.md) | [Xem bài viết →](project_logs/ROADMAP_GPT4_EXPANSION.md) |
+| [🚀 Roadmap Học Hybrid AI (6 Tháng)](project_logs/roadmapHybridAI.md) | [Xem bài viết →](project_logs/roadmapHybridAI.md) |
+| [🎯 LLM Training Pipeline - 3D Visualization System Design](project_logs/VISUALIZATION_SYSTEM_DESIGN_SPEC.md) | [Xem bài viết →](project_logs/VISUALIZATION_SYSTEM_DESIGN_SPEC.md) |
+| [🎯 Week 3-4 Implementation Plan: MoE Visualization Enhancement](project_logs/WEEK3_MOE_IMPLEMENTATION.md) | [Xem bài viết →](project_logs/WEEK3_MOE_IMPLEMENTATION.md) |
 
 <!-- Aero-Footer-Start -->
 ---
