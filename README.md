@@ -7,6 +7,7 @@ Khoá học thực hành bằng tiếng Việt về mô hình ngôn ngữ lớn:
 1. Đọc [Lộ trình khoá học](COURSE.md) để chọn điểm bắt đầu và thứ tự học.
 2. Mở [Chỉ mục toàn bộ nội dung](CONTENT_INDEX.md) khi cần tìm một bài, notebook hoặc mã nguồn cụ thể.
 3. Nếu muốn học theo chương trình ngắn, dùng [khoá nanoGPT 10 tuần](nanogpt_course/README.md).
+4. Để học theo chuyên đề nghề nghiệp, chọn một trong [các khoá 10 tuần](courses/README.md).
 
 > `COURSE.md` là nguồn chuẩn về thứ tự học. Các số trong tên thư mục `docs/` là mã lưu trữ cũ, không phải thứ tự bắt buộc.
 
