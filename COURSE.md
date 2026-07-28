@@ -117,6 +117,6 @@ Sản phẩm tối thiểu gồm README tái lập được, notebook/script ch�
 ## Lộ trình rút gọn
 
 - **10 tuần cho lớp học:** [nanoGPT Course](nanogpt_course/README.md).
-- **Ba khoá nghề nghiệp, 10 tuần/20 buổi:** [Xây LLM từ đầu, fine-tuning open-weight và pipeline training](courses/README.md).
+- **Bốn khoá nghề nghiệp, 10 tuần/20 buổi:** [Xây LLM từ đầu, fine-tuning open-weight, pipeline training và Kimi K3 frontier systems](courses/README.md).
 - **Training thực chiến:** [AI Thực Chiến](aithucchien/README.md).
 - **Tra cứu từng tài sản:** [Chỉ mục toàn bộ nội dung](CONTENT_INDEX.md).

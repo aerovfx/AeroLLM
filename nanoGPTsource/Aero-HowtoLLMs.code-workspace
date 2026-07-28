@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "Aero-HowtoLLMs",
+			"path": ".."
+		},
+		{
+			"name": "nanoGPTsource",
+			"path": "../../Downloads/nanoGPTsource"
+		}
+	],
+	"settings": {}
+}

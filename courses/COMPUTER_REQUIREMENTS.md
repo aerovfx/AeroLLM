@@ -42,6 +42,13 @@ Dung lượng thực tế phụ thuộc model, precision, sequence length, batch
 - CPT/SFT reduced run: GPU 16–24 GB trở lên.
 - Distributed/DeepSpec: hạ tầng chuyên dụng. Không chạy cấu hình mặc định DeepSpec nếu chưa kiểm tra storage; target cache mặc định có thể cực lớn.
 
+### Kimi K3: frontier architecture & agents
+
+- Toy KDA/AttnRes/QB/verifier: CPU 4 core, RAM 8 GB, Python + NumPy; PyTorch chỉ cần khi mở rộng sang model trainable.
+- Notebook/ablation model nhỏ: RAM 16 GB; GPU 8–16 GB là tuỳ chọn.
+- API experiment: không cần GPU nhưng cần quota, cost cap và dữ liệu không nhạy cảm.
+- Full Kimi K3: **không phải lab máy cá nhân**. Với 2.8T weights, lower bound lý thuyết đã khoảng 1.40 TB ở 4 bit, chưa gồm cache/runtime overhead; cần cluster và inference engine/hardware tương thích.
+
 ## Kiểm tra nhanh
 
 ```bash
