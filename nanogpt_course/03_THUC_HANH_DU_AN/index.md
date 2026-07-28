@@ -5,6 +5,8 @@
 
 ## 📄 Danh mục tài liệu thực hành
 
+0. **[Hệ thống bài tập nanoGPTsource](../06_BAI_TAP_MA_NGUON/index.md):** Bài đọc code, test, ablation và thí nghiệm theo từng tuần; có ba mức A/B/C.
+
 1.  **[thuc_hanh_colab.md (Hướng dẫn Colab)](file:///Users/dangvietchung/Aero-HowtoLLMs/nanogpt_course/03_THUC_HANH_DU_AN/thuc_hanh_colab.md):** Quy trình 3 bước thiết lập môi trường đám mây miễn phí và chạy huấn luyện mô hình.
 2.  **[minh_hoa_training.md (Minh họa quá trình Training)](file:///Users/dangvietchung/Aero-HowtoLLMs/nanogpt_course/03_THUC_HANH_DU_AN/minh_hoa_training.md):** Giải thích chi tiết mã nguồn PyTorch minh họa cho quy trình huấn luyện từng bước.
 3.  **Mã nguồn mẫu của mô hình:**

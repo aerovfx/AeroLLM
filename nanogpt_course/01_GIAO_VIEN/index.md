@@ -6,6 +6,8 @@
 
 ## 📄 Danh mục tài liệu giảng dạy
 
+0. **[Hướng dẫn tổ chức bài tập nanoGPTsource](huong_dan_nanoGPTsource.md):** Phân tầng A/B/C, chuẩn bị môi trường, rubric và giới hạn tài nguyên.
+
 1.  **[ke_hoach_giang_day.md (Kế hoạch bài dạy)](file:///Users/dangvietchung/Aero-HowtoLLMs/nanogpt_course/01_GIAO_VIEN/ke_hoach_giang_day.md):** Lộ trình giảng dạy chi tiết qua 10 tuần, phương pháp giảng dạy và mẹo truyền tải thuật toán bằng ẩn dụ sinh động.
 2.  **[chuan_bi_bai_day.md (Công tác chuẩn bị)](file:///Users/dangvietchung/Aero-HowtoLLMs/nanogpt_course/01_GIAO_VIEN/chuan_bi_bai_day.md):** Hướng dẫn chuẩn bị phần cứng, cài đặt môi trường lập trình Python/PyTorch, và phân bổ tài nguyên GPU trên Google Colab.
 3.  **[dap_an_phieu_hoc_tap.md (Đáp án phiếu học tập)](file:///Users/dangvietchung/Aero-HowtoLLMs/nanogpt_course/01_GIAO_VIEN/dap_an_phieu_hoc_tap.md):** Lời giải chi tiết cho tất cả các câu hỏi kiểm tra, câu hỏi trắc nghiệm tự ôn tập và thử thách viết code của học sinh từ Tuần 1 đến Tuần 10.

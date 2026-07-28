@@ -17,6 +17,11 @@
 - [🐍 Module 20: Python for AI](../20_python_colab_notebooks/index.md)
 ---
 <!-- Aero-Navigation-End -->
+
+## Khoá thực hành liên quan
+
+- [Module 30 — Fine-tuning LLM với Unsloth](../30_unsloth_finetuning/index.md): QLoRA, SFT, đánh giá, export và triển khai trong 8 buổi.
+
 ## 📁 Thư mục con
 | Thư mục | Liên kết |
 | :--- | :--- |

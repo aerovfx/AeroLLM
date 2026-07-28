@@ -53,6 +53,18 @@ Các module dưới đây được xếp theo thứ tự sư phạm. Mã module 
 |---|---|
 | 09 | [Quantitative evaluations](09_quantitative_evaluations/index.md) |
 
+## 5A. Thực hành fine-tuning với Unsloth
+
+| Mã | Nội dung |
+|---|---|
+| 30 | [Fine-tuning LLM với Unsloth: QLoRA, SFT, evaluation và deployment](30_unsloth_finetuning/index.md) |
+
+## 5B. Huấn luyện draft model và tối ưu inference
+
+| Mã | Nội dung |
+|---|---|
+| 31 | [DeepSpec: speculative decoding, target cache, draft training và evaluation](31_deepspec_training/index.md) |
+
 ## 6. Ứng dụng và an toàn
 
 | Mã | Nội dung |

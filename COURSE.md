@@ -70,9 +70,14 @@ Học theo thứ tự: embedding → positional embedding → causal attention �
 2. [Classification fine-tuning code](src/finetune/ch06/README.md)
 3. [Instruction tuning](docs/08_instruction_tuning/index.md)
 4. [Instruction fine-tuning, evaluation và DPO code](src/finetune/ch07/README.md)
-5. Mở rộng thực chiến: [training pipeline](aithucchien/README.md)
+5. [Khoá thực hành Unsloth: QLoRA → SFT → deployment](docs/30_unsloth_finetuning/index.md)
+6. Mở rộng thực chiến: [training pipeline](aithucchien/README.md)
 
 **Đầu ra:** chuẩn bị dataset, fine-tune một mô hình, đánh giá baseline và mô tả khác biệt giữa SFT, PEFT/LoRA và preference optimization.
+
+### Chuyên đề hệ thống sau huấn luyện
+
+[Module DeepSpec](docs/31_deepspec_training/index.md) dành cho người đã hoàn thành training và evaluation, muốn huấn luyện draft model cho speculative decoding. Đây là nhánh tối ưu inference nhiều GPU/storage, không phải bước bắt buộc của fine-tuning.
 
 ## Giai đoạn 6: Đánh giá, ứng dụng và an toàn
 

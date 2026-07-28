@@ -24,6 +24,9 @@
 | Transformer/GPT | [Module 04](docs/04_buildgpt/index.md) | [Pretrain ch03–04](src/README.md#xây-gpt-và-pre-training) |
 | Pre-training | [Module 06](docs/06_pretraining/index.md) | [Pretrain ch05](src/pretrain/ch05/README.md) |
 | Fine-tuning | [Module 07](docs/07_fine_tune_pretrained_models/index.md) | [Finetune ch06](src/finetune/ch06/README.md) |
+| Unsloth/QLoRA | [Module 30](docs/30_unsloth_finetuning/index.md) | Khoá 8 buổi có lab và đồ án |
+| Speculative decoding | [Module 31](docs/31_deepspec_training/index.md) | DeepSpec: data, target cache, draft training, evaluation |
+| nanoGPT source exercises | [Khoá nanoGPT 10 tuần](nanogpt_course/README.md) | [Bài tập theo tuần](nanogpt_course/06_BAI_TAP_MA_NGUON/index.md) |
 | Instruction/alignment | [Module 08](docs/08_instruction_tuning/index.md) | [Finetune ch07](src/finetune/ch07/README.md) |
 | Evaluation | [Module 09](docs/09_quantitative_evaluations/index.md) | [Model evaluation](src/finetune/ch07/03_model-evaluation/README.md) |
 | RAG | [Module 18](docs/18_rag/index.md) | [RAG templates](docs/18_rag/index.md) |

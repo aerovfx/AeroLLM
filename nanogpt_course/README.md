@@ -26,6 +26,7 @@ Mỗi tuần dùng cùng một nhịp học: `01_Topic` → `02_Terminology` →
 - **Học sinh:** bắt đầu từ bảng tuần học phía trên.
 - **Giáo viên:** [kế hoạch, chuẩn bị và đáp án](01_GIAO_VIEN/index.md).
 - **Thực hành:** [Colab và minh hoạ training](03_THUC_HANH_DU_AN/index.md).
+- **Bài tập mã nguồn:** [bài luyện tập 10 tuần với nanoGPTsource](06_BAI_TAP_MA_NGUON/index.md).
 - **Đánh giá:** [rubric, đề và biểu mẫu](04_DANH_GIA/index.md).
 - **Tài nguyên:** [tài liệu tham khảo](05_TAI_NGUYEN/index.md).
 

@@ -17,6 +17,10 @@ Nhánh ứng dụng của [Aero How to LLMs](../COURSE.md), phù hợp sau khi h
 | 9 | [Evaluation](docs/training/tuan-09-evaluation.md) |
 | 10 | [Model submission](docs/training/tuan-10-model-submission.md) |
 
+## Chuyên đề hệ thống nâng cao
+
+- [DeepSpec — huấn luyện draft model cho speculative decoding](../docs/31_deepspec_training/index.md): học sau distributed training và evaluation; yêu cầu capacity planning nghiêm ngặt do pipeline mặc định giả định 8 GPU và target cache rất lớn.
+
 ## Chuyên đề và tài liệu cuộc thi
 
 - [Round 2](docs/round-2.md): quy định, công cụ Google GenAI và vibe coding.
