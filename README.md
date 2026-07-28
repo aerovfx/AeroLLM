@@ -11,6 +11,18 @@ Khoá học thực hành bằng tiếng Việt về mô hình ngôn ngữ lớn:
 
 > `COURSE.md` là nguồn chuẩn về thứ tự học. Các số trong tên thư mục `docs/` là mã lưu trữ cũ, không phải thứ tự bắt buộc.
 
+## Mở nhanh các khoá học
+
+| Khoá học | Mục lục | Tuần 1 | Lịch học / bài tập |
+|---|---|---|---|
+| nanoGPT cho lớp học | [Mở khoá](nanogpt_course/README.md) | [Bắt đầu](nanogpt_course/02_HOC_SINH/Tuan_01_Intro/01_Topic.md) | [Bài tập mã nguồn](nanogpt_course/06_BAI_TAP_MA_NGUON/index.md) |
+| Xây LLM từ đầu | [Mở khoá](courses/llm-from-scratch/INDEX.md) | [Tuần 1](courses/llm-from-scratch/lessons/week01.md) | [Lịch 20 buổi](courses/llm-from-scratch/schedule.md) |
+| Fine-tuning open-weight | [Mở khoá](courses/openweight-finetuning/INDEX.md) | [Tuần 1](courses/openweight-finetuning/lessons/week01.md) | [Lịch 20 buổi](courses/openweight-finetuning/schedule.md) |
+| Pipeline huấn luyện open-weight | [Mở khoá](courses/openweight-training-pipeline/INDEX.md) | [Tuần 1](courses/openweight-training-pipeline/lessons/week01.md) | [Lịch 20 buổi](courses/openweight-training-pipeline/schedule.md) |
+| Kimi K3 frontier systems | [Mở khoá](courses/kimi-k3-frontier-systems/INDEX.md) | [Tuần 1](courses/kimi-k3-frontier-systems/lessons/week01.md) | [Lịch 20 buổi](courses/kimi-k3-frontier-systems/schedule.md) |
+
+[Xem toàn bộ 40 tuần của bốn khoá chuyên đề](courses/WEEK_INDEX.md) · [Yêu cầu máy tính](courses/COMPUTER_REQUIREMENTS.md)
+
 ## Ba cách học
 
 | Lộ trình | Phù hợp với | Điểm vào |
@@ -26,6 +38,7 @@ Khoá học thực hành bằng tiếng Việt về mô hình ngôn ngữ lớn:
 | [`docs/`](docs/index.md) | Bài giảng lý thuyết, bài tập và chuyên đề |
 | [`src/`](src/README.md) | Notebook, mã Python và ứng dụng trực quan |
 | [`nanogpt_course/`](nanogpt_course/README.md) | Giáo án và học liệu 10 tuần |
+| [`courses/`](courses/README.md) | Bốn khoá chuyên đề 10 tuần, code lab và đồ án |
 | [`aithucchien/`](aithucchien/README.md) | Nhánh thực chiến: dữ liệu, training, alignment, submission |
 | [`docs/project_logs/`](docs/project_logs/) | Nhật ký và thiết kế dự án; tài liệu tham khảo, không thuộc luồng học bắt buộc |
 

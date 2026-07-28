@@ -1,5 +1,7 @@
 # Tuần 10 — Đóng gói, nộp bài và serving / Packaging, submission, and serving
 
+[← Tuần 9](week09.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Đóng gói model/adapter/tokenizer/config có manifest / package artifacts with a manifest.

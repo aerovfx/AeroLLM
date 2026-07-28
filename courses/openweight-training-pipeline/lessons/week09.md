@@ -1,5 +1,7 @@
 # Tuần 09 — Đánh giá và red teaming / Evaluation and red teaming
 
+[← Tuần 8](week08.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 10 →](week10.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Xây evaluation pyramid từ unit tests đến human review / build an evaluation pyramid.

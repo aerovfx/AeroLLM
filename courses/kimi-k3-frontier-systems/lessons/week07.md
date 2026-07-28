@@ -1,5 +1,7 @@
 # Tuần 7 — SFT, RL, reasoning effort và distillation
 
+[← Tuần 6](week06.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 8 →](week08.md)
+
 ## Mục tiêu / Objectives
 
 - Mô tả SFT → domain/effort RL → MOPD. / Explain the post-training sequence.
@@ -41,4 +43,3 @@ Nộp simulator, 3×3 policy matrix, plots latency/staleness và risk register r
 - Nhiều reasoning tokens luôn tốt hơn. / Effort has quality–cost trade-offs.
 - Distillation chỉ là SFT trên teacher outputs. / K3 describes on-policy dense reward.
 - Resume rollout không gây off-policy risk. / Policy changes create staleness.
-

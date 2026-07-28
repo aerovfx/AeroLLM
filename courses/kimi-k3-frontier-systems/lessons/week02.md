@@ -1,5 +1,7 @@
 # Tuần 2 — Hybrid KDA–Gated MLA / Hybrid sequence mixing
 
+[← Tuần 1](week01.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 3 →](week03.md)
+
 ## Mục tiêu / Objectives
 
 - Diễn giải KDA recurrence, decay và delta write. / Explain KDA recurrence.
@@ -41,4 +43,3 @@ Nộp implementation chuỗi, bốn tests và memo so full attention/KDA/MLA v�
 - Linear attention luôn chính xác như softmax attention. / Different mechanisms have different inductive biases.
 - O(1) recurrent state nghĩa toàn bộ serving O(1). / MLA layers still have growing cache.
 - Toy PyTorch loop đo được Tensor Core throughput. / It does not.
-

@@ -1,5 +1,7 @@
 # Tuần 06 — SFT và siêu tham số / SFT and hyperparameters
 
+[← Tuần 5](week05.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 7 →](week07.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Thiết kế objective SFT và completion-only masking đúng / design SFT and completion-only masking correctly.

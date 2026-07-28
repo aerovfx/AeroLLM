@@ -1,5 +1,7 @@
 # Tuần 4 — Chat templates và tokenization / Week 4 — Chat templates and tokenization
 
+[← Tuần 3](week03.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 5 →](week05.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Render roles thành token sequence đúng convention của model. / Render roles using the model's expected convention.

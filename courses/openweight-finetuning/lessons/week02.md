@@ -1,5 +1,7 @@
 # Tuần 2 — Model, giấy phép và phần cứng / Week 2 — Model, license, and hardware
 
+[← Tuần 1](week01.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 3 →](week03.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Chọn base/instruct model theo task, ngôn ngữ, context và ecosystem. / Select a model by task and operational fit.

@@ -1,5 +1,7 @@
 # Tuần 5 — Cấu hình LoRA và QLoRA / Week 5 — LoRA and QLoRA configuration
 
+[← Tuần 4](week04.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 6 →](week06.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Giải thích low-rank update và QLoRA memory strategy. / Explain low-rank adaptation and QLoRA.

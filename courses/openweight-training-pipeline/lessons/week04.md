@@ -1,5 +1,7 @@
 # Tuần 4 — Chọn tokenizer và model / Week 4 — Tokenizer and model selection
 
+[← Tuần 3](week03.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 5 →](week05.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Benchmark tokenizer trên domain/language mục tiêu. / Benchmark tokenizers on target data.

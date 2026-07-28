@@ -1,5 +1,7 @@
 # Tuần 10 — Capstone và model card / Capstone and model card
 
+[← Tuần 9](week09.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Hoàn thiện fine-tuning artifact có thể tái lập / deliver a reproducible fine-tuning artifact.

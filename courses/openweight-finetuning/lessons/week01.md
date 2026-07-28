@@ -1,5 +1,7 @@
 # Tuần 1 — Bài toán, baseline và chọn phương pháp / Week 1 — Task, baseline, and method choice
 
+[Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 2 →](week02.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Chuyển nhu cầu thành task, acceptance criteria và evaluation set. / Translate a need into a task, acceptance criteria, and evaluation set.

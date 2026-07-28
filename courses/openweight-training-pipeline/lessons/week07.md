@@ -1,5 +1,7 @@
 # Tuần 07 — Huấn luyện phân tán và observability / Distributed training and observability
 
+[← Tuần 6](week06.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 8 →](week08.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Giải thích data parallel, FSDP/ZeRO và sharding trade-offs / explain parallelism and sharding trade-offs.

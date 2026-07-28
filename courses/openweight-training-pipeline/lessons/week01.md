@@ -1,5 +1,7 @@
 # Tuần 1 — Vòng đời huấn luyện và capacity / Week 1 — Training lifecycle and capacity
 
+[Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 2 →](week02.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Vẽ vòng đời từ objective đến release/monitoring. / Map the lifecycle from objective to release.

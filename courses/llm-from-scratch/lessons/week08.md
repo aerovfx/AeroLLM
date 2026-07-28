@@ -1,5 +1,7 @@
 # Tuần 08 — Huấn luyện, optimizer và checkpoint / Training, optimization, and checkpoints
 
+[← Tuần 7](week07.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 9 →](week09.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Xây training loop đúng với accumulation, clipping và mixed precision / build a correct loop with accumulation, clipping, and mixed precision.

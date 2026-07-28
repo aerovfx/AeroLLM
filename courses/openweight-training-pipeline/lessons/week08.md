@@ -1,5 +1,7 @@
 # Tuần 08 — Tối ưu ưu tiên và alignment / Preference optimization and alignment
 
+[← Tuần 7](week07.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 9 →](week09.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Thiết kế preference collection và annotation protocol / design preference collection and annotation.

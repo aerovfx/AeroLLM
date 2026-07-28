@@ -1,5 +1,7 @@
 # Tuần 8 — Agent environments và verifier-first training
 
+[← Tuần 7](week07.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 9 →](week09.md)
+
 ## Mục tiêu / Objectives
 
 - Định nghĩa task bằng state, action, budget và verifier. / Define executable agent tasks.
@@ -41,4 +43,3 @@ Nộp một environment package có ≥3 tools, ≥8 tests, public/hidden verifi
 - Agent trả lời đẹp nghĩa task hoàn tất. / Completion requires state evidence.
 - LLM judge là ground truth. / Judges can be biased or gamed.
 - Hidden tests thay thế sandbox security. / They address different risks.
-

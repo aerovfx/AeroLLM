@@ -1,5 +1,7 @@
 # Tuần 10 — Capstone reproduction-style và technical defense
 
+[← Tuần 9](week09.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md)
+
 ## Mục tiêu / Objectives
 
 - Tích hợp architecture, data, agent và evaluation. / Integrate the course pillars.
@@ -41,4 +43,3 @@ Nộp theo [đặc tả đồ án](../projects/final_project.md): code, tests, r
 - Demo chạy một lần là reproducible. / Reproducibility needs environment and tests.
 - Negative result là thất bại. / It is useful evidence when well controlled.
 - Toy implementation có thể mang tên “Kimi K3 reproduction”. / Scope the claim to the mechanism tested.
-

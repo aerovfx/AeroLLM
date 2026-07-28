@@ -1,6 +1,6 @@
 # Kimi K3: kiến trúc frontier và hệ thống agent / Frontier Architecture & Agent Systems
 
-[Danh mục khoá ngắn](../README.md) · [Lịch 20 buổi](schedule.md) · [Phân tích technical report](TECHNICAL_REPORT.md) · [Hướng dẫn repository](REPOSITORY_GUIDE.md) · [Đồ án](projects/final_project.md)
+[Danh mục khoá ngắn](../README.md) · [Chỉ mục 40 tuần](../WEEK_INDEX.md) · [Lịch 20 buổi](schedule.md) · [Phân tích technical report](TECHNICAL_REPORT.md) · [Hướng dẫn repository](REPOSITORY_GUIDE.md) · [Đồ án](projects/final_project.md)
 
 [Code lab](code/README.md) · [Yêu cầu máy tính](../COMPUTER_REQUIREMENTS.md) · [Nguồn chính thức](references/README.md)
 

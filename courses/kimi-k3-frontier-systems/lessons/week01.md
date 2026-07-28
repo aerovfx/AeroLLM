@@ -1,5 +1,7 @@
 # Tuần 1 — Đọc report và audit claim / Reading and auditing claims
 
+[Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 2 →](week02.md)
+
 ## Mục tiêu / Objectives
 
 - Phân biệt fact, author claim, independent result và suy luận. / Separate facts, author claims, independent results, and inference.

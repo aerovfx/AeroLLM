@@ -1,5 +1,7 @@
 # Tuần 4 — Causal self-attention / Week 4 — Causal self-attention
 
+[← Tuần 3](week03.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 5 →](week05.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Tính scaled dot-product attention và giải thích scale $1/\sqrt{d_k}$. / Compute scaled dot-product attention and explain scaling.

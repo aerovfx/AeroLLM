@@ -1,5 +1,7 @@
 # Tuần 4 — Stable LatentMoE và Quantile Balancing
 
+[← Tuần 3](week03.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 5 →](week05.md)
+
 ## Mục tiêu / Objectives
 
 - Phân biệt total width, latent width, routed/shared experts. / Explain LatentMoE structure.
@@ -41,4 +43,3 @@ Nộp router experiment trên ba score distributions, fairness metrics, assignme
 - Chỉ expert active mới cần lưu. / Inactive weights still require residency or movement.
 - Perfect balance luôn tốt nhất cho quality. / Balance is a systems constraint, not the full objective.
 - Bias update chạy trên cùng batch rồi dùng ngay. / Report applies it causally to the next step.
-

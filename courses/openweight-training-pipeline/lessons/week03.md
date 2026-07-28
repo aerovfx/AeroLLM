@@ -1,5 +1,7 @@
 # Tuần 3 — Dữ liệu tổng hợp và lọc / Week 3 — Synthetic data and filtering
 
+[← Tuần 2](week02.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 4 →](week04.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Thiết kế generator–critic–filter pipeline có provenance. / Design a traceable synthesis pipeline.

@@ -1,5 +1,7 @@
 # Tuần 2 — Tokenization và dữ liệu / Week 2 — Tokenization and data
 
+[← Tuần 1](week01.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 3 →](week03.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - So sánh character, byte và subword tokenization. / Compare character, byte, and subword tokenization.

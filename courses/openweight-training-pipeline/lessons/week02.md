@@ -1,5 +1,7 @@
 # Tuần 2 — Data governance và licensing / Week 2 — Data governance and licensing
 
+[← Tuần 1](week01.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 3 →](week03.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Tạo source registry và data lineage có kiểm toán. / Build an auditable source registry and lineage.

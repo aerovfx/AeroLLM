@@ -1,5 +1,7 @@
 # Tuần 3 — Embedding và batching / Week 3 — Embeddings and batching
 
+[← Tuần 2](week02.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 4 →](week04.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Suy luận shape của token/position embedding và logits. / Derive token, positional embedding, and logit shapes.

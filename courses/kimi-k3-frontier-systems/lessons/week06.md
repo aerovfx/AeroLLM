@@ -1,5 +1,7 @@
 # Tuần 6 — Million-token context và systems co-design
 
+[← Tuần 5](week05.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 7 →](week07.md)
+
 ## Mục tiêu / Objectives
 
 - Thiết kế curriculum 8K → 64K → 256K → 1M. / Design progressive context extension.
@@ -41,4 +43,3 @@ Nộp context curriculum, dependency probe suite và cache design memo gồm fai
 - Hỗ trợ 1M nghĩa dùng mọi token tốt như nhau. / Capacity is not utilization quality.
 - NoPE loại bỏ nhu cầu long-context training. / Data curriculum remains necessary.
 - Cache hit chỉ là tối ưu, không ảnh hưởng correctness. / Hybrid cache boundaries must remain consistent.
-

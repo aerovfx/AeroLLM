@@ -10,6 +10,7 @@
 | Notebook và mã thực hành | [src/README.md](src/README.md) |
 | Khoá học nanoGPT 10 tuần | [nanogpt_course/README.md](nanogpt_course/README.md) |
 | Các khoá chuyên đề 10 tuần | [courses/README.md](courses/README.md) |
+| Chỉ mục trực tiếp 40 tuần | [courses/WEEK_INDEX.md](courses/WEEK_INDEX.md) |
 | Training thực chiến | [aithucchien/README.md](aithucchien/README.md) |
 | Visualizer web | [src/llm/](src/llm/) và hướng dẫn chạy ở [README](README.md) |
 | Nhật ký/thiết kế dự án | [docs/project_logs/](docs/project_logs/) |

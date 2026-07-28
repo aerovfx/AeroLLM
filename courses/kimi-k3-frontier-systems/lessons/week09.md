@@ -1,5 +1,7 @@
 # Tuần 9 — QAT, serving và benchmark audit
 
+[← Tuần 8](week08.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 10 →](week10.md)
+
 ## Mục tiêu / Objectives
 
 - Giải thích deployment-aware QAT và speculative draft. / Explain QAT and drafting.

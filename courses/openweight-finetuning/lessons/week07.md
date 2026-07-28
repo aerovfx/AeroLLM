@@ -1,5 +1,7 @@
 # Tuần 07 — Đánh giá và phân tích lỗi / Evaluation and error analysis
 
+[← Tuần 6](week06.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 8 →](week08.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Xây eval set chống leakage, đại diện use case / build a leakage-resistant, use-case-aligned eval set.

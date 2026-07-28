@@ -1,5 +1,7 @@
 # Tuần 5 — Multi-head attention / Week 5 — Multi-head attention
 
+[← Tuần 4](week04.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 6 →](week06.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Mở rộng single-head thành multi-head attention (MHA). / Extend a single head into MHA.

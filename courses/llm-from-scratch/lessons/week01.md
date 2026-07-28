@@ -1,5 +1,7 @@
 # Tuần 1 — Mô hình ngôn ngữ và baseline / Week 1 — Language models and baselines
 
+[Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 2 →](week02.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Phát biểu bài toán dự đoán token kế tiếp và phân biệt mô hình ngôn ngữ với chatbot. / Formulate next-token prediction and distinguish a language model from a chatbot.

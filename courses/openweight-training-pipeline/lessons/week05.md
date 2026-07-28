@@ -1,5 +1,7 @@
 # Tuần 5 — Continued pretraining / Week 5 — Continued pretraining
 
+[← Tuần 4](week04.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 6 →](week06.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Phân biệt continued pretraining (CPT), SFT và training from scratch. / Distinguish CPT, SFT, and scratch training.

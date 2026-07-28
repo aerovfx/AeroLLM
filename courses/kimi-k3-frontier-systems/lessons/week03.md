@@ -1,5 +1,7 @@
 # Tuần 3 — Attention Residuals / Selective depth mixing
 
+[← Tuần 2](week02.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 4 →](week04.md)
+
 ## Mục tiêu / Objectives
 
 - Xem network depth như một trục attention. / Treat depth as an attention axis.
@@ -41,4 +43,3 @@ Nộp ablation trên synthetic task với ≥3 baselines, seed cố định, plo
 - Weight lớn chứng minh source là nguyên nhân duy nhất. / Attention weight is not causal proof.
 - Block AttnRes miễn phí. / It adds computation and state management.
 - Kết quả toy dự đoán trực tiếp model 93 layers. / Scaling can change behavior.
-

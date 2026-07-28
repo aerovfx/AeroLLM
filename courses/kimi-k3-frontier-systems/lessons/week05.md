@@ -1,5 +1,7 @@
 # Tuần 5 — Native multimodal, dữ liệu và scaling laws
 
+[← Tuần 4](week04.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 6 →](week06.md)
+
 ## Mục tiêu / Objectives
 
 - Thiết kế data taxonomy text/vision có provenance. / Design a multimodal data taxonomy.
@@ -43,4 +45,3 @@ Nộp dataset card 1,000-sample hypothetical mixture, QA pipeline, contamination
 - Nhiều modality tự động tạo grounding. / Data and supervision quality still matter.
 - Scaling curve chứng minh từng architectural choice. / It is an aggregate result.
 - Validation loss thấp đảm bảo agent performance. / Downstream behavior needs separate evaluation.
-

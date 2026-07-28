@@ -1,5 +1,7 @@
 # Tuần 09 — Suy luận, lấy mẫu và đánh giá / Inference, sampling, and evaluation
 
+[← Tuần 8](week08.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 10 →](week10.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Cài greedy, temperature, top-k và top-p sampling / implement greedy, temperature, top-k, and top-p sampling.

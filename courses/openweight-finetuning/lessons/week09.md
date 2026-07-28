@@ -1,5 +1,7 @@
 # Tuần 09 — Xuất GGUF và triển khai / GGUF export and deployment
 
+[← Tuần 8](week08.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 10 →](week10.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Merge adapter có kiểm soát và lưu artifact đầy đủ / merge adapters safely and save complete artifacts.

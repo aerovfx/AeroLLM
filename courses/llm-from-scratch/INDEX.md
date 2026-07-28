@@ -1,6 +1,6 @@
 # Xây dựng và huấn luyện LLM từ đầu / Build and Train an LLM from Scratch
 
-[Danh mục khoá ngắn](../README.md) · [Lịch 20 buổi](schedule.md) · [Đồ án](projects/final_project.md)
+[Danh mục khoá ngắn](../README.md) · [Chỉ mục 40 tuần](../WEEK_INDEX.md) · [Lịch 20 buổi](schedule.md) · [Đồ án](projects/final_project.md)
 
 [Mã minh hoạ và bài tập](code/README.md) · [Yêu cầu máy tính](../COMPUTER_REQUIREMENTS.md)
 

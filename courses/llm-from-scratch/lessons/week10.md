@@ -1,5 +1,7 @@
 # Tuần 10 — Capstone, an toàn và demo / Capstone, safety, and demo
 
+[← Tuần 9](week09.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Tích hợp pipeline data→train→evaluate→serve / integrate data, training, evaluation, and serving.

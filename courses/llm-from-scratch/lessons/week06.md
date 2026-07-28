@@ -1,5 +1,7 @@
 # Tuần 06 — MLP, chuẩn hoá và kết nối dư / MLP, normalization, and residual connections
 
+[← Tuần 5](week05.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 7 →](week07.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 Sau tuần này, học viên có thể / By the end of this week, learners can:

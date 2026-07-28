@@ -1,5 +1,7 @@
 # Tuần 06 — SFT và dữ liệu chỉ dẫn / SFT and instruction data
 
+[← Tuần 5](week05.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 7 →](week07.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Xây pipeline instruction data có provenance và version / build versioned instruction data with provenance.

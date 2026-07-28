@@ -1,5 +1,7 @@
 # Tuần 07 — Lắp ráp GPT hoàn chỉnh / Assemble a complete GPT
 
+[← Tuần 6](week06.md) · [Mục lục khoá](../INDEX.md) · [40 tuần](../../WEEK_INDEX.md) · [Lịch 20 buổi](../schedule.md) · [Tuần 8 →](week08.md)
+
 ## Mục tiêu học tập / Learning objectives
 
 - Kết nối tokenizer, embedding, positional signal, block và LM head / connect tokenizer, embeddings, position signal, blocks, and LM head.
