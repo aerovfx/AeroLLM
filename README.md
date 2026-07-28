@@ -1,78 +1,53 @@
-# 🚀 Aero-HowtoLLMs: Master LLM & Visualization
+# Aero How to LLMs
 
-> **Chương trình đào tạo toàn diện về Large Language Models (LLM) - Từ lý thuyết cơ bản đến thực thi 3D Visualizer & MoE.**
+Khoá học thực hành bằng tiếng Việt về mô hình ngôn ngữ lớn: từ Python và toán nền tảng, token hoá, tự xây GPT, huấn luyện, tinh chỉnh, đánh giá đến RAG, an toàn và interpretability.
 
-[![Status: Active](https://img.shields.io/badge/Status-Active-success.svg)]()
-[![Tech: Next.js 14](https://img.shields.io/badge/Tech-Next.js%2014-blue.svg)]()
-[![Content: 100% Vietnamese](https://img.shields.io/badge/Content-Vietnamese%20Localized-red.svg)]()
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)]()
+## Bắt đầu ở đây
 
----
+1. Đọc [Lộ trình khoá học](COURSE.md) để chọn điểm bắt đầu và thứ tự học.
+2. Mở [Chỉ mục toàn bộ nội dung](CONTENT_INDEX.md) khi cần tìm một bài, notebook hoặc mã nguồn cụ thể.
+3. Nếu muốn học theo chương trình ngắn, dùng [khoá nanoGPT 10 tuần](nanogpt_course/README.md).
 
-## 📽️ Interactive 3D LLM Visualizer
-Dự án tích hợp một công cụ trực quan hóa kiến trúc Transformer (GPT-4) và Mixture of Experts (MoE) cực kỳ sinh động.
+> `COURSE.md` là nguồn chuẩn về thứ tự học. Các số trong tên thư mục `docs/` là mã lưu trữ cũ, không phải thứ tự bắt buộc.
 
-- **Khám phá cấu trúc:** Token Embeddings, Multi-Head Attention, MLP, Residual Connections.
-- **Mixture of Experts:** Trực quan hóa cơ chế Router và các Experts.
-- **Hoàn toàn Tiếng Việt:** Hệ thống chú giải và bước hướng dẫn đã được Việt hóa 100%.
+## Ba cách học
 
-### 🛠️ Chạy Visualizer ngay:
+| Lộ trình | Phù hợp với | Điểm vào |
+|---|---|---|
+| Chuẩn | Người đã biết Python cơ bản, muốn hiểu và tự xây LLM | [Giai đoạn 1](COURSE.md#giai-đoạn-1-bức-tranh-toàn-cảnh) |
+| Có bổ trợ | Người mới với Python, PyTorch hoặc toán cho deep learning | [Giai đoạn 0](COURSE.md#giai-đoạn-0-bổ-trợ-khi-cần) |
+| 10 tuần | Học sinh THPT, lớp học hoặc câu lạc bộ | [nanoGPT Course](nanogpt_course/README.md) |
+
+## Cấu trúc kho học liệu
+
+| Khu vực | Vai trò |
+|---|---|
+| [`docs/`](docs/index.md) | Bài giảng lý thuyết, bài tập và chuyên đề |
+| [`src/`](src/README.md) | Notebook, mã Python và ứng dụng trực quan |
+| [`nanogpt_course/`](nanogpt_course/README.md) | Giáo án và học liệu 10 tuần |
+| [`aithucchien/`](aithucchien/README.md) | Nhánh thực chiến: dữ liệu, training, alignment, submission |
+| [`docs/project_logs/`](docs/project_logs/) | Nhật ký và thiết kế dự án; tài liệu tham khảo, không thuộc luồng học bắt buộc |
+
+## Chạy công cụ trực quan
+
+Yêu cầu Node.js và npm:
+
 ```bash
 npm install
 npm run dev
 ```
-*Truy cập: [http://localhost:3002](http://localhost:3002)*
 
----
+Mở <http://localhost:3002>. Công cụ minh hoạ token embedding, attention, MLP, residual connection và Mixture of Experts.
 
-## 📚 Hệ Thống Tài Liệu (Knowledge Base)
-Kho lưu trữ kiến thức khổng lồ với hơn 400+ nội dung chuyên sâu được phân loại khoa học thành 29+ Module.
+## Quy ước sử dụng
 
-### 🧭 Các Module trọng tâm:
+- Đi theo thứ tự trong `COURSE.md`; không suy ra thứ tự từ số thư mục.
+- Mỗi giai đoạn nên hoàn thành ít nhất một bài thực hành hoặc sản phẩm đầu ra.
+- Notebook và mã trong `src/` là phần thực hành đi kèm, không phải một khoá học độc lập.
+- Các chuyên đề interpretability có thể học sau khi đã hoàn thành Build GPT và Evaluation.
 
-| Group | Modules | Chủ đề chính |
-| :--- | :--- | :--- |
-| **I. Nền tảng** | 01 - 05 | LLM Course, Tokenization, Embeddings |
-| **II. Xây dựng** | 04, 06, 28, 29 | Build GPT, Pre-training, Optimization |
-| **III. Tinh chỉnh** | 07, 08, 18 | Fine-tuning, Instruction Tuning, RAG |
-| **IV. Giải mã** | 09 - 17, 19 | Interpretability, Mechanistic Circuits, Safety |
-| **V. Công cụ** | 20 - 27 | Python for AI, Math for DL, PyTorch |
+## Đóng góp
 
-👉 **[BẤM VÀO ĐÂY ĐỂ XEM CHI TIẾT 29+ MODULES (Full Index)](docs/README.md)**
+Khi thêm nội dung, hãy cập nhật [chỉ mục nội dung](CONTENT_INDEX.md) và đặt bài vào đúng giai đoạn trong [lộ trình](COURSE.md). Không đưa nhật ký phát triển vào luồng bài học chính.
 
----
-
-## 🗺️ Lộ Trình Học Tập (Learning Roadmap)
-
-### 🔵 Giai đoạn 1: Nền tảng & Kiến trúc (The Core)
-- Tìm hiểu về Transformers qua [Visualization Spec](docs/VISUALIZATION_SYSTEM_DESIGN_SPEC.md).
-- Học về Tokenization và Embedding Spaces.
-
-### 🟢 Giai đoạn 2: Xây dựng & Huấn luyện (Pre-training)
-- Từng bước code GPT trong module BuildGPT.
-- Hiểu về Loss functions và Optimization.
-
-### 🟡 Giai đoạn 3: Tinh chỉnh & Thích nghi (Fine-tuning)
-- Áp dụng các kỹ thuật SFT, RLHF, và LoRA.
-- Thực hiện các Code Challenge thực tế.
-
-### 🔴 Giai đoạn 4: Ứng dụng & An toàn (Advanced)
-- Triển khai RAG với dữ liệu tùy chỉnh.
-- Nghiên cứu về AI Safety và Interpretability.
-
----
-
-## 📈 Tiến Độ Dự ÁN
-- [x] **Week 1-3:** Hoàn thành Core Architecture & Visualization.
-- [x] **Week 4:** Đang hoàn thiện Localization 100%.
-- [ ] **Next:** Mở rộng sang Hybrid AI & Agentic Workflows.
-
----
-
-## 🤝 Liên hệ & Đóng góp
-Dự án được phát triển bởi **Pixibox**. Mọi đóng góp về nội dung và mã nguồn đều được chào đón.
-
-> *"Kiến thức là sức mạnh, chia sẻ là lan tỏa."* 🚀
-
----
-*Cập nhật lần cuối: 26/02/2026*
+Giấy phép: [Apache License 2.0](LICENSE.txt).

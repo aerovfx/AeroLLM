@@ -17,6 +17,14 @@
 - [🐍 Module 20: Python for AI](../../20_python_colab_notebooks/index.md)
 ---
 <!-- Aero-Navigation-End -->
+
+## 🎥 Video bài giảng chính thức của Stanford
+
+- [Xem trọn bộ CME 295 — Transformers & Large Language Models trên YouTube](https://www.youtube.com/playlist?list=PLoROMvodv4rOCXd21gf0CF4xr35yINeOy)
+- [Trang môn học và syllabus chính thức](https://cme295.stanford.edu/syllabus/)
+
+Playlist gồm 9 video tương ứng Lecture 1–9 bên dưới. Các bài “Overview”, “Essential Tools” và các chương tổng hợp là học liệu bổ sung của khoá học này, không phải video riêng trong playlist Stanford.
+
 ## 📄 Tài liệu chi tiết
 | Bài học | Liên kết |
 | :--- | :--- |
