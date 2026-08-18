@@ -21,7 +21,7 @@
   height: 58px;
   padding: 0;
   border: 1px solid var(--line);
-  background: rgba(9,16,20,.96);
+  background: rgba(14, 14, 17, .96);
   color: var(--cyan);
   font: 500 1.25rem var(--mono);
   cursor: pointer;
@@ -33,7 +33,7 @@
   background: var(--cyan);
   color: var(--void);
   outline: none;
-  box-shadow: 0 0 14px rgba(49,247,255,.25);
+  box-shadow: 0 0 14px rgba(255, 176, 0, .25);
 }
 
 .sidebar-collapsed .course-shell {

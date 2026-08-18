@@ -193,8 +193,8 @@
     if (global.STEM_NO_BADGE || badgeEl) return;
     var css = document.createElement('style');
     css.textContent = '.stem-cloud-badge{position:fixed;right:12px;bottom:12px;z-index:9999;font:600 12px/1 Inter,system-ui,sans-serif;' +
-      'padding:9px 13px;border-radius:99px;cursor:pointer;border:1px solid rgba(0,0,0,.08);' +
-      'box-shadow:0 6px 18px rgba(0,0,0,.14);user-select:none;transition:.2s}' +
+      'padding:9px 13px;border-radius:99px;cursor:pointer;border:1px solid rgba(0, 0, 0, .08);' +
+      'box-shadow:0 6px 18px rgba(0, 0, 0, .14);user-select:none;transition:.2s}' +
       '.stem-cloud-badge:hover{transform:translateY(-2px)}' +
       '.stem-cloud-badge.ok{background:#dcfce7;color:#166534}' +
       '.stem-cloud-badge.wait{background:#fef3c7;color:#92400e}' +
