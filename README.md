@@ -108,9 +108,9 @@ Mở <http://localhost:3002>. Công cụ minh hoạ token embedding, attention, 
 
 1. Đẩy code lên nhánh `main`.
 2. Vào **Settings → Pages**, chọn **Deploy from a branch**, chọn nhánh `main` và thư mục `/ (root)`.
-3. GitHub tự build Jekyll theo `Gemfile` (gem `github-pages`). Trang có tại `https://aerovfx.github.io/AeroLLM/`.
+3. Trang hiện được phục vụ dạng **tĩnh** (file `.nojekyll` báo GitHub Pages bỏ qua bước build Jekyll) — shell `index.html` + CSS/JS hiển thị ngay tại `https://aerovfx.github.io/AeroLLM/`.
 
-> Lưu ý: `baseurl` trong `_config.yml` phải khớp tên repo (hiện là `/AeroLLM`). Nếu đổi tên repo, cập nhật lại `baseurl` và các link tuyệt đối.
+> Khi thêm trang khoá học (file `.md` có front matter `layout: course`), hãy xoá `.nojekyll` và bật lại Jekyll (hoặc dùng GitHub Actions với `actions/jekyll-build-pages`), đồng thời thêm `exclude` cho `skills/` và các thư mục nội dung LLM trong `_config.yml` để tránh lỗi Liquid (`{% %}`/`{{ }}`) từ code mẫu.
 
 ## Quy ước sử dụng
 
