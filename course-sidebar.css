@@ -1,0 +1,82 @@
+.course-shell {
+  transition: grid-template-columns .22s ease, gap .22s ease;
+}
+
+.course-sidebar {
+  overflow: visible;
+  transition: opacity .16s ease;
+}
+
+.course-sidebar-content {
+  max-height: calc(100vh - 130px);
+  overflow: auto;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 0;
+  right: -29px;
+  z-index: 9;
+  width: 29px;
+  height: 58px;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: rgba(9,16,20,.96);
+  color: var(--cyan);
+  font: 500 1.25rem var(--mono);
+  cursor: pointer;
+  clip-path: polygon(0 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%);
+}
+
+.sidebar-toggle:hover,
+.sidebar-toggle:focus-visible {
+  background: var(--cyan);
+  color: var(--void);
+  outline: none;
+  box-shadow: 0 0 14px rgba(49,247,255,.25);
+}
+
+.sidebar-collapsed .course-shell {
+  grid-template-columns: 0 minmax(0,1fr);
+  gap: 0;
+}
+
+.sidebar-collapsed .course-sidebar {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.sidebar-collapsed .course-sidebar-content {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 800px) {
+  .sidebar-toggle {
+    display: none;
+  }
+
+  .sidebar-collapsed .course-shell {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .sidebar-collapsed .course-sidebar {
+    padding-left: 1.2rem;
+    border-left: 1px solid var(--line);
+  }
+
+  .sidebar-collapsed .course-sidebar-content {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .course-shell,
+  .course-sidebar {
+    transition: none;
+  }
+}

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Khảo sát buổi học — AeroLLM</title>
+  <meta name="description" content="Khảo sát trải nghiệm học an toàn thông tin trên AeroLLM"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --p:#6c63ff;--pd:#4e46e5;--s:#06b6d4;--a:#f59e0b;--g:#10b981;
+      --bg:#0f0e1a;--sf:#1a1830;--sf2:#22204a;--sf3:#2a2850;
+      --bd:rgba(108,99,255,.22);--txt:#e8e6ff;--muted:#9b97c9;
+      --rad:14px;--shad:0 8px 32px rgba(0,0,0,.45);
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;
+      background:radial-gradient(ellipse 80% 60% at 10% 0%,rgba(108,99,255,.16) 0%,transparent 60%),
+        radial-gradient(ellipse 60% 50% at 90% 100%,rgba(6,182,212,.13) 0%,transparent 60%);
+      pointer-events:none;z-index:0}
+
+    /* ── topbar ── */
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      background:rgba(15,14,26,.85);backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--bd);
+      padding:.7rem 1.25rem;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .back-btn{display:inline-flex;align-items:center;gap:.4rem;
+      background:var(--sf2);border:1px solid var(--bd);border-radius:8px;
+      padding:.38rem .85rem;font-size:.78rem;font-weight:600;color:var(--muted);
+      cursor:pointer;text-decoration:none;transition:all .2s}
+    .back-btn:hover{border-color:var(--p);color:var(--txt)}
+    .topbar-right{display:flex;align-items:center;gap:.5rem}
+    .prog-mini{display:flex;align-items:center;gap:.55rem;font-size:.78rem;color:var(--muted)}
+    .prog-mini-track{width:80px;height:5px;background:var(--sf2);border-radius:99px;overflow:hidden}
+    .prog-mini-fill{height:100%;background:linear-gradient(90deg,var(--p),var(--s));
+      border-radius:99px;transition:width .4s ease;width:0%}
+
+    /* ── header ── */
+    header{position:relative;z-index:5;padding:2rem 1.25rem 1.5rem;text-align:center}
+    .badge{display:inline-flex;align-items:center;gap:.5rem;
+      background:rgba(108,99,255,.15);border:1px solid var(--bd);border-radius:99px;
+      padding:.38rem 1rem;font-size:.75rem;font-weight:700;color:var(--p);
+      letter-spacing:.05em;margin-bottom:1rem}
+    h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;line-height:1.2;margin-bottom:.5rem;
+      background:linear-gradient(135deg,#fff 0%,var(--p) 50%,var(--s) 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .subtitle{color:var(--muted);font-size:.9rem;max-width:480px;margin:0 auto}
+
+    /* ── form layout ── */
+    .form-wrap{position:relative;z-index:5;max-width:640px;margin:1.5rem auto;padding:0 1.25rem 5rem}
+
+    /* ── card ── */
+    .card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rad);
+      padding:1.5rem;margin-bottom:1rem;box-shadow:var(--shad);
+      transition:border-color .3s;animation:slideUp .45s ease both}
+    .card:hover{border-color:rgba(108,99,255,.42)}
+    .card:nth-child(2){animation-delay:.05s}.card:nth-child(3){animation-delay:.1s}
+    .card:nth-child(4){animation-delay:.15s}.card:nth-child(5){animation-delay:.2s}
+
+    /* ── section label ── */
+    .section-label{display:flex;align-items:center;gap:.5rem;
+      font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+      color:var(--p);margin-bottom:1.25rem}
+    .section-label::after{content:'';flex:1;height:1px;background:var(--bd)}
+
+    /* ── field ── */
+    .field{margin-bottom:1.2rem}
+    .field:last-child{margin-bottom:0}
+    .field>label{display:block;font-size:.84rem;font-weight:600;color:var(--txt);margin-bottom:.45rem}
+    .req{color:#f87171;margin-left:.15rem}
+
+    /* ── input / textarea ── */
+    input[type=text],input[type=email],select,textarea{
+      width:100%;background:var(--sf2);border:1.5px solid var(--bd);
+      border-radius:10px;padding:.7rem .95rem;font-family:inherit;
+      font-size:.9rem;color:var(--txt);outline:none;
+      transition:border-color .25s,box-shadow .25s}
+    input:focus,select:focus,textarea:focus{
+      border-color:var(--p);box-shadow:0 0 0 3px rgba(108,99,255,.18)}
+    textarea{resize:vertical;min-height:80px}
+    select option{background:var(--sf)}
+
+    /* ── GRADE COMPACT SELECT ── */
+    .grade-select-wrap{position:relative}
+    .grade-select-wrap select{
+      appearance:none;padding-right:2.5rem;cursor:pointer;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239b97c9' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;background-position:right .75rem center;background-size:16px}
+    .grade-badges{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.55rem}
+    .grade-badge{display:inline-flex;align-items:center;gap:.3rem;
+      background:var(--sf3);border:1px solid var(--bd);border-radius:99px;
+      padding:.28rem .7rem;font-size:.75rem;font-weight:600;color:var(--muted);
+      cursor:pointer;transition:all .18s;user-select:none}
+    .grade-badge:hover{border-color:rgba(108,99,255,.5);color:var(--txt)}
+    .grade-badge.active{background:var(--p);border-color:var(--p);color:#fff}
+    /* hidden real input */
+    #gradeInput{display:none}
+
+    /* ── star rating ── */
+    .star-row{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+    .star-opt{display:none}
+    .star-lbl{font-size:2rem;cursor:pointer;color:var(--sf3);
+      transition:color .15s,transform .15s;line-height:1}
+    .star-lbl:hover{transform:scale(1.18)}
+    /* reverse trick */
+    .star-group{display:flex;flex-direction:row-reverse;gap:.35rem;justify-content:flex-end}
+    .star-opt:checked~.star-lbl,.star-group:hover .star-opt+.star-lbl:hover,
+    .star-group:hover .star-opt+.star-lbl:hover~.star-lbl{color:#f59e0b}
+    .star-opt:checked~.star-lbl{color:#f59e0b;filter:drop-shadow(0 0 5px rgba(245,158,11,.4))}
+    .star-hint{font-size:.78rem;color:var(--muted);margin-left:.3rem;transition:opacity .2s}
+
+    /* ── segment control (4 options) ── */
+    .segment{display:flex;background:var(--sf2);border-radius:10px;
+      padding:.25rem;gap:.25rem;border:1.5px solid var(--bd)}
+    .seg-in{display:none}
+    .seg-lbl{flex:1;text-align:center;padding:.55rem .4rem;border-radius:8px;
+      cursor:pointer;font-size:.82rem;font-weight:600;color:var(--muted);
+      transition:all .2s;line-height:1.3;user-select:none}
+    .seg-lbl:hover{color:var(--txt)}
+    .seg-in:checked+.seg-lbl{background:var(--p);color:#fff;
+      box-shadow:0 2px 10px rgba(108,99,255,.35)}
+
+    /* ── chip checkboxes ── */
+    .chip-grid{display:flex;flex-wrap:wrap;gap:.45rem}
+    .chip-cb{display:none}
+    .chip-lb{display:inline-flex;align-items:center;gap:.3rem;
+      background:var(--sf2);border:1.5px solid var(--bd);border-radius:99px;
+      padding:.38rem .85rem;font-size:.82rem;font-weight:500;color:var(--muted);
+      cursor:pointer;transition:all .2s;user-select:none}
+    .chip-lb:hover{border-color:rgba(108,99,255,.5);color:var(--txt)}
+    .chip-cb:checked+.chip-lb{background:rgba(108,99,255,.18);
+      border-color:var(--p);color:#fff;font-weight:600}
+
+    /* ── slider ── */
+    .slider-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem}
+    .slider-val{font-size:1.3rem;font-weight:800;color:var(--p)}
+    input[type=range]{-webkit-appearance:none;width:100%;height:5px;border-radius:99px;
+      background:var(--sf2);outline:none;border:none;padding:0;cursor:pointer}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;
+      width:20px;height:20px;border-radius:50%;background:var(--p);
+      border:3px solid #fff;box-shadow:0 2px 8px rgba(108,99,255,.45);cursor:pointer}
+    .slider-ticks{display:flex;justify-content:space-between;
+      font-size:.7rem;color:var(--muted);margin-top:.35rem}
+
+    /* ── quick-rate row (difficulty / recommend) ── */
+    .qr-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+    @media(max-width:480px){.qr-row{grid-template-columns:1fr}}
+
+    /* ── textarea with counter ── */
+    .ta-wrap{position:relative}
+    .ta-wrap textarea{padding-bottom:1.8rem}
+    .ta-counter{position:absolute;bottom:.5rem;right:.8rem;
+      font-size:.68rem;color:var(--muted);pointer-events:none}
+
+    /* ── submit ── */
+    .btn-submit{
+      width:100%;padding:1rem;
+      background:linear-gradient(135deg,var(--p),var(--pd));
+      color:#fff;border:none;border-radius:var(--rad);
+      font-family:inherit;font-size:1rem;font-weight:700;cursor:pointer;
+      box-shadow:0 4px 20px rgba(108,99,255,.4);
+      transition:transform .2s,box-shadow .2s;
+      display:flex;align-items:center;justify-content:center;gap:.55rem}
+    .btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(108,99,255,.55)}
+    .btn-submit:active{transform:translateY(0)}
+
+    /* ── success overlay ── */
+    #success-overlay{display:none;position:fixed;inset:0;z-index:999;
+      background:rgba(15,14,26,.92);backdrop-filter:blur(14px);
+      align-items:center;justify-content:center}
+    #success-overlay.show{display:flex}
+    .success-box{background:var(--sf);border:1px solid rgba(16,185,129,.4);
+      border-radius:20px;padding:2.5rem 2rem;max-width:420px;width:90%;
+      text-align:center;animation:popIn .4s ease}
+    .success-icon{font-size:3.5rem;margin-bottom:.8rem;animation:bounce 1.2s infinite}
+    .success-box h2{font-size:1.4rem;font-weight:800;margin-bottom:.55rem;
+      background:linear-gradient(135deg,var(--g),var(--s));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .success-box p{color:var(--muted);font-size:.88rem;margin-bottom:1.3rem}
+    .btn-view{display:inline-block;padding:.72rem 1.8rem;background:var(--g);
+      color:#fff;border-radius:10px;border:none;font-family:inherit;
+      font-size:.9rem;font-weight:700;cursor:pointer;text-decoration:none;transition:opacity .2s}
+    .btn-view:hover{opacity:.85}
+
+    /* ── result ── */
+    #result-section{display:none;max-width:640px;margin:0 auto 5rem;padding:0 1.25rem}
+    #result-section.show{display:block}
+    .result-card{background:var(--sf);border:1px solid rgba(16,185,129,.25);
+      border-radius:var(--rad);padding:1.8rem;animation:slideUp .5s ease}
+    .result-header{display:flex;align-items:center;gap:.9rem;margin-bottom:1.3rem;
+      padding-bottom:1rem;border-bottom:1px solid var(--bd)}
+    .result-avatar{width:46px;height:46px;border-radius:12px;
+      background:linear-gradient(135deg,var(--p),var(--s));
+      display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+    .result-meta h3{font-size:1rem;font-weight:700}
+    .result-meta p{font-size:.76rem;color:var(--muted);margin-top:.15rem}
+    .result-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.75rem}
+    .result-item{background:var(--sf2);border-radius:10px;padding:.9rem}
+    .result-item .rl{font-size:.7rem;color:var(--muted);margin-bottom:.25rem}
+    .result-item .rv{font-size:.9rem;font-weight:700}
+    .md-block{margin-top:1.3rem;background:#0d1117;border:1px solid #30363d;
+      border-radius:10px;padding:1.1rem;font-family:'Courier New',monospace;
+      font-size:.76rem;line-height:1.75;color:#c9d1d9;white-space:pre-wrap;
+      overflow-x:auto;max-height:320px;overflow-y:auto}
+    .copy-btn{display:inline-flex;align-items:center;gap:.35rem;
+      padding:.4rem .85rem;background:var(--sf2);border:1px solid var(--bd);
+      border-radius:8px;font-family:inherit;font-size:.76rem;font-weight:600;
+      color:var(--muted);cursor:pointer;transition:all .2s;margin-bottom:.5rem}
+    .copy-btn:hover{border-color:var(--p);color:var(--p)}
+
+    /* ── animations ── */
+    @keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes popIn{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:scale(1)}}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+    footer{text-align:center;padding:1.8rem 1rem;font-size:.75rem;color:var(--muted);
+      border-top:1px solid var(--bd);position:relative;z-index:5}
+    footer a{color:var(--p);text-decoration:none}
+  </style>
+  <link rel="stylesheet" href="theme.css?v=3"/>
+</head>
+<body>
+
+<!-- SUCCESS OVERLAY -->
+<div id="success-overlay">
+  <div class="success-box">
+    <div class="success-icon">🎉</div>
+    <h2>Gửi thành công!</h2>
+    <p>Cảm ơn bạn đã tham gia khảo sát. Phản hồi của bạn rất có giá trị!</p>
+    <button class="btn-view" onclick="showResult()">Xem kết quả của bạn ↓</button>
+  </div>
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a class="back-btn" href="portal.html">← Trang chủ</a>
+  <div class="topbar-right">
+    <div class="prog-mini">
+      <div class="prog-mini-track"><div class="prog-mini-fill" id="progMiniFill"></div></div>
+      <span id="progMiniPct">0%</span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="badge">📋 AeroLLM · Student Survey</div>
+  <h1>Khảo Sát Buổi Học</h1>
+  <p class="subtitle">Giúp chúng tôi cải thiện chương trình. Mất khoảng <strong>3 phút</strong>.</p>
+</header>
+
+<!-- FORM -->
+<div class="form-wrap">
+<form id="surveyForm" novalidate>
+
+  <!-- ══ SECTION 1: Học viên ══ -->
+  <div class="card" id="identityCard">
+    <div class="section-label">👤 Thông tin học viên</div>
+
+    <!-- Banner tự động khi vào từ portal -->
+    <div id="identityBanner" style="display:none">
+      <div style="display:flex;align-items:center;gap:.9rem;
+        background:rgba(108,99,255,.1);border:1.5px solid rgba(108,99,255,.32);
+        border-radius:12px;padding:.9rem 1.1rem">
+        <div id="idAvatar" style="font-size:2rem;flex-shrink:0">🧑</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:1rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="idName">—</div>
+          <div style="font-size:.75rem;color:var(--muted);margin-top:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="idMeta">—</div>
+        </div>
+        <a href="portal.html" style="flex-shrink:0;font-size:.72rem;color:var(--muted);
+          text-decoration:none;border:1px solid var(--bd);border-radius:7px;
+          padding:.3rem .65rem;white-space:nowrap;transition:color .2s"
+          onmouseover="this.style.color='#e8e6ff'" onmouseout="this.style.color=''">
+          ← Đổi
+        </a>
+      </div>
+      <!-- hidden fields -->
+      <input type="hidden" id="name" name="name"/>
+      <input type="hidden" id="school" name="school"/>
+      <input type="hidden" id="gradeHidden" name="grade"/>
+    </div>
+
+    <!-- Form nhập thủ công (fallback) -->
+    <div id="identityManual">
+      <div style="display:flex;align-items:center;gap:.5rem;
+        background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.22);
+        border-radius:9px;padding:.55rem .9rem;margin-bottom:1rem;
+        font-size:.78rem;color:#f59e0b">
+        ⚠️ Chưa đăng nhập từ portal.
+        <a href="portal.html" style="color:#f59e0b;font-weight:700;margin-left:.3rem">Vào đây →</a>
+      </div>
+
+      <div class="field">
+        <label for="nameInput">Họ và tên <span class="req">*</span></label>
+        <input type="text" id="nameInput" name="name" placeholder="Nguyễn Văn A" required autocomplete="name"/>
+      </div>
+
+      <!-- Khối lớp — compact: badge + select fallback -->
+      <div class="field">
+        <label>Khối lớp <span class="req">*</span></label>
+        <!-- Quick-pick badges cho cấp phổ biến -->
+        <div class="grade-badges" id="gradeBadges">
+          <span class="grade-badge" data-val="Lớp 3">3</span>
+          <span class="grade-badge" data-val="Lớp 4">4</span>
+          <span class="grade-badge" data-val="Lớp 5">5</span>
+          <span class="grade-badge" data-val="Lớp 6">6</span>
+          <span class="grade-badge" data-val="Lớp 7">7</span>
+          <span class="grade-badge" data-val="Lớp 8">8</span>
+          <span class="grade-badge" data-val="Lớp 9">9</span>
+          <span class="grade-badge" data-val="Lớp 10">10</span>
+          <span class="grade-badge" data-val="Lớp 11">11</span>
+          <span class="grade-badge" data-val="Lớp 12">12</span>
+        </div>
+        <input type="hidden" id="gradeInput" name="grade" required/>
+        <p style="font-size:.7rem;color:var(--muted);margin-top:.45rem" id="gradeLabel">Chưa chọn</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: Trải nghiệm ══ -->
+  <div class="card">
+    <div class="section-label">📚 Trải nghiệm học tập</div>
+
+    <!-- Slider buổi học -->
+    <div class="field">
+      <div class="slider-header">
+        <label>Số buổi đã hoàn thành</label>
+        <span class="slider-val" id="sessionVal">0</span>
+      </div>
+      <input type="range" id="sessions" name="sessions" min="0" max="36" value="0"
+        oninput="syncSlider(this,'sessionVal',v=>v+' buổi',' buổi')"/>
+      <div class="slider-ticks"><span>0</span><span>18</span><span>36</span></div>
+    </div>
+
+    <!-- Phần thích nhất — chip -->
+    <div class="field">
+      <label>Phần bạn thích nhất <span style="color:var(--muted);font-weight:400">(chọn nhiều)</span></label>
+      <div class="chip-grid">
+        <input class="chip-cb" type="checkbox" id="fav1" name="fav" value="Lý thuyết bảo mật"/><label class="chip-lb" for="fav1">🛡️ Lý thuyết</label>
+        <input class="chip-cb" type="checkbox" id="fav2" name="fav" value="Thực hành lab"/><label class="chip-lb" for="fav2">⌨️ Lab</label>
+        <input class="chip-cb" type="checkbox" id="fav3" name="fav" value="Phân tích bằng chứng"/><label class="chip-lb" for="fav3">🔎 Phân tích</label>
+        <input class="chip-cb" type="checkbox" id="fav4" name="fav" value="Dự án nhóm"/><label class="chip-lb" for="fav4">🤝 Dự án</label>
+        <input class="chip-cb" type="checkbox" id="fav5" name="fav" value="MicroPython"/><label class="chip-lb" for="fav5">🐍 MicroPython</label>
+        <input class="chip-cb" type="checkbox" id="fav6" name="fav" value="Dự án cuối khóa"/><label class="chip-lb" for="fav6">🏆 Dự án cuối</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: Đánh giá ══ -->
+  <div class="card">
+    <div class="section-label">⭐ Đánh giá</div>
+
+    <!-- Star rating -->
+    <div class="field">
+      <label>Mức độ hài lòng <span class="req">*</span></label>
+      <div style="display:flex;align-items:center;gap:.5rem;flex-wrap:wrap">
+        <div class="star-group">
+          <input class="star-opt" type="radio" name="overall" id="s5" value="5" required/><label class="star-lbl" for="s5" title="Xuất sắc">★</label>
+          <input class="star-opt" type="radio" name="overall" id="s4" value="4"/><label class="star-lbl" for="s4" title="Tốt">★</label>
+          <input class="star-opt" type="radio" name="overall" id="s3" value="3"/><label class="star-lbl" for="s3" title="Trung bình">★</label>
+          <input class="star-opt" type="radio" name="overall" id="s2" value="2"/><label class="star-lbl" for="s2" title="Kém">★</label>
+          <input class="star-opt" type="radio" name="overall" id="s1" value="1"/><label class="star-lbl" for="s1" title="Rất kém">★</label>
+        </div>
+        <span class="star-hint" id="starHint">Nhấn để đánh giá</span>
+      </div>
+    </div>
+
+    <!-- 2-col: Độ khó + Giới thiệu -->
+    <div class="qr-row">
+      <div class="field" style="margin-bottom:0">
+        <label>Độ khó</label>
+        <div class="segment">
+          <input class="seg-in" type="radio" name="difficulty" id="d1" value="Quá dễ"/><label class="seg-lbl" for="d1">😴 Dễ</label>
+          <input class="seg-in" type="radio" name="difficulty" id="d2" value="Vừa phải"/><label class="seg-lbl" for="d2">😊 Vừa</label>
+          <input class="seg-in" type="radio" name="difficulty" id="d3" value="Hơi khó"/><label class="seg-lbl" for="d3">🤔 Khó</label>
+          <input class="seg-in" type="radio" name="difficulty" id="d4" value="Quá khó"/><label class="seg-lbl" for="d4">😰 Rất khó</label>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:0">
+        <label>Giới thiệu cho bạn bè?</label>
+        <div class="segment">
+          <input class="seg-in" type="radio" name="recommend" id="r1" value="Chắc chắn"/><label class="seg-lbl" for="r1">✅ Có</label>
+          <input class="seg-in" type="radio" name="recommend" id="r2" value="Có thể"/><label class="seg-lbl" for="r2">🤷 Có thể</label>
+          <input class="seg-in" type="radio" name="recommend" id="r3" value="Không"/><label class="seg-lbl" for="r3">❌ Không</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: Kỹ năng ══ -->
+  <div class="card">
+    <div class="section-label">🎯 Kỹ năng đạt được</div>
+
+    <div class="field">
+      <div class="slider-header">
+        <label>Kỹ năng an toàn thông tin cải thiện</label>
+        <span class="slider-val" id="skillVal">50%</span>
+      </div>
+      <input type="range" id="skill" name="skill" min="0" max="100" value="50"
+        oninput="syncSlider(this,'skillVal',v=>v+'%','%')"/>
+      <div class="slider-ticks"><span>Không đổi</span><span>Khá hơn</span><span>Rất nhiều</span></div>
+    </div>
+
+    <div class="field">
+      <label>Kỹ năng nổi bật nhất <span style="color:var(--muted);font-weight:400">(chọn nhiều)</span></label>
+      <div class="chip-grid">
+        <input class="chip-cb" type="checkbox" id="sk1" name="skill_gained" value="Tư duy giải quyết vấn đề"/><label class="chip-lb" for="sk1">🧩 Tư duy</label>
+        <input class="chip-cb" type="checkbox" id="sk2" name="skill_gained" value="Code và cấu hình"/><label class="chip-lb" for="sk2">⌨️ Code</label>
+        <input class="chip-cb" type="checkbox" id="sk3" name="skill_gained" value="Làm việc nhóm"/><label class="chip-lb" for="sk3">👥 Nhóm</label>
+        <input class="chip-cb" type="checkbox" id="sk4" name="skill_gained" value="Sáng tạo"/><label class="chip-lb" for="sk4">💡 Sáng tạo</label>
+        <input class="chip-cb" type="checkbox" id="sk5" name="skill_gained" value="Điện tử cơ bản"/><label class="chip-lb" for="sk5">⚡ Điện tử</label>
+        <input class="chip-cb" type="checkbox" id="sk6" name="skill_gained" value="Thuyết trình"/><label class="chip-lb" for="sk6">🎤 Thuyết trình</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: Phản hồi ══ -->
+  <div class="card">
+    <div class="section-label">💬 Phản hồi</div>
+
+    <div class="field">
+      <label for="best">Điều bạn thích nhất?</label>
+      <div class="ta-wrap">
+        <textarea id="best" name="best" maxlength="300"
+          placeholder="Ví dụ: Tôi thích phần làm robot vì..."
+          oninput="countChars(this,'cnt1')"></textarea>
+        <span class="ta-counter" id="cnt1">0/300</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="improve">Bạn muốn cải thiện điều gì?</label>
+      <div class="ta-wrap">
+        <textarea id="improve" name="improve" maxlength="300"
+          placeholder="Ví dụ: Muốn thêm bài tập MicroPython..."
+          oninput="countChars(this,'cnt2')"></textarea>
+        <span class="ta-counter" id="cnt2">0/300</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="topic">Chủ đề muốn học thêm?</label>
+      <input type="text" id="topic" name="topic" placeholder="AI, IoT, Robotics nâng cao..."/>
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <button type="submit" class="btn-submit" id="submitBtn">
+    <span>📨</span> Gửi khảo sát
+  </button>
+
+</form>
+</div><!-- /form-wrap -->
+
+<!-- RESULT -->
+<div id="result-section">
+  <div class="result-card">
+    <div class="result-header">
+      <div class="result-avatar">📊</div>
+      <div class="result-meta">
+        <h3>Kết quả của bạn</h3>
+        <p id="result-time">—</p>
+      </div>
+    </div>
+    <div class="result-grid" id="result-grid"></div>
+    <div style="margin-top:1.2rem">
+      <button class="copy-btn" onclick="copyMd()">📋 Copy Markdown</button>
+      <pre class="md-block" id="md-output"></pre>
+    </div>
+  </div>
+</div>
+
+<footer>
+  🎓 AeroLLM · Authorized Security Education ·
+  <a href="portal.html">Trang chủ</a> ·
+  <a href="danh-gia.html">Đánh giá đồng đẳng</a> ·
+  <a href="ket-qua.html">Kết quả</a>
+</footer>
+
+<script src="js/cloud.js"></script>
+<script>
+/* ── GRADE BADGE PICKER ── */
+document.querySelectorAll('.grade-badge').forEach(badge=>{
+  badge.addEventListener('click',()=>{
+    document.querySelectorAll('.grade-badge').forEach(b=>b.classList.remove('active'));
+    badge.classList.add('active');
+    const val = badge.dataset.val;
+    document.getElementById('gradeInput').value = val;
+    document.getElementById('gradeLabel').textContent = `✓ Đã chọn: ${val}`;
+    document.getElementById('gradeLabel').style.color = 'var(--g)';
+    updateProgress();
+  });
+});
+
+/* ── SLIDER SYNC ── */
+function syncSlider(el, valId, fmt, unit){
+  const pct = (el.value - el.min)/(el.max - el.min)*100;
+  el.style.background = `linear-gradient(90deg,var(--p) ${pct}%,var(--sf2) ${pct}%)`;
+  document.getElementById(valId).textContent = fmt(+el.value);
+}
+// init slider fills
+document.querySelectorAll('input[type=range]').forEach(el=>syncSlider(el, el.id==='sessions'?'sessionVal':'skillVal', el.id==='sessions'?v=>v+' buổi':v=>v+'%'));
+
+/* ── CHAR COUNTER ── */
+function countChars(ta, counterId){
+  document.getElementById(counterId).textContent = `${ta.value.length}/${ta.maxLength}`;
+}
+
+/* ── STAR HINTS ── */
+const starLabels = {1:'Rất kém 😞',2:'Kém 😐',3:'Trung bình 🙂',4:'Tốt 😊',5:'Xuất sắc 🤩'};
+document.querySelectorAll('.star-opt').forEach(input=>{
+  input.addEventListener('change',()=>{
+    document.getElementById('starHint').textContent = starLabels[input.value]||'';
+    updateProgress();
+  });
+});
+
+/* ── PROGRESS ── */
+const REQUIRED = ['name','grade','overall'];
+function updateProgress(){
+  const form = document.getElementById('surveyForm');
+  let filled = 0;
+  REQUIRED.forEach(n=>{
+    // grade may be in hidden #gradeInput or hidden #gradeHidden
+    const special = n==='grade';
+    if(special){
+      const gi = document.getElementById('gradeInput');
+      const gh = document.getElementById('gradeHidden');
+      if((gi&&gi.value)||(gh&&gh.value)) filled++;
+      return;
+    }
+    const els = form.querySelectorAll(`[name="${n}"]`);
+    if([...els].some(e=>e.value.trim()&&(e.type!=='radio'||e.checked))) filled++;
+  });
+  const pct = Math.round(filled/REQUIRED.length*100);
+  document.getElementById('progMiniFill').style.width = pct+'%';
+  document.getElementById('progMiniPct').textContent = pct+'%';
+}
+document.getElementById('surveyForm').addEventListener('input', updateProgress);
+
+/* ── FORM SUBMIT ── */
+document.getElementById('surveyForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const data = {};
+  for(const [k,v] of fd.entries()){
+    data[k] = data[k] ? [].concat(data[k],v) : v;
+  }
+  window._survey = data;
+  window._surveyTime = new Date().toLocaleString('vi-VN');
+  const context = JSON.parse(sessionStorage.getItem('stem_user') || 'null');
+  const surveys = JSON.parse(localStorage.getItem('stem_surveys') || '[]');
+  const record = {
+    id: `survey_${Date.now()}`,
+    studentId: context?.student?.id || '',
+    studentName: context?.student?.name || data.name || '',
+    classId: context?.class?.id || data.grade || '',
+    sessionId: context?.session?.id || Number(data.sessions) || 0,
+    sessionTitle: context?.session?.title || '',
+    courseId: context?.course?.id || 'stem-microbit',
+    courseTitle: context?.course?.title || '',
+    submittedAt: new Date().toISOString(),
+    answers: data
+  };
+  surveys.push(record);
+  localStorage.setItem('stem_surveys', JSON.stringify(surveys));
+
+  /* ── đồng bộ lên Google Sheets (nếu đã kết nối) ── */
+  if(window.STEMCloud){
+    const kh = (context && context.course) || null;
+    STEMCloud.push('survey', Object.assign({}, data, {
+      id: record.id,
+      courseId: kh ? kh.id : 'stem-microbit',
+      courseTitle: kh ? kh.title : '',
+      studentId: record.studentId,
+      studentName: record.studentName,
+      classId: record.classId,
+      sessionId: record.sessionId,
+      sessionTitle: record.sessionTitle,
+      submittedAt: record.submittedAt
+    }), { uid: record.id });
+  }
+
+  document.getElementById('success-overlay').classList.add('show');
+});
+
+/* ── SHOW RESULT ── */
+function showResult(){
+  document.getElementById('success-overlay').classList.remove('show');
+  const rs = document.getElementById('result-section');
+  rs.classList.add('show');
+  rs.scrollIntoView({behavior:'smooth',block:'start'});
+
+  const d = window._survey, t = window._surveyTime;
+  document.getElementById('result-time').textContent = '📅 '+t;
+
+  const stars = '★'.repeat(+(d.overall||0))+'☆'.repeat(5-(+(d.overall||0)));
+  const favArr = [].concat(d.fav||[]);
+  const skillArr = [].concat(d.skill_gained||[]);
+
+  const items=[
+    {l:'👤 Họ tên',v:d.name||'—'},{l:'📚 Lớp',v:d.grade||'—'},
+    {l:'📅 Buổi học',v:(d.sessions||0)+'/36'},{l:'⭐ Đánh giá',v:stars},
+    {l:'🎯 Độ khó',v:d.difficulty||'—'},{l:'📣 Giới thiệu',v:d.recommend||'—'},
+    {l:'📈 Cải thiện',v:(d.skill||50)+'%'},{l:'💡 Kỹ năng',v:skillArr.join(', ')||'—'},
+  ];
+  document.getElementById('result-grid').innerHTML =
+    items.map(i=>`<div class="result-item"><div class="rl">${i.l}</div><div class="rv">${i.v}</div></div>`).join('');
+
+  const md=[
+    `# 📋 Khảo sát AeroLLM – Kết Quả`,
+    ``,`**Họ tên:** ${d.name||'—'}  `,`**Lớp:** ${d.grade||'—'}  `,
+    `**Thời gian:** ${t}  `,``,
+    `## 📚 Trải nghiệm`,
+    `- Buổi học: ${d.sessions||0}/36`,
+    `- Phần thích nhất: ${favArr.join(', ')||'—'}`,``,
+    `## ⭐ Đánh giá`,
+    `- Tổng thể: ${stars} (${d.overall||0}/5)`,
+    `- Độ khó: ${d.difficulty||'—'}`,
+    `- Giới thiệu: ${d.recommend||'—'}`,``,
+    `## 🎯 Kỹ năng`,
+    `- Cải thiện: ${d.skill||50}%`,
+    `- Kỹ năng nổi bật: ${skillArr.join(', ')||'—'}`,``,
+    `## 💬 Phản hồi`,
+    `> **Thích nhất:** ${d.best||'—'}`,
+    `> **Cần cải thiện:** ${d.improve||'—'}`,
+    `> **Muốn học thêm:** ${d.topic||'—'}`,``,
+    `---`,`*Tạo tự động · AeroLLM Portal · ${t}*`,
+  ].join('\n');
+  document.getElementById('md-output').textContent = md;
+  window._mdContent = md;
+}
+
+function copyMd(){
+  navigator.clipboard.writeText(window._mdContent||'').then(()=>{
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent='✅ Đã sao chép!';
+    setTimeout(()=>btn.innerHTML='📋 Copy Markdown',2000);
+  });
+}
+
+/* ── AUTO-FILL từ sessionStorage ── chạy SAU khi DOM & hàm sẵn sàng ── */
+window.addEventListener('load',()=>{
+  const raw = sessionStorage.getItem('stem_user');
+  if(!raw) return;
+  try{
+    const ctx = JSON.parse(raw);
+    const {student, class:cls, session} = ctx;
+    if(!student) return;
+
+    // Hiện banner, ẩn manual
+    document.getElementById('identityBanner').style.display='block';
+    document.getElementById('identityManual').style.display='none';
+
+    // Điền banner
+    document.getElementById('idAvatar').textContent = student.avatar||'🧑';
+    document.getElementById('idName').textContent   = student.name;
+    document.getElementById('idMeta').textContent   =
+      `${cls?.name||''} · ${cls?.teacher||''} · 📅 Buổi ${session?.id||''}: ${session?.title||''}`;
+
+    // Hidden fields
+    document.getElementById('name').value        = student.name;
+    document.getElementById('school').value      = cls?.name||'';
+    document.getElementById('gradeHidden').value = cls?.name||'';
+
+    // Slider buổi học
+    if(session?.id){
+      const sl=document.getElementById('sessions');
+      if(sl){ sl.value=Math.min(session.id,36); syncSlider(sl,'sessionVal',v=>v+' buổi'); }
+    }
+
+    updateProgress();
+  } catch(e){ console.warn('autoFill:',e); }
+});
+</script>
+<script src="js/navigation.js"></script>
+</body>
+</html>

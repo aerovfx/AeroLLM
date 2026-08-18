@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Đánh Giá Đồng Đẳng – AeroLLM Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --p:#7c3aed;--p2:#6d28d9;--s:#0ea5e9;--a:#f59e0b;
+      --g:#10b981;--r:#ef4444;
+      --bg:#080812;--sf:#12111f;--sf2:#1c1a30;--sf3:#252340;
+      --bd:rgba(124,58,237,.2);--txt:#e8e6ff;--muted:#7c7a9c;
+      --rad:14px;--shad:0 8px 32px rgba(0,0,0,.5);
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+    body::before{content:'';position:fixed;inset:0;
+      background:radial-gradient(ellipse 70% 50% at 15% 10%,rgba(124,58,237,.2) 0%,transparent 55%),
+        radial-gradient(ellipse 50% 40% at 85% 80%,rgba(14,165,233,.15) 0%,transparent 55%);
+      pointer-events:none;z-index:0}
+
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      background:rgba(8,8,18,.85);backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--bd);
+      padding:.8rem 1.5rem;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .topbar-left{display:flex;align-items:center;gap:.8rem}
+    .back-btn{display:inline-flex;align-items:center;gap:.4rem;
+      background:var(--sf2);border:1px solid var(--bd);border-radius:8px;
+      padding:.4rem .9rem;font-size:.82rem;font-weight:600;color:var(--muted);
+      cursor:pointer;text-decoration:none;transition:all .2s}
+    .back-btn:hover{border-color:var(--p);color:var(--txt)}
+    .topbar-user{display:flex;align-items:center;gap:.5rem;font-size:.85rem}
+    .user-chip{background:var(--sf3);border:1px solid var(--bd);border-radius:99px;
+      padding:.3rem .8rem;font-weight:600}
+    .session-chip{background:rgba(124,58,237,.2);border:1px solid rgba(124,58,237,.3);
+      border-radius:99px;padding:.3rem .8rem;font-size:.78rem;color:var(--p);font-weight:600}
+
+    .container{position:relative;z-index:5;max-width:820px;margin:0 auto;padding:1.5rem}
+
+    .page-header{margin-bottom:2rem;text-align:center}
+    .page-header h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;margin-bottom:.5rem;
+      background:linear-gradient(135deg,#fff,var(--p),var(--s));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .page-header p{color:var(--muted);font-size:.9rem}
+
+    /* peer selector */
+    .peer-scroll{display:flex;gap:.6rem;overflow-x:auto;padding-bottom:.5rem;margin-bottom:1.5rem}
+    .peer-scroll::-webkit-scrollbar{height:3px}
+    .peer-scroll::-webkit-scrollbar-thumb{background:var(--p);border-radius:2px}
+    .peer-chip{
+      flex-shrink:0;display:flex;align-items:center;gap:.4rem;
+      background:var(--sf2);border:1.5px solid var(--bd);border-radius:99px;
+      padding:.45rem 1rem;cursor:pointer;font-size:.82rem;font-weight:600;
+      color:var(--muted);transition:all .2s;white-space:nowrap}
+    .peer-chip:hover{border-color:var(--p);color:var(--txt)}
+    .peer-chip.active{background:var(--p);border-color:var(--p);color:#fff}
+    .peer-chip.done{border-color:var(--g);color:var(--g)}
+    .peer-chip.done.active{background:var(--g);border-color:var(--g);color:#fff}
+
+    /* evaluation card */
+    .eval-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rad);
+      padding:1.8rem;box-shadow:var(--shad);margin-bottom:1rem;animation:slideU .35s ease}
+
+    .eval-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.8rem;
+      padding-bottom:1.2rem;border-bottom:1px solid var(--bd)}
+    .eval-avatar{width:56px;height:56px;border-radius:14px;
+      background:linear-gradient(135deg,var(--p),var(--s));
+      display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+    .eval-info h3{font-size:1.1rem;font-weight:700}
+    .eval-info p{font-size:.8rem;color:var(--muted);margin-top:.2rem}
+    .eval-progress-wrap{margin-left:auto;text-align:right}
+    .eval-progress-num{font-size:1.3rem;font-weight:800;color:var(--p)}
+    .eval-progress-lbl{font-size:.72rem;color:var(--muted)}
+
+    /* criteria */
+    .criterion{margin-bottom:2rem}
+    .criterion:last-child{margin-bottom:0}
+    .crit-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem}
+    .crit-icon{font-size:1.2rem}
+    .crit-info h4{font-size:.9rem;font-weight:700}
+    .crit-info p{font-size:.76rem;color:var(--muted)}
+    .crit-score{margin-left:auto;font-size:1.3rem;font-weight:800;color:var(--p);min-width:40px;text-align:right}
+
+    /* star rating */
+    .stars{display:flex;gap:.35rem;flex-direction:row-reverse;justify-content:flex-end}
+    .star-in{display:none}
+    .star-lbl{font-size:1.6rem;cursor:pointer;color:var(--sf3);transition:all .2s;
+      filter:drop-shadow(0 0 0px transparent)}
+    .star-in:checked ~ .star-lbl{color:#f59e0b;filter:drop-shadow(0 0 6px rgba(245,158,11,.4))}
+    .stars:hover .star-lbl{color:#f59e0b}
+    .star-lbl:hover~.star-lbl{color:#f59e0b}
+    .stars .star-lbl:hover{transform:scale(1.2)}
+
+    /* comment */
+    .crit-comment{
+      width:100%;margin-top:.7rem;
+      background:var(--sf2);border:1.5px solid var(--bd);border-radius:10px;
+      padding:.65rem .9rem;font-family:inherit;font-size:.85rem;color:var(--txt);
+      outline:none;resize:none;transition:border-color .25s;min-height:60px}
+    .crit-comment:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(124,58,237,.15)}
+    .crit-comment::placeholder{color:var(--muted)}
+
+    /* overall note */
+    .overall-note{
+      width:100%;
+      background:var(--sf2);border:1.5px solid var(--bd);border-radius:10px;
+      padding:.75rem 1rem;font-family:inherit;font-size:.9rem;color:var(--txt);
+      outline:none;resize:vertical;min-height:80px;transition:border-color .25s;margin-top:.5rem}
+    .overall-note:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(124,58,237,.15)}
+    .overall-note::placeholder{color:var(--muted)}
+
+    /* summary bar */
+    .summary-bar{
+      background:var(--sf);border:1px solid var(--bd);border-radius:var(--rad);
+      padding:1.2rem 1.5rem;display:flex;align-items:center;
+      justify-content:space-between;gap:1rem;flex-wrap:wrap;
+      position:sticky;bottom:1rem;z-index:20;
+      box-shadow:0 8px 32px rgba(0,0,0,.6)}
+    .summary-left{display:flex;gap:1.2rem;flex-wrap:wrap}
+    .sum-item{text-align:center}
+    .sum-val{font-size:1.2rem;font-weight:800;color:var(--p)}
+    .sum-lbl{font-size:.7rem;color:var(--muted)}
+
+    /* score ring */
+    .score-ring{width:52px;height:52px;position:relative}
+    .score-ring svg{transform:rotate(-90deg)}
+    .ring-bg{fill:none;stroke:var(--sf3);stroke-width:4}
+    .ring-fill{fill:none;stroke:var(--p);stroke-width:4;stroke-linecap:round;
+      transition:stroke-dashoffset .4s ease;stroke-dasharray:138;stroke-dashoffset:138}
+    .ring-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+      font-size:.75rem;font-weight:700;color:var(--txt)}
+
+    .btn{padding:.75rem 1.5rem;border:none;border-radius:10px;
+      font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;
+      display:flex;align-items:center;gap:.5rem;transition:all .2s;white-space:nowrap}
+    .btn-primary{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;
+      box-shadow:0 4px 20px rgba(124,58,237,.4)}
+    .btn-primary:hover{transform:translateY(-2px)}
+    .btn-success{background:linear-gradient(135deg,var(--g),#059669);color:#fff;
+      box-shadow:0 4px 20px rgba(16,185,129,.35)}
+    .btn-success:hover{transform:translateY(-2px)}
+    .btn:disabled{opacity:.4;pointer-events:none}
+
+    /* success toast */
+    .toast{
+      position:fixed;bottom:6rem;right:1.5rem;z-index:100;
+      background:var(--sf);border:1px solid rgba(16,185,129,.4);border-radius:12px;
+      padding:1rem 1.5rem;display:flex;align-items:center;gap:.7rem;
+      box-shadow:var(--shad);transform:translateX(150%);transition:transform .35s ease}
+    .toast.show{transform:translateX(0)}
+    .toast-icon{font-size:1.4rem}
+    .toast-text{font-size:.88rem;font-weight:600}
+
+    /* done overlay */
+    #doneOverlay{display:none;position:fixed;inset:0;z-index:999;
+      background:rgba(8,8,18,.92);backdrop-filter:blur(12px);
+      align-items:center;justify-content:center}
+    #doneOverlay.show{display:flex}
+    .done-box{background:var(--sf);border:1px solid rgba(16,185,129,.4);border-radius:20px;
+      padding:3rem 2.5rem;max-width:440px;width:90%;text-align:center;animation:popIn .4s ease}
+    .done-icon{font-size:4rem;margin-bottom:1rem;animation:bounce 1s infinite}
+    .done-box h2{font-size:1.5rem;font-weight:800;margin-bottom:.6rem;
+      background:linear-gradient(135deg,var(--g),var(--s));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .done-box p{color:var(--muted);margin-bottom:1.5rem}
+    .done-actions{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+    .done-actions a{
+      padding:.7rem 1.4rem;border-radius:10px;font-weight:700;font-size:.9rem;
+      text-decoration:none;transition:opacity .2s}
+    .btn-g{background:var(--g);color:#fff}
+    .btn-bl{background:var(--p);color:#fff}
+    .btn-gr{background:var(--sf2);color:var(--txt);border:1px solid var(--bd)}
+
+    @keyframes slideU{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes popIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  </style>
+  <link rel="stylesheet" href="theme.css?v=3"/>
+</head>
+<body>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <div class="toast-icon">✅</div>
+  <div class="toast-text" id="toastText">Đã lưu đánh giá!</div>
+</div>
+
+<!-- Done overlay -->
+<div id="doneOverlay">
+  <div class="done-box">
+    <div class="done-icon">🏆</div>
+    <h2>Hoàn thành đánh giá!</h2>
+    <p id="doneMsg">Bạn đã đánh giá tất cả bạn trong lớp cho buổi học này.</p>
+    <div class="done-actions">
+      <a class="done-actions btn-g" href="ket-qua.html">📊 Xem kết quả</a>
+      <a class="done-actions btn-bl" href="portal.html">🔄 Đánh giá lại</a>
+      <a class="done-actions btn-gr" href="portal.html">← Trang chủ</a>
+    </div>
+  </div>
+</div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a class="back-btn" href="portal.html">← Quay lại</a>
+    <div class="session-chip" id="sessionChip">📅 Buổi —</div>
+  </div>
+  <div class="topbar-user">
+    <div class="user-chip" id="userChip">👤 —</div>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="container">
+  <div class="page-header">
+    <h1>🔄 Đánh Giá Đồng Đẳng</h1>
+    <p>Đánh giá từng bạn trong lớp theo các tiêu chí học tập.</p>
+  </div>
+
+  <!-- Peer selector -->
+  <div class="peer-scroll" id="peerScroll"></div>
+
+  <!-- Evaluation card (per peer) -->
+  <div class="eval-card" id="evalCard">
+    <div class="eval-header">
+      <div class="eval-avatar" id="evalAvatar">👤</div>
+      <div class="eval-info">
+        <h3 id="evalName">—</h3>
+        <p id="evalClass">—</p>
+      </div>
+      <div class="eval-progress-wrap">
+        <div class="eval-progress-num" id="evalProgressNum">0/6</div>
+        <div class="eval-progress-lbl">tiêu chí</div>
+      </div>
+    </div>
+    <div id="criteriaList"></div>
+    <div style="margin-top:1.5rem">
+      <label style="font-size:.85rem;font-weight:600;color:var(--muted);margin-bottom:.4rem;display:block">
+        💬 Nhận xét chung (tùy chọn)
+      </label>
+      <textarea class="overall-note" id="overallNote" placeholder="Ví dụ: Bạn rất tích cực trong buổi học hôm nay, luôn hỗ trợ các thành viên..."></textarea>
+    </div>
+  </div>
+
+  <!-- Sticky summary bar -->
+  <div class="summary-bar">
+    <div class="summary-left">
+      <div class="sum-item">
+        <div class="sum-val" id="sumDone">0</div>
+        <div class="sum-lbl">Đã đánh giá</div>
+      </div>
+      <div class="sum-item">
+        <div class="sum-val" id="sumTotal">0</div>
+        <div class="sum-lbl">Tổng bạn</div>
+      </div>
+      <div class="sum-item">
+        <div class="sum-val" id="sumAvg">—</div>
+        <div class="sum-lbl">Điểm TB buổi</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:.75rem;align-items:center">
+      <div class="score-ring">
+        <svg viewBox="0 0 44 44" width="52" height="52">
+          <circle class="ring-bg" cx="22" cy="22" r="22"/>
+          <circle class="ring-fill" id="ringFill" cx="22" cy="22" r="22"/>
+        </svg>
+        <div class="ring-text" id="ringText">0%</div>
+      </div>
+      <button class="btn btn-primary" id="saveBtn" onclick="saveCurrent()">💾 Lưu & Tiếp</button>
+      <button class="btn btn-success" id="finishBtn" onclick="finishAll()" style="display:none">
+        🏁 Hoàn thành
+      </button>
+    </div>
+  </div>
+</div><!-- /container -->
+
+<script src="js/cloud.js"></script>
+<script>
+  /* ── load context ── */
+  const ctx = JSON.parse(sessionStorage.getItem('stem_user') || 'null');
+  if(!ctx){ window.location.replace('portal.html'); }
+
+  // Keep initialization safe while the browser completes the redirect.
+  const { student = {}, class: cls = {}, session = {}, peers = [] } = ctx || {};
+  const course = (ctx && ctx.course) ||
+    { id:'ethical-cybersecurity', title:'Ethical Cybersecurity', icon:'⌁', group:'cyber' };
+  const STORAGE_KEY = `stem_eval_${course.id}_${student.id}_sess${session.id}`;
+
+  /* show user info */
+  document.getElementById('userChip').textContent = `${student.avatar} ${student.name}`;
+  document.getElementById('sessionChip').textContent =
+    `${course.icon||'📘'} ${course.title} · Buổi ${session.id} – ${session.title}`;
+  document.getElementById('sumTotal').textContent = peers.length;
+
+  /* load existing evaluations */
+  let evaluations = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  // evaluations[peerId] = { scores:{critId:score,...}, note:'', savedAt:'' }
+
+  let criteria = [], currentPeerIdx = 0;
+
+  /* ── tiêu chí: ưu tiên bộ tiêu chí của khoá (portal truyền sang) ── */
+  if(ctx && ctx.criteria && ctx.criteria.length){
+    criteria = ctx.criteria;
+    initPeers();
+  } else
+  fetch('data/courses.json')
+    .then(r=>r.json())
+    .then(d=>{
+      const g = (d.criteriaGroups||[]).find(x=>x.id===course.group);
+      if(!g) throw new Error('không có nhóm tiêu chí');
+      criteria = g.criteria;
+      initPeers();
+    })
+    .catch(()=>fetch('data/students.json')
+      .then(r=>r.json())
+      .then(db=>{
+        criteria = db.criteria;
+        initPeers();
+      }));
+
+  /* ── init peer chips ── */
+  function initPeers(){
+    const scroll = document.getElementById('peerScroll');
+    peers.forEach((p, i) => {
+      const chip = document.createElement('div');
+      chip.className = 'peer-chip' + (evaluations[p.id] ? ' done' : '') + (i===0 ? ' active' : '');
+      chip.id = 'chip_'+p.id;
+      chip.innerHTML = `${p.avatar} ${p.name}`;
+      chip.onclick = () => switchPeer(i);
+      scroll.appendChild(chip);
+    });
+    loadPeer(0);
+  }
+
+  function switchPeer(idx){
+    // auto-save current before switching
+    autoSave();
+    currentPeerIdx = idx;
+    document.querySelectorAll('.peer-chip').forEach((c,i)=>{
+      c.classList.toggle('active', i===idx);
+    });
+    loadPeer(idx);
+  }
+
+  function loadPeer(idx){
+    currentPeerIdx = idx;
+    const peer = peers[idx];
+    document.getElementById('evalAvatar').textContent = peer.avatar;
+    document.getElementById('evalName').textContent = peer.name;
+    document.getElementById('evalClass').textContent = `${cls.name} · ${peer.id}`;
+
+    const saved = evaluations[peer.id] || {};
+    document.getElementById('overallNote').value = saved.note || '';
+
+    renderCriteria(peer, saved.scores || {});
+    updateProgressNum();
+  }
+
+  function renderCriteria(peer, savedScores){
+    const list = document.getElementById('criteriaList');
+    list.innerHTML = '';
+    criteria.forEach(c => {
+      const savedVal = savedScores[c.id] || 0;
+      const div = document.createElement('div');
+      div.className = 'criterion';
+      div.innerHTML = `
+        <div class="crit-header">
+          <div class="crit-icon">${c.icon}</div>
+          <div class="crit-info">
+            <h4>${c.label}</h4>
+            <p>${c.desc}</p>
+          </div>
+          <div class="crit-score" id="sc_${peer.id}_${c.id}">${savedVal||'—'}</div>
+        </div>
+        <div class="stars">
+          ${[5,4,3,2,1].map(v=>`
+            <input class="star-in" type="radio" name="star_${peer.id}_${c.id}" id="star_${peer.id}_${c.id}_${v}" value="${v}" ${savedVal==v?'checked':''}>
+            <label class="star-lbl" for="star_${peer.id}_${c.id}_${v}" title="${v} sao">★</label>
+          `).join('')}
+        </div>
+        <textarea class="crit-comment" placeholder="Nhận xét về tiêu chí này (tuỳ chọn)..." rows="2"
+          id="cm_${peer.id}_${c.id}">${(savedScores['note_'+c.id])||''}</textarea>`;
+      list.appendChild(div);
+
+      // update score display on change
+      criteria.forEach(cc=>{
+        [1,2,3,4,5].forEach(v=>{
+          const el = document.getElementById(`star_${peer.id}_${cc.id}_${v}`);
+          if(el) el.addEventListener('change', ()=>{
+            document.getElementById(`sc_${peer.id}_${cc.id}`).textContent = v;
+            updateProgressNum();
+          });
+        });
+      });
+    });
+    updateProgressNum();
+  }
+
+  function updateProgressNum(){
+    const peer = peers[currentPeerIdx];
+    let filled = 0;
+    criteria.forEach(c=>{
+      const checked = document.querySelector(`input[name="star_${peer.id}_${c.id}"]:checked`);
+      if(checked) filled++;
+    });
+    document.getElementById('evalProgressNum').textContent = `${filled}/${criteria.length}`;
+    document.getElementById('evalProgressNum').style.color = filled===criteria.length ? 'var(--g)' : 'var(--p)';
+  }
+
+  function getCurrentScores(){
+    const peer = peers[currentPeerIdx];
+    const scores = {};
+    criteria.forEach(c=>{
+      const checked = document.querySelector(`input[name="star_${peer.id}_${c.id}"]:checked`);
+      if(checked) scores[c.id] = +checked.value;
+      const cm = document.getElementById(`cm_${peer.id}_${c.id}`);
+      if(cm?.value) scores['note_'+c.id] = cm.value;
+    });
+    return scores;
+  }
+
+  function autoSave(){
+    const peer = peers[currentPeerIdx];
+    const scores = getCurrentScores();
+    const note = document.getElementById('overallNote').value;
+    if(Object.keys(scores).length > 0){
+      evaluations[peer.id] = { scores, note, savedAt: new Date().toISOString() };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(evaluations));
+    }
+  }
+
+  function saveCurrent(){
+    const peer = peers[currentPeerIdx];
+    const scores = getCurrentScores();
+    const note = document.getElementById('overallNote').value;
+    const filled = criteria.filter(c=>scores[c.id]).length;
+
+    if(filled === 0){
+      showToast('⚠️ Hãy đánh giá ít nhất 1 tiêu chí!');
+      return;
+    }
+
+    evaluations[peer.id] = { scores, note, savedAt: new Date().toISOString() };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(evaluations));
+
+    // update chip
+    const chip = document.getElementById('chip_'+peer.id);
+    chip.classList.add('done');
+
+    showToast(`✅ Đã lưu đánh giá ${peer.name}!`);
+    updateSummary();
+
+    // gửi ngay từng phiếu lên Sheets (khoá trùng sẽ ghi đè, không sinh dòng mới)
+    if(window.STEMCloud){
+      const clean = {};
+      criteria.forEach(c=>{ if(scores[c.id]) clean[c.id] = scores[c.id]; });
+      STEMCloud.push('peer_eval', {
+        courseId: course.id, courseTitle: course.title, group: course.group,
+        sessionId: session.id, sessionTitle: session.title, classId: cls.id,
+        raterId: student.id, raterName: student.name,
+        targetId: peer.id, targetName: peer.name,
+        scores: clean, note, savedAt: new Date().toISOString()
+      }, { uid: `peer_${course.id}_${student.id}_${session.id}_${peer.id}` });
+    }
+
+    // move to next
+    const next = currentPeerIdx + 1;
+    if(next < peers.length){
+      setTimeout(()=>switchPeer(next), 600);
+    } else {
+      document.getElementById('finishBtn').style.display='flex';
+    }
+  }
+
+  function finishAll(){
+    const done = Object.keys(evaluations).length;
+    document.getElementById('doneMsg').textContent =
+      `Bạn đã đánh giá ${done}/${peers.length} bạn trong lớp ${cls.name} cho Buổi ${session.id}.`;
+    document.getElementById('doneOverlay').classList.add('show');
+    exportToMarkdown();
+    dongBoLenSheets();
+  }
+
+  /* ── gửi toàn bộ phiếu của buổi này lên Google Sheets ── */
+  function dongBoLenSheets(){
+    if(!window.STEMCloud) return;
+    const items = Object.entries(evaluations).map(([peerId, ev])=>{
+      const peer = peers.find(p=>p.id===peerId) || {};
+      const scores = {};
+      criteria.forEach(c=>{ if(ev.scores[c.id]) scores[c.id] = ev.scores[c.id]; });
+      return { targetId: peerId, targetName: peer.name || '', scores,
+               note: ev.note || '', savedAt: ev.savedAt };
+    });
+    if(!items.length) return;
+    STEMCloud.push('peer_eval_set', {
+      courseId: course.id, courseTitle: course.title, group: course.group,
+      sessionId: session.id, sessionTitle: session.title, classId: cls.id,
+      raterId: student.id, raterName: student.name, items
+    }, { uid: `peerset_${course.id}_${student.id}_sess${session.id}` })
+    .then(r=>{ if(r && r.queued) showToast('⏳ Chưa gửi được lên Sheets — đã lưu chờ gửi lại.'); });
+  }
+
+  function updateSummary(){
+    const done = Object.keys(evaluations).length;
+    document.getElementById('sumDone').textContent = done;
+
+    // avg score across all evaluations
+    let total = 0, count = 0;
+    Object.values(evaluations).forEach(ev=>{
+      criteria.forEach(c=>{
+        if(ev.scores[c.id]){ total += ev.scores[c.id]; count++; }
+      });
+    });
+    const avg = count > 0 ? (total/count).toFixed(1) : '—';
+    document.getElementById('sumAvg').textContent = avg;
+
+    // ring
+    const pct = Math.round(done/peers.length*100);
+    const offset = 138 - (138*pct/100);
+    document.getElementById('ringFill').style.strokeDashoffset = offset;
+    document.getElementById('ringText').textContent = pct+'%';
+  }
+
+  function showToast(msg){
+    const t = document.getElementById('toast');
+    document.getElementById('toastText').textContent = msg;
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'), 2500);
+  }
+
+  /* ── export markdown ── */
+  function exportToMarkdown(){
+    const lines = [
+      `# 🔄 Đánh Giá Đồng Đẳng – Buổi ${session.id}`,
+      ``,
+      `**Người đánh giá:** ${student.name} (${student.id})  `,
+      `**Lớp:** ${cls.name} – Giáo viên: ${cls.teacher}  `,
+      `**Buổi học:** Buổi ${session.id} – ${session.title}  `,
+      `**Ngày đánh giá:** ${new Date().toLocaleDateString('vi-VN')}  `,
+      ``,
+      `## 📊 Bảng Tổng Hợp`,
+      ``,
+      `| Học viên | ${criteria.map(c=>c.icon+' '+c.label).join(' | ')} | TB |`,
+      `|----------|${criteria.map(()=>'------').join('|')}|----|`,
+    ];
+
+    peers.forEach(p=>{
+      const ev = evaluations[p.id];
+      if(!ev){ lines.push(`| ${p.name} | ${criteria.map(()=>'—').join(' | ')} | — |`); return; }
+      const scores = criteria.map(c => ev.scores[c.id] || '—');
+      const nums = scores.filter(s=>s!=='—').map(Number);
+      const avg = nums.length ? (nums.reduce((a,b)=>a+b,0)/nums.length).toFixed(1) : '—';
+      lines.push(`| ${p.name} | ${scores.join(' | ')} | **${avg}** |`);
+    });
+
+    lines.push('');
+    lines.push('## 💬 Nhận Xét Chi Tiết');
+    lines.push('');
+    peers.forEach(p=>{
+      const ev = evaluations[p.id];
+      if(!ev || !ev.note) return;
+      lines.push(`**${p.name}:** ${ev.note}  `);
+    });
+    lines.push('');
+    lines.push('---');
+    lines.push(`*Tạo tự động bởi AeroLLM Portal · ${new Date().toLocaleString('vi-VN')}*`);
+
+    const md = lines.join('\n');
+    // save to localStorage for results page
+    const key = `stem_md_${student.id}_sess${session.id}`;
+    localStorage.setItem(key, md);
+    sessionStorage.setItem('latest_md', md);
+  }
+
+  /* init summary */
+  updateSummary();
+</script>
+<script src="js/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Kết nối Google Sheets & Forms — AeroLLM Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f4f7f4;--card:#fff;--ink:#18251f;--muted:#6a7770;--green:#245c46;--lime:#dff36f;
+      --line:#dce5df;--red:#b33b3b;--amber:#b8860b;--blue:#2563eb}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Inter,system-ui,sans-serif}
+header{height:68px;padding:0 4vw;display:flex;align-items:center;justify-content:space-between;background:var(--green);color:#fff}
+header a{color:#fff;text-decoration:none;font-weight:700}
+.wrap{max-width:960px;margin:auto;padding:32px 20px 80px}
+h1{margin:0 0 .3rem;font-size:clamp(1.7rem,4vw,2.6rem);letter-spacing:-.045em}
+h2{font-size:1.1rem;margin:0 0 .8rem;display:flex;align-items:center;gap:.5rem}
+.note{color:var(--muted);margin:0 0 1.6rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px}
+.step-no{display:inline-flex;width:26px;height:26px;border-radius:99px;background:var(--green);color:#fff;
+         align-items:center;justify-content:center;font-size:.85rem;font-weight:800;flex-shrink:0}
+input[type=text],input[type=url]{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;
+       font:inherit;background:#fbfdfb}
+input:focus{outline:2px solid var(--green);outline-offset:1px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+button{font:inherit;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--ink);
+       padding:11px 16px;border-radius:10px;cursor:pointer;transition:.15s}
+button:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+button.primary{background:var(--green);color:#fff;border-color:var(--green)}
+button.ghost{background:#f2f6f2}
+button:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.status{margin-top:14px;padding:12px 15px;border-radius:10px;font-weight:600;display:none}
+.status.show{display:block}
+.status.ok{background:#dcfce7;color:#166534}
+.status.err{background:#fee2e2;color:#991b1b}
+.status.wait{background:#fef3c7;color:#92400e}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:6px}
+.tile{background:#f7f9f6;border:1px solid var(--line);border-radius:12px;padding:14px}
+.tile .n{font-size:1.7rem;font-weight:850;color:var(--green);line-height:1.1}
+.tile .l{font-size:.78rem;color:var(--muted);margin-top:2px}
+.links a{display:flex;gap:10px;align-items:center;padding:12px 14px;background:#f7f9f6;border:1px solid var(--line);
+         border-radius:10px;text-decoration:none;color:var(--ink);font-weight:600;margin-bottom:8px;word-break:break-all}
+.links a:hover{background:#eef4ef;border-color:var(--green)}
+ol{padding-left:1.3rem}ol li{margin-bottom:.5rem}
+code{background:#eef2ee;padding:2px 6px;border-radius:5px;font-size:.85em;word-break:break-all}
+.hint{font-size:.82rem;color:var(--muted);margin-top:.5rem}
+.warn{border-left:4px solid var(--amber);background:#fff9e7;color:#645326;padding:13px 16px;border-radius:0 10px 10px 0}
+table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{color:var(--muted);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.03em}
+@media(max-width:600px){.wrap{padding:20px 14px 70px}}
+</style>
+<link rel="stylesheet" href="theme.css?v=3">
+</head>
+<body>
+<header>
+  <a href="portal.html">← AeroLLM Portal</a>
+  <strong>Kết nối dữ liệu</strong>
+  <a href="admin.html">Giáo viên</a>
+</header>
+
+<main class="wrap">
+  <h1>☁️ Kết nối Google Sheets &amp; Forms</h1>
+  <p class="note">Kết nối Web App Google Apps Script do giáo viên sở hữu để đồng bộ dữ liệu lớp học.
+    Khi chưa kết nối, mọi chức năng vẫn chạy cục bộ bằng bộ nhớ trình duyệt.</p>
+
+  <!-- 1. Cấu hình -->
+  <section class="card">
+    <h2><span class="step-no">1</span> URL Web App (Apps Script)</h2>
+    <input type="url" id="apiUrl" placeholder="https://script.google.com/macros/s/AKfycb.../exec" autocomplete="off"/>
+    <div class="row">
+      <button class="primary" onclick="kiemTra()">🔍 Kiểm tra kết nối</button>
+      <button onclick="luuUrl()">💾 Lưu</button>
+      <button class="ghost" onclick="xoaUrl()">✖ Ngắt kết nối</button>
+    </div>
+    <div class="status" id="st1"></div>
+    <p class="hint">Dán URL Web App do chính bạn triển khai. AeroLLM không cấu hình sẵn máy chủ nhận dữ liệu.
+      Chi tiết: <a href="gas/HUONG-DAN.md" target="_blank">hướng dẫn triển khai</a> —
+      dán <code>gas/Code.gs</code> vào script.google.com, chạy hàm <code>taoToanBo</code>, rồi Triển khai → Ứng dụng web
+      (<em>Thực thi: Tôi</em> · <em>Truy cập: Bất kỳ ai</em>).</p>
+  </section>
+
+  <!-- 2. Tình trạng -->
+  <section class="card">
+    <h2><span class="step-no">2</span> Tình trạng dữ liệu trên Sheets</h2>
+    <div class="grid" id="tiles">
+      <div class="tile"><div class="n">—</div><div class="l">Chưa kiểm tra</div></div>
+    </div>
+    <div class="row">
+      <button onclick="lamMoi()">🔄 Làm mới số liệu</button>
+      <button onclick="dungLaiTongHop()">📊 Dựng lại sheet Tổng hợp</button>
+    </div>
+    <div class="status" id="st2"></div>
+  </section>
+
+  <!-- 3. Liên kết -->
+  <section class="card">
+    <h2><span class="step-no">3</span> Bảng tính &amp; biểu mẫu</h2>
+    <div class="links" id="links"><p class="hint">Kiểm tra kết nối để lấy liên kết Sheet và 3 Form.</p></div>
+  </section>
+
+  <!-- 4. Đồng bộ -->
+  <section class="card">
+    <h2><span class="step-no">4</span> Đồng bộ dữ liệu đang có trong máy</h2>
+    <table id="localTable">
+      <thead><tr><th>Loại dữ liệu</th><th>Số bản ghi trong máy</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div class="row">
+      <button class="primary" onclick="dayTatCa()">⬆️ Đẩy toàn bộ lên Sheets</button>
+      <button onclick="dayDanhSach()">👥 Đẩy danh sách lớp/học sinh</button>
+      <button onclick="guiHangCho()">📤 Gửi hàng chờ (<span id="qn">0</span>)</button>
+    </div>
+    <div class="status" id="st3"></div>
+    <p class="hint">Đẩy lại nhiều lần không tạo dòng trùng: mỗi bản ghi có khoá riêng, gửi lại sẽ ghi đè đúng dòng cũ.</p>
+  </section>
+
+  <!-- 5. Báo cáo email -->
+  <section class="card">
+    <h2><span class="step-no">5</span> Báo cáo tổng hợp gửi email giáo viên</h2>
+    <input type="email" id="teacherEmail" placeholder="teacher@example.edu" autocomplete="email"/>
+    <div class="row">
+      <button class="primary" onclick="luuEmail()">💾 Lưu email</button>
+      <button onclick="guiBaoCao()">📧 Gửi báo cáo ngay</button>
+      <button id="weeklyBtn" onclick="doiLichTuan()">⏰ Báo cáo hằng tuần: —</button>
+    </div>
+    <div class="status" id="st5"></div>
+    <p class="hint">Báo cáo gồm: số liệu từng khoá học, top 5 điểm tổng hợp, danh sách cần hỗ trợ (dưới 3.5/5)
+      và phản hồi khảo sát mới nhất. Lịch tự động: <strong>7:00 sáng thứ Hai hằng tuần</strong>.</p>
+  </section>
+
+  <!-- 6. Chia sẻ -->
+  <section class="card">
+    <h2><span class="step-no">6</span> Dùng trên máy khác</h2>
+    <p class="hint" style="margin-top:0">Gửi link kèm tham số <code>?api=</code> — máy nhận sẽ tự lưu cấu hình:</p>
+    <input type="text" id="shareLink" readonly value="—"/>
+    <div class="row"><button onclick="chepLink()">📋 Sao chép link</button></div>
+    <div class="status" id="st4"></div>
+  </section>
+
+  <div class="warn">
+    <strong>Riêng tư:</strong> biểu mẫu không thu thập email học sinh. Quyền truy cập bảng tính do
+    tài khoản Google triển khai Apps Script kiểm soát.
+  </div>
+</main>
+
+<script src="js/cloud.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+function say(el, msg, kind){ const e=$(el); e.className='status show '+(kind||'ok'); e.innerHTML=msg; }
+
+/* ── khởi tạo ── */
+$('apiUrl').value = STEMCloud.getUrl();
+capNhatHangCho();
+demDuLieuMay();
+capNhatShareLink();
+if(STEMCloud.enabled()) kiemTra();
+
+/* ── 1. cấu hình ── */
+function luuUrl(){
+  const u = STEMCloud.setUrl($('apiUrl').value);
+  capNhatShareLink();
+  if(!u){ say('st1','Đã xoá URL. Trang hoạt động ở chế độ ngoại tuyến.','wait'); return; }
+  say('st1','✅ Đã lưu URL vào trình duyệt này.','ok');
+  STEMCloud.repaint();
+}
+function xoaUrl(){ STEMCloud.setUrl(''); $('apiUrl').value=''; capNhatShareLink();
+  say('st1','Đã ngắt kết nối — dữ liệu chỉ lưu trong máy.','wait'); STEMCloud.repaint(); }
+
+function kiemTra(){
+  const u = STEMCloud.setUrl($('apiUrl').value);
+  if(!u){ say('st1','⚠️ Hãy dán URL Web App kết thúc bằng <code>/exec</code>.','err'); return; }
+  if(!/\/exec$/.test(u)) say('st1','⏳ Đang kiểm tra… (lưu ý URL nên kết thúc bằng /exec)','wait');
+  else say('st1','⏳ Đang kiểm tra kết nối…','wait');
+  STEMCloud.ping().then(r=>{
+    say('st1','✅ Kết nối thành công — máy chủ phản hồi lúc '+new Date(r.time).toLocaleString('vi-VN'),'ok');
+    veLienKet(r.config);
+    lamMoi();
+    napEmail();
+    STEMCloud.repaint();
+  }).catch(e=>{
+    say('st1','❌ '+e.message+'<br><span style="font-weight:500">Kiểm tra: đã Triển khai với quyền “Bất kỳ ai” chưa? URL có đuôi <code>/exec</code> chưa?</span>','err');
+  });
+}
+
+/* ── 2. số liệu ── */
+function lamMoi(){
+  if(!STEMCloud.enabled()){ say('st2','Chưa kết nối.','wait'); return; }
+  STEMCloud.get('summary').then(r=>{
+    const d = r.data;
+    $('tiles').innerHTML = [
+      ['Khảo sát', d.khaoSat], ['Đánh giá đồng đẳng', d.dongDang],
+      ['Điểm giáo viên', d.giaoVien], ['Học sinh', d.hocSinh], ['Lớp', d.lop]
+    ].map(([l,n])=>`<div class="tile"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
+    say('st2','Cập nhật lúc '+d.capNhat,'ok');
+  }).catch(e=>say('st2','❌ '+e.message,'err'));
+}
+function dungLaiTongHop(){
+  if(!STEMCloud.enabled()){ say('st2','Chưa kết nối.','wait'); return; }
+  say('st2','⏳ Đang tính lại…','wait');
+  STEMCloud.get('rebuild',{},60000)
+    .then(()=>say('st2','✅ Đã dựng lại sheet “Tổng hợp”.','ok'))
+    .catch(e=>say('st2','❌ '+e.message,'err'));
+}
+
+/* ── 3. liên kết ── */
+function veLienKet(cfg){
+  if(!cfg){ return; }
+  const items = [];
+  if(cfg.spreadsheetUrl) items.push(['📊','Bảng tính — 9 sheet dữ liệu', cfg.spreadsheetUrl]);
+  const f = cfg.forms||{};
+  if(f.khaoSat)  items.push(['🧪', f.khaoSat.title,  f.khaoSat.url]);
+  if(f.dongDang) items.push(['🔄', f.dongDang.title, f.dongDang.url]);
+  if(f.giaoVien) items.push(['👩‍🏫', f.giaoVien.title, f.giaoVien.url]);
+  $('links').innerHTML = items.length
+    ? items.map(([i,t,u])=>`<a href="${u}" target="_blank" rel="noopener"><span>${i}</span><span>${t}</span></a>`).join('')
+      + '<p class="hint">Link Form ở trên là link <strong>điền</strong> — gửi thẳng cho học sinh hoặc dán vào QR code.</p>'
+    : '<p class="hint">Chưa tạo Sheet/Form. Chạy hàm <code>taoToanBo()</code> trong Apps Script.</p>';
+}
+
+/* ── 4. đồng bộ ── */
+function docMay(){
+  const surveys = JSON.parse(localStorage.getItem('stem_surveys')||'[]');
+  const grades  = JSON.parse(localStorage.getItem('stem_teacher_grades')||'{}');
+  const evals   = [];
+  for(let i=0;i<localStorage.length;i++){
+    const k = localStorage.key(i);
+    if(!k.startsWith('stem_eval_')) continue;
+    const m = k.match(/^stem_eval_(.+)_sess(\d+)$/); if(!m) continue;
+    const data = JSON.parse(localStorage.getItem(k)||'{}');
+    Object.entries(data).forEach(([peerId,ev])=>{
+      evals.push({ raterId:m[1], sessionId:Number(m[2]), targetId:peerId,
+                   targetName:ev.targetName||'', scores:ev.scores||{}, note:ev.note||'', savedAt:ev.savedAt });
+    });
+  }
+  return { surveys, grades: Object.values(grades), evals };
+}
+function demDuLieuMay(){
+  const d = docMay();
+  const db = JSON.parse(localStorage.getItem('stem_db')||'{"students":[]}');
+  $('localTable').querySelector('tbody').innerHTML = [
+    ['🧪 Khảo sát học viên', d.surveys.length],
+    ['🔄 Phiếu đánh giá đồng đẳng', d.evals.length],
+    ['👩‍🏫 Bảng điểm giáo viên', d.grades.length],
+    ['👥 Học sinh thêm thủ công', (db.students||[]).length]
+  ].map(([l,n])=>`<tr><td>${l}</td><td><strong>${n}</strong></td></tr>`).join('');
+  return d;
+}
+function dayTatCa(){
+  if(!STEMCloud.enabled()){ say('st3','⚠️ Hãy kết nối ở bước 1 trước.','err'); return; }
+  const d = docMay();
+  const items = [];
+  d.surveys.forEach(s=>items.push({type:'survey', payload:Object.assign({}, s.answers||{}, {
+      id:s.id, studentId:s.studentId, studentName:s.studentName, classId:s.classId,
+      sessionId:s.sessionId, sessionTitle:s.sessionTitle, submittedAt:s.submittedAt })}));
+  d.evals.forEach(e=>items.push({type:'peer_eval', payload:e}));
+  d.grades.forEach(g=>items.push({type:'teacher_grade', payload:g}));
+  if(!items.length){ say('st3','Không có dữ liệu nào trong máy để đẩy lên.','wait'); return; }
+
+  say('st3','⏳ Đang gửi '+items.length+' bản ghi…','wait');
+  // chia lô 50 để tránh vượt giới hạn thời gian chạy của Apps Script
+  const lo = []; for(let i=0;i<items.length;i+=50) lo.push(items.slice(i,i+50));
+  guiLo(lo, 0, 0);
+}
+function guiLo(lo, i, done){
+  if(i>=lo.length){ say('st3','✅ Đã đẩy xong '+done+' bản ghi lên Google Sheets.','ok'); lamMoi(); return; }
+  fetch(STEMCloud.getUrl(), {
+    method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify({ type:'batch', device: STEMCloud.deviceId(), items: lo[i] })
+  }).then(r=>r.text()).then(()=>{
+    done += lo[i].length;
+    say('st3','⏳ Đã gửi '+done+' bản ghi…','wait');
+    guiLo(lo, i+1, done);
+  }).catch(e=>say('st3','❌ Lỗi ở lô '+(i+1)+': '+e.message,'err'));
+}
+function dayDanhSach(){
+  if(!STEMCloud.enabled()){ say('st3','⚠️ Hãy kết nối ở bước 1 trước.','err'); return; }
+  say('st3','⏳ Đang tải danh sách…','wait');
+  fetch('data/students.json').then(r=>r.json()).then(base=>{
+    const saved = JSON.parse(localStorage.getItem('stem_db')||'{"classes":[],"students":[]}');
+    const payload = {
+      classes:[...(base.classes||[]),...(saved.classes||[])],
+      students:[...(base.students||[]),...(saved.students||[])],
+      sessions: base.sessions||[]
+    };
+    return STEMCloud.push('roster', payload);
+  }).then(r=>{
+    if(r.ok===false && r.queued) say('st3','⏳ Chưa gửi được, đã xếp hàng chờ.','wait');
+    else { say('st3','✅ Đã đẩy danh sách lớp/học sinh/buổi học lên Sheets.','ok'); lamMoi(); }
+  }).catch(e=>say('st3','❌ '+e.message,'err'));
+}
+function guiHangCho(){
+  say('st3','⏳ Đang gửi hàng chờ…','wait');
+  STEMCloud.flush().then(r=>{
+    capNhatHangCho();
+    if(r.error) say('st3','❌ '+r.error,'err');
+    else if(!r.sent) say('st3','Không có bản ghi nào đang chờ.','wait');
+    else { say('st3','✅ Đã gửi '+r.sent+' bản ghi đang chờ.','ok'); lamMoi(); }
+  });
+}
+function capNhatHangCho(){ $('qn').textContent = STEMCloud.queueSize(); }
+
+/* ── 5. báo cáo email ── */
+let weeklyOn = false;
+function napEmail(){
+  if(!STEMCloud.enabled()) return;
+  STEMCloud.get('email').then(r=>{
+    $('teacherEmail').value = r.data.email || '';
+    weeklyOn = !!r.data.weekly;
+    veNutTuan();
+  }).catch(()=>{});
+}
+function veNutTuan(){
+  $('weeklyBtn').textContent = '⏰ Báo cáo hằng tuần: ' + (weeklyOn ? 'BẬT' : 'TẮT');
+}
+function luuEmail(){
+  const e = $('teacherEmail').value.trim();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)){ say('st5','⚠️ Email không hợp lệ.','err'); return; }
+  say('st5','⏳ Đang lưu…','wait');
+  STEMCloud.get('set_email', { email: e })
+    .then(()=>say('st5','✅ Báo cáo sẽ gửi về <strong>'+e+'</strong>.','ok'))
+    .catch(err=>say('st5','❌ '+err.message,'err'));
+}
+function guiBaoCao(){
+  const e = $('teacherEmail').value.trim();
+  if(!STEMCloud.enabled()){ say('st5','⚠️ Hãy kết nối ở bước 1 trước.','err'); return; }
+  say('st5','⏳ Đang tổng hợp và gửi email… (có thể mất 20–30 giây)','wait');
+  STEMCloud.get('report', e ? { email: e } : {}, 90000)
+    .then(r=>say('st5','✅ Đã gửi báo cáo tới <strong>'+r.data.to+'</strong> — '+
+      r.data.students+' học sinh, '+r.data.courses+' khoá. Còn '+r.data.quotaLeft+' email trong hạn mức hôm nay.','ok'))
+    .catch(err=>say('st5','❌ '+err.message,'err'));
+}
+function doiLichTuan(){
+  if(!STEMCloud.enabled()){ say('st5','⚠️ Hãy kết nối ở bước 1 trước.','err'); return; }
+  say('st5','⏳ Đang cập nhật lịch…','wait');
+  STEMCloud.get('weekly', { on: weeklyOn ? '0' : '1' }, 60000).then(r=>{
+    weeklyOn = !!r.data.weekly; veNutTuan();
+    say('st5', weeklyOn ? '✅ Đã bật báo cáo tự động 7:00 sáng thứ Hai hằng tuần.'
+                        : '⏸️ Đã tắt báo cáo tự động.', weeklyOn ? 'ok' : 'wait');
+  }).catch(err=>say('st5','❌ '+err.message,'err'));
+}
+
+/* ── 6. chia sẻ ── */
+function capNhatShareLink(){
+  const u = STEMCloud.getUrl();
+  const base = location.href.split('?')[0].replace(/ket-noi\.html$/,'portal.html');
+  $('shareLink').value = u ? base+'?api='+encodeURIComponent(u) : '— chưa có URL Web App —';
+}
+function chepLink(){
+  const v = $('shareLink').value;
+  if(v.startsWith('—')){ say('st4','⚠️ Chưa có URL để chia sẻ.','err'); return; }
+  navigator.clipboard.writeText(v).then(()=>say('st4','✅ Đã sao chép link.','ok'))
+    .catch(()=>say('st4','Không sao chép được — hãy chọn và copy thủ công.','err'));
+}
+</script>
+<script src="js/navigation.js"></script>
+</body>
+</html>

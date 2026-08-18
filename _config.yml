@@ -1,0 +1,19 @@
+title: AeroLLM
+description: Lộ trình thực hành mô hình ngôn ngữ lớn (LLM) bằng tiếng Việt: từ Python, token hoá, tự xây GPT đến huấn luyện, tinh chỉnh và đánh giá.
+url: https://aerovfx.github.io
+baseurl: /AeroLLM
+markdown: kramdown
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: true
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  hard_wrap: false
+encoding: utf-8
+exclude:
+  - .git
+  - .github
+

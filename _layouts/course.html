@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#030508">
+  <title>{{ page.title | default: "Bài học" }} · AeroLLM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/course.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/course-cards.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/course-sidebar.css' | relative_url }}">
+</head>
+<body>
+  <div class="reading-progress" id="reading-progress"></div>
+  <header class="course-header">
+    <a class="brand" href="{{ '/#courses' | relative_url }}"><span class="brand-mark">A</span><strong>AERO<span>LLM</span></strong></a>
+    <div class="system-state"><i></i> LEARNING NODE ONLINE</div>
+    <div class="header-actions">
+      <a class="classroom-link" href="{{ '/tools/khao-sat/portal.html' | relative_url }}" aria-label="Mở cổng lớp học AeroLLM">CLASSROOM <span>◎</span></a>
+      <a class="source-link" href="https://github.com/aerovfx/AeroLLM" target="_blank" rel="noreferrer" aria-label="Mở mã nguồn AeroLLM trên GitHub">SOURCE <span>↗</span></a>
+      <a class="back-link" href="{{ '/#courses' | relative_url }}">← Về lộ trình</a>
+    </div>
+  </header>
+
+  <div class="course-shell">
+    <aside class="course-sidebar">
+      <button class="sidebar-toggle" id="sidebar-toggle" type="button" aria-controls="course-sidebar-content" aria-expanded="true" aria-label="Thu gọn thanh bên"><span aria-hidden="true">‹</span></button>
+      <div class="course-sidebar-content" id="course-sidebar-content">
+      <p class="label">// DOCUMENT</p>
+      <p class="file-name">{{ page.path }}</p>
+      <nav id="toc" aria-label="Mục lục bài học">
+        <p class="label">// ON THIS PAGE</p>
+      </nav>
+      <div class="sidebar-actions">
+        <button id="copy-link" type="button">COPY LINK <span>↗</span></button>
+        <a href="https://github.com/aerovfx/AeroLLM/blob/main/{{ page.path }}" target="_blank" rel="noreferrer">VIEW SOURCE <span>↗</span></a>
+      </div>
+      </div>
+    </aside>
+
+    <main class="course-main">
+      <div class="doc-status"><span>DOC://{{ page.path | split: '/' | last | upcase }}</span><span>VERIFIED_CONTENT</span></div>
+      <nav class="resource-nav" id="resource-nav" aria-label="Nội dung khóa học"></nav>
+      <nav class="week-nav" id="week-nav" aria-label="Điều hướng bài học theo tuần"></nav>
+      <article class="markdown-body" id="lesson-content">
+        {{ content }}
+      </article>
+      <nav class="lesson-pagination" id="lesson-pagination" aria-label="Bài học trước và tiếp theo"></nav>
+      <footer class="course-footer">
+        <p>END_OF_DOCUMENT</p>
+        <a href="{{ '/#courses' | relative_url }}">Chọn nội dung tiếp theo →</a>
+      </footer>
+    </main>
+  </div>
+  <script src="{{ '/course.js' | relative_url }}"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AeroLLM — lộ trình thực hành mô hình ngôn ngữ lớn (LLM) bằng tiếng Việt.">
+  <meta name="theme-color" content="#07110f">
+  <title>AeroLLM — Học xây dựng mô hình ngôn ngữ lớn có lộ trình</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="classroom.css">
+</head>
+<body>
+  <a class="skip-link" href="#courses">Bỏ qua tới nội dung</a>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="AeroLLM, trang chủ">
+      <span class="brand-mark" aria-hidden="true">A</span>
+      <span>AERO<span>LLM</span></span>
+    </a>
+    <nav aria-label="Điều hướng chính">
+      <a href="#courses">Lộ trình</a>
+      <a href="#classroom">Lớp học</a>
+      <a href="#method">Phương pháp</a>
+      <a href="#safety">An toàn</a>
+    </nav>
+    <a class="header-cta" href="#courses">Bắt đầu học <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> Nền tảng học tập mở · Tiếng Việt</p>
+        <h1 id="hero-title">Hiểu mô hình.<br><em>Làm chủ LLM.</em></h1>
+        <p class="hero-lede">Lộ trình thực hành từ nền tảng đến chuyên sâu: tự xây GPT, huấn luyện, tinh chỉnh, đánh giá và triển khai mô hình ngôn ngữ lớn có kiểm chứng.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#courses">Khám phá lộ trình <span aria-hidden="true">→</span></a>
+          <a class="button button-ghost" href="https://github.com/aerovfx/AeroLLM" target="_blank" rel="noreferrer">Xem mã nguồn <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="trust-row" aria-label="Thông tin khóa học">
+          <div><strong>05</strong><span>lộ trình</span></div>
+          <div><strong>40</strong><span>tuần học</span></div>
+          <div><strong>100+</strong><span>bài thực hành</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Minh họa terminal huấn luyện">
+        <div class="radar">
+          <span class="orbit orbit-a"></span><span class="orbit orbit-b"></span>
+          <span class="radar-dot dot-a"></span><span class="radar-dot dot-b"></span><span class="radar-dot dot-c"></span>
+          <div class="shield" aria-hidden="true">
+            <svg viewBox="0 0 64 72" fill="none"><path d="M32 3 57 13v19c0 17-10.7 29.6-25 36C17.7 61.6 7 49 7 32V13L32 3Z" stroke="currentColor" stroke-width="2"/><path d="m21 35 7 7 15-17" stroke="currentColor" stroke-width="3"/></svg>
+          </div>
+        </div>
+        <div class="terminal-card">
+          <div class="terminal-top"><i></i><i></i><i></i><span>training_session.sh</span></div>
+          <code><span class="muted">$</span> ./start_training<br><span class="green">✓</span> dataset: tokenized<br><span class="green">✓</span> model: initialized<br><span class="muted">→</span> next_module: <b>attention</b><br><span class="cursor">▋</span></code>
+        </div>
+      </div>
+    </section>
+
+    <section class="marquee" aria-label="Chủ đề nổi bật">
+      <div>TOKENIZATION <b>✦</b> ATTENTION <b>✦</b> BUILD GPT <b>✦</b> TRAINING <b>✦</b> FINE-TUNING <b>✦</b> EVALUATION <b>✦</b> RAG <b>✦</b> INTERPRETABILITY</div>
+    </section>
+
+    <section class="courses section" id="courses" aria-labelledby="courses-title">
+      <div class="section-heading">
+        <div><p class="eyebrow"><span></span> Chọn hướng đi</p><h2 id="courses-title">Lộ trình dành cho bạn</h2></div>
+        <p>Mỗi lộ trình gồm 10 tuần, kết hợp lý thuyết cô đọng, lab có hướng dẫn và dự án cuối khóa.</p>
+      </div>
+      <div class="course-tools">
+        <label class="search"><span aria-hidden="true">⌕</span><span class="sr-only">Tìm khóa học</span><input id="course-search" type="search" placeholder="Tìm theo tên hoặc kỹ năng…"></label>
+        <div class="filters" role="group" aria-label="Lọc khóa học">
+          <button class="active" data-filter="all">Tất cả</button>
+          <button data-filter="foundation">Nền tảng</button>
+          <button data-filter="advanced">Chuyên sâu</button>
+        </div>
+      </div>
+      <div class="course-grid" id="course-grid">
+        <!-- Thẻ khóa học sẽ được thêm khi có nội dung lộ trình. -->
+      </div>
+      <p class="empty-state" id="empty-state">Lộ trình đang được chuẩn bị — nội dung sẽ sớm được bổ sung.</p>
+    </section>
+
+    <section class="classroom section" id="classroom" aria-labelledby="classroom-title">
+      <div class="section-heading">
+        <div><p class="eyebrow"><span></span> Classroom operations</p><h2 id="classroom-title">Học · Review · Tiến bộ</h2></div>
+        <p>Một quy trình khép kín cho học viên và giáo viên, chạy trực tiếp trên GitHub Pages và lưu cục bộ theo mặc định.</p>
+      </div>
+      <div class="classroom-grid">
+        <a class="classroom-card classroom-primary" href="tools/khao-sat/portal.html"><span class="classroom-no">01</span><i>◎</i><h3>Cổng lớp học</h3><p>Chọn khóa, buổi học và hồ sơ học viên trước khi bắt đầu đánh giá.</p><b>Vào classroom <span>→</span></b></a>
+        <a class="classroom-card" href="tools/khao-sat/index.html"><span class="classroom-no">02</span><i>▤</i><h3>Khảo sát học viên</h3><p>Thu phản hồi trải nghiệm, độ khó, kỹ năng đạt được và đề xuất cải thiện.</p><b>Mở khảo sát <span>→</span></b></a>
+        <a class="classroom-card" href="tools/khao-sat/danh-gia.html"><span class="classroom-no">03</span><i>◇</i><h3>Đánh giá đồng đẳng</h3><p>Học viên review lẫn nhau theo sáu tiêu chí kỹ thuật và năng lực cộng tác.</p><b>Bắt đầu review <span>→</span></b></a>
+        <a class="classroom-card" href="tools/khao-sat/admin.html"><span class="classroom-no">04</span><i>⚙</i><h3>Chấm điểm giáo viên</h3><p>Chấm rubric 1–5, ghi nhận xét, xem hồ sơ và xuất báo cáo CSV hoặc JSON.</p><b>Mở quản lý <span>→</span></b></a>
+        <a class="classroom-card classroom-wide" href="tools/khao-sat/ket-qua.html"><span class="classroom-no">05</span><i>▥</i><h3>Dashboard kết quả</h3><p>Tổng hợp khảo sát, đánh giá đồng đẳng và điểm giáo viên trong một màn hình.</p><b>Xem dashboard <span>→</span></b></a>
+      </div>
+      <div class="classroom-note"><span>LOCAL-FIRST</span><p>Dữ liệu mặc định không rời khỏi trình duyệt. Giáo viên có thể chủ động kết nối Google Sheets của mình tại trang <a href="tools/khao-sat/ket-noi.html">Kết nối dữ liệu →</a></p></div>
+    </section>
+
+    <section class="method section" id="method">
+      <div class="method-intro"><p class="eyebrow"><span></span> Học để làm được</p><h2>Một quy trình.<br>Tiến bộ mỗi tuần.</h2><p>Không chỉ đọc lý thuyết. Bạn sẽ quan sát, thực hành trong môi trường an toàn và ghi lại bằng chứng sau mỗi bài học.</p></div>
+      <ol class="steps">
+        <li><span>01</span><div><h3>Hiểu nền tảng</h3><p>Nắm khái niệm cốt lõi và kiến trúc mô hình trước khi chạm vào công cụ.</p></div></li>
+        <li><span>02</span><div><h3>Thực hành có kiểm soát</h3><p>Notebook và thí nghiệm tái lập được, với mục tiêu và phạm vi rõ ràng.</p></div></li>
+        <li><span>03</span><div><h3>Tạo sản phẩm thật</h3><p>Code, cấu hình, báo cáo và capstone có thể đưa thẳng vào portfolio.</p></div></li>
+      </ol>
+    </section>
+
+    <section class="safety section" id="safety">
+      <div class="safety-mark" aria-hidden="true">✓</div>
+      <div><p class="eyebrow light">Nguyên tắc xuyên suốt</p><h2>Học AI.<br><em>Luôn có trách nhiệm.</em></h2></div>
+      <p>Mọi thí nghiệm dùng dữ liệu có nguồn gốc rõ ràng, tôn trọng bản quyền và quyền riêng tư. Kiểm chứng kết quả, ghi lại bằng chứng và luôn chuẩn bị phương án khôi phục.</p>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand footer-brand" href="#top"><span class="brand-mark">A</span><span>AERO<span>LLM</span></span></a>
+    <p>Tài nguyên học mô hình ngôn ngữ lớn mở · Xây dựng để học, chia sẻ để cùng tiến bộ.</p>
+    <p class="copyright">© <span id="year"></span> AeroLLM</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

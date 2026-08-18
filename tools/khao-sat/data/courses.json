@@ -1,0 +1,74 @@
+{
+  "updatedAt": "2026-08-14",
+  "criteriaGroups": [
+    {
+      "id": "cyber",
+      "name": "An toàn thông tin thực chiến",
+      "criteria": [
+        { "id": "ethics", "label": "Đạo đức & phạm vi", "icon": "🛡️", "desc": "Tuân thủ Rules of Engagement và giới hạn lab" },
+        { "id": "analysis", "label": "Phân tích kỹ thuật", "icon": "🔎", "desc": "Lập luận từ bằng chứng và xác định nguyên nhân" },
+        { "id": "coding", "label": "Code & cấu hình", "icon": "⌨️", "desc": "Viết code hoặc cấu hình chính xác, an toàn" },
+        { "id": "problem", "label": "Giải quyết vấn đề", "icon": "🧩", "desc": "Kiểm thử, xử lý lỗi và đề xuất biện pháp" },
+        { "id": "reporting", "label": "Báo cáo bằng chứng", "icon": "📋", "desc": "Trình bày finding, tác động và remediation" },
+        { "id": "teamwork", "label": "Hợp tác & phản biện", "icon": "🤝", "desc": "Phối hợp, review và phản hồi xây dựng" }
+      ]
+    }
+  ],
+  "courses": [
+    {
+      "id": "ethical-cybersecurity", "icon": "⌁", "title": "Ethical Cybersecurity", "subtitle": "Assessment, SOC & Reporting", "group": "cyber",
+      "docPath": "1_System_App_Security/cybersecurity-10weeks/INDEX.html",
+      "sessions": [
+        {"id":1,"title":"Đạo đức, phạm vi và môi trường lab","phase":1},{"id":2,"title":"Asset inventory và threat surface","phase":1},
+        {"id":3,"title":"Quan sát mạng và baseline","phase":2},{"id":4,"title":"Đánh giá lỗ hổng có kiểm soát","phase":2},
+        {"id":5,"title":"Web & application security","phase":3},{"id":6,"title":"Identity và access control","phase":3},
+        {"id":7,"title":"Logging và detection","phase":4},{"id":8,"title":"Incident triage","phase":4},
+        {"id":9,"title":"Remediation và verification","phase":5},{"id":10,"title":"Báo cáo và bảo vệ capstone","phase":5}
+      ]
+    },
+    {
+      "id": "applied-cryptography", "icon": "◇", "title": "Mật mã học ứng dụng", "subtitle": "AES, RSA, ECC, PKI & E2EE", "group": "cyber",
+      "docPath": "2_Cryptography/crypto-10weeks/INDEX.html",
+      "sessions": [
+        {"id":1,"title":"Mật mã cổ điển và phân tích tần suất","phase":1},{"id":2,"title":"AES và chế độ mã hóa khối","phase":1},
+        {"id":3,"title":"ChaCha20 và CSPRNG","phase":2},{"id":4,"title":"Hash và HMAC","phase":2},
+        {"id":5,"title":"RSA và nền tảng toán học","phase":3},{"id":6,"title":"ECC, Diffie-Hellman và ECDH","phase":3},
+        {"id":7,"title":"Chữ ký số, PKI và TLS","phase":4},{"id":8,"title":"Password hashing và KDF","phase":4},
+        {"id":9,"title":"ZKP và mật mã hậu lượng tử","phase":5},{"id":10,"title":"E2EE Messenger capstone","phase":5}
+      ]
+    },
+    {
+      "id": "reverse-engineering", "icon": "⌬", "title": "Reverse Engineering", "subtitle": "Binary triage & secure patching", "group": "cyber",
+      "docPath": "1_System_App_Security/software-reverse-engineering-10weeks/INDEX.html",
+      "sessions": [
+        {"id":1,"title":"Môi trường lab và binary triage","phase":1},{"id":2,"title":"Định dạng executable","phase":1},
+        {"id":3,"title":"Assembly và control flow","phase":2},{"id":4,"title":"Phân tích tĩnh","phase":2},
+        {"id":5,"title":"Debug và phân tích động","phase":3},{"id":6,"title":"Strings, imports và indicators","phase":3},
+        {"id":7,"title":"Anti-analysis cơ bản","phase":4},{"id":8,"title":"Vulnerability root cause","phase":4},
+        {"id":9,"title":"Secure patching và regression","phase":5},{"id":10,"title":"Báo cáo capstone","phase":5}
+      ]
+    },
+    {
+      "id": "cybersecurity-ai", "icon": "✣", "title": "Cybersecurity & AI", "subtitle": "Traffic, logs & verified triage", "group": "cyber",
+      "docPath": "1_System_App_Security/cybersec-ai-10weeks/INDEX.html",
+      "sessions": [
+        {"id":1,"title":"Python security và socket cơ bản","phase":1},{"id":2,"title":"Traffic collection an toàn","phase":1},
+        {"id":3,"title":"Log parsing và chuẩn hóa","phase":2},{"id":4,"title":"Feature engineering","phase":2},
+        {"id":5,"title":"Anomaly detection","phase":3},{"id":6,"title":"AI-assisted triage","phase":3},
+        {"id":7,"title":"Prompt injection và AI security","phase":4},{"id":8,"title":"Đánh giá mô hình có kiểm chứng","phase":4},
+        {"id":9,"title":"SOC copilot workflow","phase":5},{"id":10,"title":"Capstone và audit trail","phase":5}
+      ]
+    },
+    {
+      "id": "cisco-asa", "icon": "▦", "title": "Cisco ASA Firewall", "subtitle": "Zones, policy, backup & DHCP", "group": "cyber",
+      "docPath": "1_System_App_Security/asa-firewall-10weeks/INDEX.html",
+      "sessions": [
+        {"id":1,"title":"ASA lab và nguyên tắc an toàn","phase":1},{"id":2,"title":"Interfaces, zones và routing","phase":1},
+        {"id":3,"title":"Object và access rules","phase":2},{"id":4,"title":"NAT có kiểm soát","phase":2},
+        {"id":5,"title":"Logging và verification","phase":3},{"id":6,"title":"Backup và restore","phase":3},
+        {"id":7,"title":"Upgrade và rollback","phase":4},{"id":8,"title":"Secure management","phase":4},
+        {"id":9,"title":"DHCP và network services","phase":5},{"id":10,"title":"Firewall capstone","phase":5}
+      ]
+    }
+  ]
+}

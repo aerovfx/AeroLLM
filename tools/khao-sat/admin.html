@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Quản lý lớp & chấm điểm — AeroLLM Portal</title>
+  <style>
+    :root{--bg:#f4f7f4;--card:#fff;--ink:#18251f;--muted:#6a7770;--green:#245c46;--lime:#dff36f;--line:#dce5df;--red:#b33b3b}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif}header{height:68px;padding:0 4vw;display:flex;align-items:center;justify-content:space-between;background:var(--green);color:#fff}header a{color:#fff;text-decoration:none;font-weight:700}.wrap{max-width:1280px;margin:auto;padding:30px 24px}.top{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:24px}h1{margin:0;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:-.045em}.note{color:var(--muted);margin:.35rem 0 0}.actions{display:flex;gap:8px;flex-wrap:wrap}button,.file-btn,select,input,textarea{font:inherit}button,.file-btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 14px;border-radius:9px;cursor:pointer;font-weight:700}.primary{background:var(--green);color:#fff;border-color:var(--green)}.danger{color:var(--red)}.file-btn input{display:none}.layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:18px}.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}.sidebar select,.sidebar input{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;margin-bottom:10px}.student{width:100%;text-align:left;margin:3px 0;border-color:transparent;font-weight:600}.student.active{background:#e7efe9;border-color:#b9cbbf;color:var(--green)}.count{font-size:.8rem;color:var(--muted);margin:8px 3px}.empty{padding:55px 15px;text-align:center;color:var(--muted)}.student-head{display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:18px}.student-head h2{margin:0}.badge{display:inline-block;background:var(--lime);padding:4px 9px;border-radius:99px;font-size:.76rem;font-weight:800}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.field label{display:block;font-weight:700;margin-bottom:5px}.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px;background:#fff}.field textarea{min-height:72px;resize:vertical}.score{font-size:1.2rem;color:var(--green);font-weight:850}.survey{margin-top:24px}.survey h3{border-bottom:1px solid var(--line);padding-bottom:9px}.survey-card{background:#f7f9f6;border:1px solid var(--line);border-radius:10px;padding:14px;margin:8px 0}.survey-card strong{color:var(--green)}.survey-card dl{display:grid;grid-template-columns:170px 1fr;gap:4px 12px;margin:10px 0}.survey-card dt{color:var(--muted)}.survey-card dd{margin:0}.savebar{display:flex;align-items:center;gap:12px;margin-top:16px}.saved{color:var(--green);font-weight:700}.privacy{margin-top:20px;padding:13px 16px;border-left:4px solid #dda92c;background:#fff9e7;color:#645326}@media(max-width:800px){.top,.student-head{align-items:stretch;flex-direction:column}.layout{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}}@media(max-width:500px){.grid{grid-template-columns:1fr}.wrap{padding:20px 12px}}
+  </style>
+  <link rel="stylesheet" href="theme.css?v=3">
+</head>
+<body>
+<header><a href="portal.html">← AeroLLM Portal</a><strong>Không gian giáo viên</strong><a href="../../index.html">Kho học liệu</a></header>
+<main class="wrap">
+  <div class="top"><div><h1>Quản lý lớp & chấm điểm</h1><p class="note">Thông tin, phản hồi khảo sát và điểm của từng học sinh.</p></div><div class="actions"><button class="primary" id="pullBtn" onclick="pullCloud()">☁️ Tải từ Sheets</button><a class="file-btn" href="ket-noi.html" style="text-decoration:none;display:inline-block">🔌 Kết nối dữ liệu</a><button onclick="exportCSV()">Xuất CSV</button><button onclick="exportJSON()">Sao lưu JSON</button><label class="file-btn">Khôi phục JSON<input type="file" accept="application/json" onchange="importJSON(this)"></label></div></div>
+  <div class="layout">
+    <aside class="panel sidebar"><select id="courseSelect" onchange="pickCourse()"></select><select id="classSelect" onchange="renderStudents()"></select><input id="search" placeholder="Tìm học sinh…" oninput="renderStudents()"><div class="count" id="count"></div><div id="students"></div></aside>
+    <section class="panel" id="detail"><div class="empty">Chọn một học sinh để xem thông tin và chấm điểm.</div></section>
+  </div>
+  <p class="privacy"><strong>Lưu ý:</strong> GitHub Pages là website tĩnh nên dữ liệu mặc định chỉ nằm trong trình duyệt của thiết bị này. Để thu bài tập trung từ nhiều máy, hãy <a href="ket-noi.html">kết nối Google Sheets &amp; Forms</a> của bạn — khi đã kết nối, mỗi lần lưu điểm sẽ tự đẩy lên bảng tính, và nút <em>Tải từ Sheets</em> gộp dữ liệu của mọi thiết bị về máy này.</p>
+</main>
+<script src="js/cloud.js"></script>
+<script>
+let DB={classes:[],students:[],sessions:[],criteria:[]}, selected=null;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const savedDb=JSON.parse(localStorage.getItem('stem_db')||'{"classes":[],"students":[]}');
+const sessionDb=JSON.parse(sessionStorage.getItem('stem_db_full')||'null');
+fetch('data/students.json').then(r=>r.json()).then(base=>{
+  DB=sessionDb||base;
+  if(!sessionDb){DB.classes=[...base.classes,...(savedDb.classes||[])];DB.students=[...base.students,...(savedDb.students||[])];}
+  init();
+}).catch(()=>{if(sessionDb){DB=sessionDb;init()}else document.getElementById('detail').innerHTML='<div class="empty">Không tải được dữ liệu lớp học.</div>'});
+function init(){const sel=document.getElementById('classSelect');sel.innerHTML=DB.classes.map(c=>`<option value="${esc(c.id)}">${esc(c.name)} — ${esc(c.teacher)}</option>`).join('');napKhoaHoc();renderStudents()}
+/* ── ĐA KHOÁ: nạp danh sách khoá + bộ tiêu chí tương ứng ── */
+let COURSES=[],GROUPS=[],course=null;
+function napKhoaHoc(){
+  fetch('data/courses.json').then(r=>r.json()).then(d=>{
+    COURSES=d.courses||[];GROUPS=d.criteriaGroups||[];
+    const luu=localStorage.getItem('stem_admin_course');
+    course=COURSES.find(c=>c.id===luu)||COURSES[0]||null;
+    const sel=document.getElementById('courseSelect');
+    sel.innerHTML=COURSES.map(c=>`<option value="${esc(c.id)}" ${course&&course.id===c.id?'selected':''}>${c.icon||'📘'} ${esc(c.title)}</option>`).join('');
+    apDungTieuChi();if(selected)renderDetail();
+  }).catch(()=>{});
+}
+function apDungTieuChi(){
+  const g=GROUPS.find(x=>x.id===(course&&course.group));
+  if(g&&g.criteria&&g.criteria.length)DB.criteria=g.criteria;
+}
+function pickCourse(){
+  course=COURSES.find(c=>c.id===document.getElementById('courseSelect').value)||course;
+  if(course)localStorage.setItem('stem_admin_course',course.id);
+  apDungTieuChi();if(selected)renderDetail();
+}
+function khoaDiem(id){return (course?course.id:'stem-microbit')+'|'+id}
+function renderStudents(){const cls=document.getElementById('classSelect').value,q=document.getElementById('search').value.toLocaleLowerCase('vi');const rows=DB.students.filter(s=>s.classId===cls&&s.name.toLocaleLowerCase('vi').includes(q));document.getElementById('count').textContent=`${rows.length} học sinh`;document.getElementById('students').innerHTML=rows.map(s=>`<button class="student ${selected?.id===s.id?'active':''}" onclick="selectStudent('${esc(s.id)}')">${s.avatar||'🧑'} ${esc(s.name)} <small>· ${esc(s.id)}</small></button>`).join('')||'<p class="empty">Chưa có học sinh.</p>'}
+function surveys(){return JSON.parse(localStorage.getItem('stem_surveys')||'[]')}
+function grades(){return JSON.parse(localStorage.getItem('stem_teacher_grades')||'{}')}
+function selectStudent(id){selected=DB.students.find(s=>s.id===id);renderStudents();renderDetail()}
+function renderDetail(){const cls=DB.classes.find(c=>c.id===selected.classId)||{};const studentSurveys=surveys().filter(x=>(x.studentId===selected.id||(!x.studentId&&x.studentName===selected.name))&&(!course||!x.courseId||x.courseId===course.id));const all=grades(),g=all[khoaDiem(selected.id)]||all[selected.id]||{scores:{},note:'',updatedAt:''};const values=DB.criteria.map(c=>Number(g.scores?.[c.id])||0).filter(Boolean);const avg=values.length?(values.reduce((a,b)=>a+b,0)/values.length).toFixed(1):'—';document.getElementById('detail').innerHTML=`<div class="student-head"><div><span class="badge">${esc(cls.name||selected.classId)}</span><h2>${selected.avatar||'🧑'} ${esc(selected.name)}</h2><p class="note">Mã: ${esc(selected.id)} · Giáo viên: ${esc(cls.teacher||'—')} · Phòng: ${esc(cls.room||'—')}</p></div><div><div class="score" id="average">${avg}/5</div><small class="note">Điểm TB giáo viên · ${course?esc(course.icon+" "+course.title):"—"}</small></div></div><div class="grid">${DB.criteria.map(c=>`<div class="field"><label>${c.icon} ${esc(c.label)}</label><select data-criterion="${esc(c.id)}" onchange="updateAverage()"><option value="">Chưa chấm</option>${[1,2,3,4,5].map(n=>`<option value="${n}" ${g.scores?.[c.id]==n?'selected':''}>${n}/5</option>`).join('')}</select></div>`).join('')}</div><div class="field" style="margin-top:15px"><label>Nhận xét của giáo viên</label><textarea id="teacherNote" placeholder="Điểm mạnh, nội dung cần cải thiện…">${esc(g.note||'')}</textarea></div><div class="savebar"><button class="primary" onclick="saveGrade()">Lưu điểm học sinh</button><span class="saved" id="saved">${g.updatedAt?'Đã lưu '+new Date(g.updatedAt).toLocaleString('vi-VN'):''}</span></div><div class="survey"><h3>Phản hồi khảo sát (${studentSurveys.length})</h3>${studentSurveys.length?studentSurveys.slice().reverse().map(surveyCard).join(''):'<p class="empty">Học sinh chưa gửi khảo sát trên thiết bị này.</p>'}</div>`}
+function surveyCard(r){const a=r.answers||{};return `<article class="survey-card"><strong>Buổi ${esc(r.sessionId||a.sessions||'—')} ${esc(r.sessionTitle||'')}</strong><small class="note"> · ${new Date(r.submittedAt).toLocaleString('vi-VN')}</small><dl><dt>Đánh giá tổng thể</dt><dd>${esc(a.overall||'—')}/5</dd><dt>Độ khó</dt><dd>${esc(a.difficulty||'—')}</dd><dt>Phần thích nhất</dt><dd>${esc([].concat(a.fav||[]).join(', ')||'—')}</dd><dt>Điều thích nhất</dt><dd>${esc(a.best||'—')}</dd><dt>Cần cải thiện</dt><dd>${esc(a.improve||'—')}</dd><dt>Muốn học thêm</dt><dd>${esc(a.topic||'—')}</dd></dl></article>`}
+function updateAverage(){const vals=[...document.querySelectorAll('[data-criterion]')].map(x=>Number(x.value)).filter(Boolean);document.getElementById('average').textContent=(vals.length?(vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1):'—')+'/5'}
+function saveGrade(){const all=grades(),scores={};document.querySelectorAll('[data-criterion]').forEach(x=>{if(x.value)scores[x.dataset.criterion]=Number(x.value)});const cls=DB.classes.find(c=>c.id===selected.classId)||{};const rec={courseId:course?course.id:'stem-microbit',courseTitle:course?course.title:'',group:course?course.group:'stem',studentId:selected.id,studentName:selected.name,classId:selected.classId,teacher:cls.teacher||'',scores,note:document.getElementById('teacherNote').value.trim(),updatedAt:new Date().toISOString()};all[khoaDiem(selected.id)]=rec;localStorage.setItem('stem_teacher_grades',JSON.stringify(all));document.getElementById('saved').textContent='Đã lưu '+new Date().toLocaleString('vi-VN');updateAverage();if(window.STEMCloud){STEMCloud.push('teacher_grade',rec,{uid:'gv_'+khoaDiem(selected.id)}).then(r=>{if(r&&r.queued)document.getElementById('saved').textContent+=' · ⏳ chờ gửi lên Sheets';else if(r&&r.ok)document.getElementById('saved').textContent+=' · ☁️ đã lên Sheets'})}}
+/* ── tải dữ liệu từ Google Sheets về máy (gộp, không xoá dữ liệu cũ) ── */
+function pullCloud(){
+  if(!window.STEMCloud||!STEMCloud.enabled()){alert('Chưa kết nối Google Sheets.\nMở trang "Kết nối dữ liệu" để cấu hình.');location.href='ket-noi.html';return}
+  const btn=document.getElementById('pullBtn');if(btn){btn.disabled=true;btn.textContent='⏳ Đang tải…'}
+  Promise.all([STEMCloud.get('teacher'),STEMCloud.get('surveys',{limit:500}),STEMCloud.get('roster')])
+  .then(([tg,sv,ros])=>{
+    const g=grades();
+    (tg.data||[]).forEach(r=>{const id=r['Mã HS'];if(!id)return;const sc={};DB.criteria.forEach(c=>{const v=r[c.label];if(v!=='' && v!=null)sc[c.id]=Number(v)});g[id]={studentId:id,studentName:r['Họ tên'],classId:r['Lớp'],teacher:r['Giáo viên'],scores:sc,note:r['Nhận xét']||'',updatedAt:r['Thời gian']}});
+    localStorage.setItem('stem_teacher_grades',JSON.stringify(g));
+    const cur=surveys(),co=new Set(cur.map(x=>x.id));
+    (sv.data||[]).forEach(r=>{const id=r['Mã bản ghi'];if(!id||co.has(id))return;cur.push({id,studentId:r['Mã HS'],studentName:r['Họ tên'],classId:r['Khối/Lớp'],sessionId:r['Buổi số'],sessionTitle:r['Tên buổi'],submittedAt:r['Thời gian'],answers:{name:r['Họ tên'],grade:r['Khối/Lớp'],sessions:r['Số buổi đã học'],fav:String(r['Phần thích nhất']||'').split(', ').filter(Boolean),overall:r['Đánh giá (1-5)'],difficulty:r['Độ khó'],recommend:r['Sẽ giới thiệu'],skill:r['Mức cải thiện (%)'],skill_gained:String(r['Kỹ năng nổi bật']||'').split(', ').filter(Boolean),best:r['Điều thích nhất'],improve:r['Cần cải thiện'],topic:r['Muốn học thêm']}})});
+    localStorage.setItem('stem_surveys',JSON.stringify(cur));
+    const rd=ros.data||{};if(rd.students&&rd.students.length){DB.classes=rd.classes.length?rd.classes:DB.classes;DB.students=rd.students;if(rd.criteria&&rd.criteria.length)DB.criteria=rd.criteria;sessionStorage.setItem('stem_db_full',JSON.stringify(DB));init()}
+    if(btn){btn.disabled=false;btn.textContent='☁️ Tải từ Sheets'}
+    alert(`Đã tải về:\n• ${(tg.data||[]).length} bảng điểm giáo viên\n• ${(sv.data||[]).length} phiếu khảo sát\n• ${(rd.students||[]).length} học sinh`);
+    if(selected)renderDetail()
+  }).catch(e=>{if(btn){btn.disabled=false;btn.textContent='☁️ Tải từ Sheets'}alert('Không tải được: '+e.message)})
+}
+function csvCell(v){return '"'+String(v??'').replaceAll('"','""')+'"'}
+function exportCSV(){const gs=grades(),head=['Mã HS','Họ tên','Lớp',...DB.criteria.map(c=>c.label),'Trung bình','Nhận xét','Số khảo sát'];const rows=DB.students.map(s=>{const g=gs[s.id]||{},vals=DB.criteria.map(c=>g.scores?.[c.id]||''),nums=vals.filter(Boolean),avg=nums.length?(nums.reduce((a,b)=>a+Number(b),0)/nums.length).toFixed(1):'';return [s.id,s.name,s.classId,...vals,avg,g.note||'',surveys().filter(x=>x.studentId===s.id).length]});download('\ufeff'+[head,...rows].map(r=>r.map(csvCell).join(',')).join('\n'),'bang-diem-hoc-sinh.csv','text/csv')}
+function exportJSON(){download(JSON.stringify({exportedAt:new Date().toISOString(),database:DB,surveys:surveys(),teacherGrades:grades()},null,2),'sao-luu-khao-sat.json','application/json')}
+function download(content,name,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
+function importJSON(input){const file=input.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(reader.result);if(data.surveys)localStorage.setItem('stem_surveys',JSON.stringify(data.surveys));if(data.teacherGrades)localStorage.setItem('stem_teacher_grades',JSON.stringify(data.teacherGrades));alert('Đã khôi phục dữ liệu.');if(selected)renderDetail()}catch(e){alert('File JSON không hợp lệ.')}};reader.readAsText(file);input.value=''}
+</script>
+<script src="js/navigation.js"></script>
+</body></html>

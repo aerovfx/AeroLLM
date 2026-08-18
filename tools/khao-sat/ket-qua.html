@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Kết Quả & Dashboard – AeroLLM Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --p:#7c3aed;--p2:#6d28d9;--s:#0ea5e9;--a:#f59e0b;
+      --g:#10b981;--r:#ef4444;
+      --bg:#080812;--sf:#12111f;--sf2:#1c1a30;--sf3:#252340;
+      --bd:rgba(124,58,237,.2);--txt:#e8e6ff;--muted:#7c7a9c;
+      --rad:14px;--shad:0 8px 32px rgba(0,0,0,.5);
+    }
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+    body::before{content:'';position:fixed;inset:0;
+      background:radial-gradient(ellipse 70% 50% at 15% 10%,rgba(124,58,237,.2) 0%,transparent 55%),
+        radial-gradient(ellipse 50% 40% at 85% 80%,rgba(14,165,233,.15) 0%,transparent 55%);
+      pointer-events:none;z-index:0}
+
+    .topbar{
+      position:sticky;top:0;z-index:50;
+      background:rgba(8,8,18,.85);backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--bd);
+      padding:.8rem 1.5rem;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem}
+    .back-btn{display:inline-flex;align-items:center;gap:.4rem;
+      background:var(--sf2);border:1px solid var(--bd);border-radius:8px;
+      padding:.4rem .9rem;font-size:.82rem;font-weight:600;color:var(--muted);
+      cursor:pointer;text-decoration:none;transition:all .2s}
+    .back-btn:hover{border-color:var(--p);color:var(--txt)}
+    .chip{background:var(--sf3);border:1px solid var(--bd);border-radius:99px;
+      padding:.3rem .8rem;font-size:.78rem;font-weight:600}
+
+    .container{position:relative;z-index:5;max-width:960px;margin:0 auto;padding:1.5rem}
+
+    /* tabs */
+    .tabs{display:flex;gap:.4rem;background:var(--sf2);border-radius:10px;padding:.3rem;
+      margin-bottom:2rem;overflow-x:auto}
+    .tab{flex-shrink:0;padding:.6rem 1.2rem;border-radius:8px;cursor:pointer;
+      font-size:.85rem;font-weight:600;color:var(--muted);transition:all .2s;border:none;
+      background:transparent;font-family:inherit}
+    .tab.active{background:var(--p);color:#fff;box-shadow:0 4px 14px rgba(124,58,237,.35)}
+    .tab:hover:not(.active){color:var(--txt);background:var(--sf3)}
+
+    .tab-panel{display:none;animation:slideU .35s ease}
+    .tab-panel.active{display:block}
+
+    /* stat cards */
+    .stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-bottom:1.5rem}
+    .stat-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rad);
+      padding:1.4rem;position:relative;overflow:hidden}
+    .stat-card::before{content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,var(--glow,rgba(124,58,237,.08)),transparent);pointer-events:none}
+    .stat-icon{font-size:1.6rem;margin-bottom:.6rem}
+    .stat-val{font-size:2rem;font-weight:800;background:linear-gradient(135deg,#fff,var(--p));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .stat-lbl{font-size:.78rem;color:var(--muted);margin-top:.2rem}
+
+    /* radar / bar chart (CSS-based) */
+    .bar-chart{display:flex;flex-direction:column;gap:.75rem}
+    .bar-row{display:flex;align-items:center;gap:.8rem}
+    .bar-name{font-size:.82rem;font-weight:600;min-width:140px;flex-shrink:0}
+    .bar-track{flex:1;height:8px;background:var(--sf2);border-radius:99px;overflow:hidden}
+    .bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--p),var(--s));
+      transition:width .6s ease}
+    .bar-val{font-size:.82rem;font-weight:700;color:var(--p);min-width:32px;text-align:right}
+
+    /* session list */
+    .session-list{display:flex;flex-direction:column;gap:.75rem}
+    .sess-item{background:var(--sf);border:1px solid var(--bd);border-radius:12px;
+      padding:1.1rem 1.3rem;display:flex;align-items:center;gap:1rem;cursor:pointer;
+      transition:border-color .2s}
+    .sess-item:hover{border-color:var(--p)}
+    .sess-num{width:40px;height:40px;border-radius:10px;flex-shrink:0;
+      background:linear-gradient(135deg,var(--p),var(--p2));
+      display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem}
+    .sess-info h4{font-size:.9rem;font-weight:700}
+    .sess-info p{font-size:.76rem;color:var(--muted);margin-top:.15rem}
+    .sess-meta{margin-left:auto;text-align:right}
+    .sess-score{font-size:1.1rem;font-weight:800;color:var(--p)}
+    .sess-count{font-size:.72rem;color:var(--muted)}
+    .sess-status{display:inline-block;padding:.2rem .6rem;border-radius:99px;
+      font-size:.72rem;font-weight:700;margin-top:.3rem}
+    .status-done{background:rgba(16,185,129,.2);color:var(--g)}
+    .status-partial{background:rgba(245,158,11,.2);color:var(--a)}
+    .status-empty{background:var(--sf2);color:var(--muted)}
+
+    /* peer scores table */
+    .peer-table{width:100%;border-collapse:collapse;font-size:.82rem}
+    .peer-table th{background:var(--sf2);padding:.7rem .9rem;text-align:left;font-weight:700;
+      color:var(--muted);font-size:.75rem;letter-spacing:.05em}
+    .peer-table td{padding:.7rem .9rem;border-bottom:1px solid var(--bd)}
+    .peer-table tr:last-child td{border-bottom:none}
+    .peer-table tr:hover td{background:rgba(124,58,237,.05)}
+    .score-pill{display:inline-block;padding:.15rem .5rem;border-radius:5px;font-weight:700;font-size:.8rem}
+    .score-5{background:rgba(16,185,129,.2);color:var(--g)}
+    .score-4{background:rgba(14,165,233,.2);color:var(--s)}
+    .score-3{background:rgba(245,158,11,.2);color:var(--a)}
+    .score-2,.score-1{background:rgba(239,68,68,.2);color:var(--r)}
+
+    /* markdown output */
+    .md-wrap{position:relative}
+    .copy-btn{position:absolute;top:.7rem;right:.7rem;
+      background:var(--sf3);border:1px solid var(--bd);border-radius:8px;
+      padding:.4rem .8rem;font-size:.78rem;font-weight:600;cursor:pointer;
+      color:var(--muted);transition:all .2s;font-family:inherit}
+    .copy-btn:hover{border-color:var(--p);color:var(--p)}
+    .md-pre{background:#0d1117;border:1px solid #30363d;border-radius:10px;
+      padding:1.5rem;font-family:'Courier New',monospace;font-size:.78rem;
+      line-height:1.8;color:#c9d1d9;white-space:pre-wrap;overflow-x:auto;
+      max-height:450px;overflow-y:auto}
+
+    .card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rad);
+      padding:1.5rem;margin-bottom:1rem;box-shadow:var(--shad)}
+    .card-title{font-size:.95rem;font-weight:700;margin-bottom:1.2rem;
+      display:flex;align-items:center;gap:.5rem}
+
+    .btn{padding:.7rem 1.3rem;border:none;border-radius:10px;
+      font-family:inherit;font-size:.85rem;font-weight:700;cursor:pointer;
+      display:inline-flex;align-items:center;gap:.5rem;transition:all .2s;text-decoration:none}
+    .btn-primary{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;
+      box-shadow:0 4px 16px rgba(124,58,237,.35)}
+    .btn-outline{background:transparent;border:1.5px solid var(--bd);color:var(--muted)}
+    .btn-outline:hover{border-color:var(--p);color:var(--txt)}
+
+    .empty{text-align:center;padding:3rem;color:var(--muted)}
+    .empty-icon{font-size:3rem;margin-bottom:.8rem}
+
+    @keyframes slideU{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+  <link rel="stylesheet" href="theme.css?v=3"/>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="back-btn" href="portal.html">← Trang chủ</a>
+  <div style="display:flex;gap:.5rem;align-items:center">
+    <div class="chip" id="userChipTop">📊 Dashboard</div>
+    <a class="btn btn-primary" href="danh-gia.html" style="padding:.4rem .9rem;font-size:.82rem">
+      ＋ Đánh giá mới
+    </a>
+  </div>
+</div>
+
+<div class="container">
+  <div style="margin-bottom:1.5rem">
+    <h1 style="font-size:clamp(1.5rem,4vw,2rem);font-weight:800;
+      background:linear-gradient(135deg,#fff,var(--p),var(--s));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent">
+      📊 Dashboard Kết Quả
+    </h1>
+    <p style="color:var(--muted);font-size:.88rem;margin-top:.3rem">
+      Tổng hợp đánh giá đồng đẳng theo từng buổi học
+    </p>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('overview')">📈 Tổng quan</button>
+    <button class="tab" onclick="switchTab('sessions')">📅 Theo buổi học</button>
+    <button class="tab" onclick="switchTab('peers')">👥 Theo học viên</button>
+    <button class="tab" onclick="switchTab('markdown')">📄 Xuất Markdown</button>
+  </div>
+
+  <!-- TAB: Overview -->
+  <div class="tab-panel active" id="tab-overview">
+    <div class="stat-grid" id="statGrid"></div>
+    <div class="card">
+      <div class="card-title">📊 Điểm trung bình theo tiêu chí</div>
+      <div class="bar-chart" id="criteriaChart"></div>
+    </div>
+  </div>
+
+  <!-- TAB: Sessions -->
+  <div class="tab-panel" id="tab-sessions">
+    <div class="session-list" id="sessionList"></div>
+  </div>
+
+  <!-- TAB: Peers -->
+  <div class="tab-panel" id="tab-peers">
+    <div class="card">
+      <div class="card-title">👥 Điểm đánh giá cho từng học viên</div>
+      <div style="overflow-x:auto">
+        <table class="peer-table" id="peerTable">
+          <thead><tr id="peerTableHead"></tr></thead>
+          <tbody id="peerTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: Markdown -->
+  <div class="tab-panel" id="tab-markdown">
+    <div class="card">
+      <div class="card-title">📄 Xuất Markdown</div>
+      <p style="font-size:.83rem;color:var(--muted);margin-bottom:1rem">
+        Chọn buổi học để xuất kết quả dưới dạng Markdown, có thể dán vào GitHub.
+      </p>
+      <select class="styled" id="mdSessionSelect" onchange="loadMdForSession()"
+        style="background:var(--sf2);border:1.5px solid var(--bd);border-radius:10px;
+        padding:.7rem 1rem;font-family:inherit;font-size:.9rem;color:var(--txt);
+        outline:none;width:100%;margin-bottom:1rem">
+        <option value="">— Chọn buổi học —</option>
+      </select>
+      <div class="md-wrap">
+        <button class="copy-btn" onclick="copyMd()">📋 Copy</button>
+        <pre class="md-pre" id="mdOutput">Chọn buổi học để xem nội dung Markdown...</pre>
+      </div>
+      <div style="margin-top:1rem;display:flex;gap:.75rem;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="downloadMd()">⬇️ Tải về .md</button>
+        <button class="btn btn-outline" onclick="copyMd()">📋 Sao chép</button>
+      </div>
+    </div>
+  </div>
+</div><!-- /container -->
+
+<script src="js/cloud.js"></script>
+<script>
+  const ctx = JSON.parse(sessionStorage.getItem('stem_user') || 'null');
+  let DB = null, criteria = [];
+
+  fetch('data/students.json')
+    .then(r=>r.json())
+    .then(db=>{
+      DB = db;
+      criteria = db.criteria;
+      if(ctx) document.getElementById('userChipTop').textContent = `${ctx.student.avatar} ${ctx.student.name}`;
+      napKhoaHoc()                              // danh sách khoá + tiêu chí đúng nhóm
+        .then(()=>{ buildDashboard(); return napTuSheets(); })
+        .then(()=>buildDashboard());            // vẽ lại khi có dữ liệu đám mây
+    });
+
+  /* ── collect all evaluations from localStorage ── */
+  function getAllEvals(){
+    const result = []; // {courseId, studentId, sessionId, peerId, scores, note, savedAt}
+    for(let i=0;i<localStorage.length;i++){
+      const key = localStorage.key(i);
+      if(!key.startsWith('stem_eval_')) continue;
+      // dạng mới: stem_eval_{courseId}_{studentId}_sess{n} · dạng cũ: stem_eval_{studentId}_sess{n}
+      const m = key.match(/^stem_eval_(?:(.+)_)?([^_]+)_sess(\d+)$/);
+      if(!m) continue;
+      const [, courseId, sid, sessId] = m;
+      const data = JSON.parse(localStorage.getItem(key)||'{}');
+      Object.entries(data).forEach(([peerId, ev])=>{
+        result.push({ courseId: courseId || 'stem-microbit', studentId:sid, sessionId:sessId, peerId, ...ev });
+      });
+    }
+    return result;
+  }
+
+  /* ── lấy đánh giá từ Google Sheets rồi gộp với dữ liệu máy ── */
+  let cloudEvals = [], COURSES = [], GROUPS = [], courseId = '';
+
+  /* ── bộ lọc khoá học ── */
+  function napKhoaHoc(){
+    return fetch('data/courses.json').then(r=>r.json()).then(d=>{
+      COURSES = d.courses||[]; GROUPS = d.criteriaGroups||[];
+      courseId = sessionStorage.getItem('stem_course') || (ctx&&ctx.course&&ctx.course.id) || (COURSES[0]&&COURSES[0].id) || '';
+      veChonKhoa();
+      apDungTieuChi();
+    }).catch(()=>{});
+  }
+  function veChonKhoa(){
+    const wrap = document.querySelector('.tabs');
+    if(!wrap || document.getElementById('courseFilter')) return;
+    const box = document.createElement('div');
+    box.style.cssText = 'margin:0 0 1rem;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap';
+    box.innerHTML = `<span style="font-size:.8rem;color:var(--muted)">📚 Khoá học:</span>
+      <select id="courseFilter" style="background:var(--sf2);border:1.5px solid var(--bd);border-radius:10px;
+        padding:.5rem .8rem;color:var(--txt);font:inherit;font-size:.85rem">
+        <option value="">— Tất cả khoá —</option>
+        ${COURSES.map(c=>`<option value="${c.id}" ${c.id===courseId?'selected':''}>${c.icon||'📘'} ${c.title}</option>`).join('')}
+      </select>`;
+    wrap.parentNode.insertBefore(box, wrap.nextSibling);
+    box.querySelector('#courseFilter').onchange = e=>{
+      courseId = e.target.value;
+      if(courseId) sessionStorage.setItem('stem_course', courseId);
+      apDungTieuChi();
+      buildDashboard();
+    };
+  }
+  function apDungTieuChi(){
+    const c = COURSES.find(x=>x.id===courseId);
+    const g = GROUPS.find(x=>x.id===(c&&c.group));
+    if(g && g.criteria && g.criteria.length) criteria = g.criteria;
+  }
+
+  function napTuSheets(){
+    if(!window.STEMCloud || !STEMCloud.enabled()) return Promise.resolve([]);
+    return STEMCloud.get('peer', { limit: 2000 }).then(r=>{
+      cloudEvals = (r.data||[]).map(row=>{
+        const g = GROUPS.find(x=>x.id===row['Nhóm']);
+        const cs = (g && g.criteria) || criteria;
+        const scores = {};
+        cs.forEach(c=>{ const v = row[c.label]; if(v!=='' && v!=null && v!==undefined) scores[c.id] = Number(v); });
+        return {
+          courseId: row['Mã khoá'] || 'stem-microbit',
+          studentId: row['Mã người đánh giá'] || row['Người đánh giá'],
+          sessionId: String(row['Buổi số']||''),
+          peerId: row['Mã bạn được ĐG'] || row['Bạn được đánh giá'],
+          peerName: row['Bạn được đánh giá'] || '',
+          scores, note: row['Nhận xét']||'', savedAt: row['Thời gian'], nguon: 'cloud'
+        };
+      });
+      return cloudEvals;
+    }).catch(()=>[]);
+  }
+
+  function gopEvals(){
+    const local = getAllEvals();
+    const key = e => `${e.courseId}|${e.studentId}|${e.sessionId}|${e.peerId}`;
+    const map = new Map();
+    cloudEvals.forEach(e=>map.set(key(e), e));
+    local.forEach(e=>map.set(key(e), e));   // dữ liệu máy ưu tiên (mới nhất do người dùng vừa chấm)
+    const all = [...map.values()];
+    return courseId ? all.filter(e=>e.courseId===courseId) : all;
+  }
+
+  function buildDashboard(){
+    const evals = gopEvals();
+    renderStats(evals);
+    renderCriteriaChart(evals);
+    renderSessionList(evals);
+    renderPeerTable(evals);
+    renderMdSelect(evals);
+    const chip = document.getElementById('userChipTop');
+    if(window.STEMCloud && STEMCloud.enabled() && chip)
+      chip.textContent = (ctx? `${ctx.student.avatar} ${ctx.student.name} · ` : '') + `☁️ ${cloudEvals.length} phiếu từ Sheets`;
+  }
+
+  /* ── stats ── */
+  function renderStats(evals){
+    const sessions = [...new Set(evals.map(e=>e.sessionId))];
+    const peers = [...new Set(evals.map(e=>e.peerId))];
+    const allScores = evals.flatMap(e=>criteria.map(c=>e.scores?.[c.id]).filter(Boolean));
+    const avg = allScores.length ? (allScores.reduce((a,b)=>a+b,0)/allScores.length).toFixed(1) : '—';
+
+    const grid = document.getElementById('statGrid');
+    grid.innerHTML = [
+      {icon:'📅',val:sessions.length,lbl:'Buổi đã đánh giá'},
+      {icon:'🔄',val:evals.length,lbl:'Lượt đánh giá'},
+      {icon:'👥',val:peers.length,lbl:'Học viên được đánh giá'},
+      {icon:'⭐',val:avg,lbl:'Điểm trung bình chung'},
+    ].map(s=>`
+      <div class="stat-card">
+        <div class="stat-icon">${s.icon}</div>
+        <div class="stat-val">${s.val}</div>
+        <div class="stat-lbl">${s.lbl}</div>
+      </div>`).join('');
+  }
+
+  /* ── criteria bar chart ── */
+  function renderCriteriaChart(evals){
+    const chart = document.getElementById('criteriaChart');
+    if(!criteria.length){ chart.innerHTML='<div class="empty"><div class="empty-icon">📊</div>Chưa có dữ liệu</div>'; return; }
+    chart.innerHTML = criteria.map(c=>{
+      const scores = evals.map(e=>e.scores?.[c.id]).filter(Boolean);
+      const avg = scores.length ? scores.reduce((a,b)=>a+b,0)/scores.length : 0;
+      const pct = avg/5*100;
+      return `
+        <div class="bar-row">
+          <div class="bar-name">${c.icon} ${c.label}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+          <div class="bar-val">${avg.toFixed(1)}</div>
+        </div>`;
+    }).join('');
+  }
+
+  /* ── session list ── */
+  function renderSessionList(evals){
+    const list = document.getElementById('sessionList');
+    if(!DB){ return; }
+    list.innerHTML = DB.sessions.map(sess=>{
+      const sessEvals = evals.filter(e=>e.sessionId==sess.id);
+      const done = [...new Set(sessEvals.map(e=>e.peerId))].length;
+      const allScores = sessEvals.flatMap(e=>criteria.map(c=>e.scores?.[c.id]).filter(Boolean));
+      const avg = allScores.length ? (allScores.reduce((a,b)=>a+b,0)/allScores.length).toFixed(1) : '—';
+      const statusClass = sessEvals.length===0?'status-empty':done>=3?'status-done':'status-partial';
+      const statusText = sessEvals.length===0?'Chưa đánh giá':done>=3?'Hoàn thành':'Đang làm';
+      return `
+        <div class="sess-item" onclick="switchTab('peers')">
+          <div class="sess-num">${sess.id}</div>
+          <div class="sess-info">
+            <h4>${sess.title}</h4>
+            <p>Giai đoạn ${sess.phase} · ${sessEvals.length} lượt đánh giá</p>
+          </div>
+          <div class="sess-meta">
+            <div class="sess-score">${avg !== '—' ? avg+'/5' : '—'}</div>
+            <div class="sess-count">${done} học viên</div>
+            <div class="sess-status ${statusClass}">${statusText}</div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  /* ── peer table ── */
+  function renderPeerTable(evals){
+    if(!DB||!criteria.length) return;
+    const head = document.getElementById('peerTableHead');
+    const body = document.getElementById('peerTableBody');
+
+    head.innerHTML = `<th>Học viên</th><th>Lớp</th>${criteria.map(c=>`<th>${c.icon} ${c.label}</th>`).join('')}<th>TB</th>`;
+
+    const students = DB.students;
+    body.innerHTML = students.map(s=>{
+      const sEvals = evals.filter(e=>e.peerId===s.id);
+      if(!sEvals.length) return `<tr><td>${s.avatar} ${s.name}</td><td>${s.classId}</td>${criteria.map(()=>'<td>—</td>').join('')}<td>—</td></tr>`;
+      const cScores = criteria.map(c=>{
+        const sc = sEvals.map(e=>e.scores?.[c.id]).filter(Boolean);
+        return sc.length ? (sc.reduce((a,b)=>a+b,0)/sc.length).toFixed(1) : '—';
+      });
+      const nums = cScores.filter(s=>s!=='—').map(Number);
+      const avg = nums.length ? (nums.reduce((a,b)=>a+b,0)/nums.length).toFixed(1) : '—';
+      const cells = cScores.map(v=>`<td>${v!=='—'?`<span class="score-pill score-${Math.round(v)}">${v}</span>`:'—'}</td>`).join('');
+      return `<tr><td>${s.avatar} ${s.name}</td><td>${s.classId}</td>${cells}<td><strong>${avg}</strong></td></tr>`;
+    }).join('');
+  }
+
+  /* ── markdown tab ── */
+  function renderMdSelect(evals){
+    const sel = document.getElementById('mdSessionSelect');
+    sel.innerHTML = '<option value="">— Chọn buổi học —</option>';  // tránh nhân đôi khi vẽ lại
+    const sessions = [...new Set(evals.map(e=>e.sessionId))].filter(Boolean).sort((a,b)=>a-b);
+    sessions.forEach(id=>{
+      const sess = DB?.sessions.find(s=>s.id==id);
+      const o = document.createElement('option');
+      o.value = id;
+      o.textContent = `Buổi ${id}${sess?' – '+sess.title:''}`;
+      sel.appendChild(o);
+    });
+    // also check latest from sessionStorage
+    const latest = sessionStorage.getItem('latest_md');
+    if(latest){
+      const o = document.createElement('option');
+      o.value = 'latest'; o.textContent = '⭐ Đánh giá vừa hoàn thành';
+      sel.insertBefore(o, sel.children[1]);
+    }
+  }
+
+  function loadMdForSession(){
+    const val = document.getElementById('mdSessionSelect').value;
+    if(!val){ document.getElementById('mdOutput').textContent='Chọn buổi học...'; return; }
+    if(val==='latest'){
+      document.getElementById('mdOutput').textContent = sessionStorage.getItem('latest_md')||'Không có dữ liệu.';
+      return;
+    }
+    // find student who did the eval
+    const key = Object.keys(localStorage).find(k=>k.includes(`_sess${val}`));
+    if(key){
+      const mdKey = key.replace('stem_eval_','stem_md_');
+      const md = localStorage.getItem(mdKey);
+      document.getElementById('mdOutput').textContent = md || generateMdForSession(val);
+    } else {
+      document.getElementById('mdOutput').textContent = 'Không tìm thấy dữ liệu cho buổi này.';
+    }
+  }
+
+  function generateMdForSession(sessId){
+    const evals = getAllEvals().filter(e=>e.sessionId==sessId);
+    const sess = DB?.sessions.find(s=>s.id==sessId);
+    const lines = [
+      `# 📊 Kết Quả Đánh Giá – Buổi ${sessId}`,
+      sess ? `*${sess.title}*` : '',
+      ``,`**Ngày xuất:** ${new Date().toLocaleDateString('vi-VN')}`,
+      `**Số lượt đánh giá:** ${evals.length}`,``,
+      `## Bảng Điểm`,``,
+      `| Học viên | ${criteria.map(c=>c.label).join(' | ')} | TB |`,
+      `|----------|${criteria.map(()=>'---').join('|')}|----|`,
+    ];
+    const peers = [...new Set(evals.map(e=>e.peerId))];
+    peers.forEach(pid=>{
+      const pEvals = evals.filter(e=>e.peerId===pid);
+      const student = DB?.students.find(s=>s.id===pid);
+      const scores = criteria.map(c=>{
+        const sc = pEvals.map(e=>e.scores?.[c.id]).filter(Boolean);
+        return sc.length?(sc.reduce((a,b)=>a+b,0)/sc.length).toFixed(1):'—';
+      });
+      const nums = scores.filter(s=>s!=='—').map(Number);
+      const avg = nums.length?(nums.reduce((a,b)=>a+b,0)/nums.length).toFixed(1):'—';
+      lines.push(`| ${student?.name||pid} | ${scores.join(' | ')} | **${avg}** |`);
+    });
+    return lines.join('\n');
+  }
+
+  function copyMd(){
+    const text = document.getElementById('mdOutput').textContent;
+    navigator.clipboard.writeText(text).then(()=>{
+      const btn = document.querySelector('.copy-btn');
+      btn.textContent='✅ Đã copy!';
+      setTimeout(()=>btn.textContent='📋 Copy',2000);
+    });
+  }
+
+  function downloadMd(){
+    const text = document.getElementById('mdOutput').textContent;
+    const val = document.getElementById('mdSessionSelect').value || 'ket-qua';
+    const blob = new Blob([text],{type:'text/markdown'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `danh-gia-buoi-${val}.md`;
+    a.click();
+  }
+
+  function switchTab(name){
+    document.querySelectorAll('.tab').forEach((t,i)=>{
+      const names=['overview','sessions','peers','markdown'];
+      t.classList.toggle('active',names[i]===name);
+    });
+    document.querySelectorAll('.tab-panel').forEach(p=>{
+      p.classList.toggle('active',p.id==='tab-'+name);
+    });
+  }
+</script>
+<script src="js/navigation.js"></script>
+</body>
+</html>

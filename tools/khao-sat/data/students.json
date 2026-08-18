@@ -1,0 +1,32 @@
+{
+  "classes": [
+    { "id": "AERO-01", "name": "AeroLLM Cohort 01", "teacher": "Giảng viên", "room": "AI Lab", "schedule": "Lịch linh hoạt" },
+    { "id": "AERO-02", "name": "AeroLLM Cohort 02", "teacher": "Giảng viên", "room": "AI Lab", "schedule": "Lịch linh hoạt" }
+  ],
+  "students": [
+    { "id": "demo-01", "name": "Học viên Demo 01", "classId": "AERO-01", "avatar": "🧑‍💻" },
+    { "id": "demo-02", "name": "Học viên Demo 02", "classId": "AERO-01", "avatar": "👩‍💻" },
+    { "id": "demo-03", "name": "Học viên Demo 03", "classId": "AERO-02", "avatar": "🧑‍💻" },
+    { "id": "demo-04", "name": "Học viên Demo 04", "classId": "AERO-02", "avatar": "👩‍💻" }
+  ],
+  "sessions": [
+    { "id": 1, "title": "Khởi động và thiết lập lab", "phase": 1 },
+    { "id": 2, "title": "Nền tảng kỹ thuật", "phase": 1 },
+    { "id": 3, "title": "Thực hành có hướng dẫn", "phase": 2 },
+    { "id": 4, "title": "Phân tích bằng chứng", "phase": 2 },
+    { "id": 5, "title": "Mini project", "phase": 3 },
+    { "id": 6, "title": "Review và remediation", "phase": 3 },
+    { "id": 7, "title": "Bài tập nâng cao", "phase": 4 },
+    { "id": 8, "title": "Đánh giá chéo", "phase": 4 },
+    { "id": 9, "title": "Hoàn thiện capstone", "phase": 5 },
+    { "id": 10, "title": "Demo và bảo vệ", "phase": 5 }
+  ],
+  "criteria": [
+    { "id": "ethics", "label": "Đạo đức & phạm vi", "icon": "🛡️", "desc": "Tuân thủ Rules of Engagement" },
+    { "id": "analysis", "label": "Phân tích kỹ thuật", "icon": "🔎", "desc": "Lập luận từ bằng chứng" },
+    { "id": "coding", "label": "Code & cấu hình", "icon": "⌨️", "desc": "Triển khai chính xác và an toàn" },
+    { "id": "problem", "label": "Giải quyết vấn đề", "icon": "🧩", "desc": "Kiểm thử và xử lý lỗi" },
+    { "id": "reporting", "label": "Báo cáo bằng chứng", "icon": "📋", "desc": "Finding, tác động và remediation" },
+    { "id": "teamwork", "label": "Hợp tác & phản biện", "icon": "🤝", "desc": "Review và phản hồi xây dựng" }
+  ]
+}

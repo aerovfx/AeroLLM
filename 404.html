@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Đang chuyển hướng · AeroLLM</title>
+  <style>
+    body{margin:0;min-height:100vh;display:grid;place-items:center;background:#030508;color:#e9ffff;font:14px monospace;text-align:center}b{color:#31f7ff}a{color:#c6ff00}
+  </style>
+</head>
+<body>
+  <main><p><b>AEROLLM://ROUTING</b></p><p id="message">Đang tìm tài liệu…</p><p><a href="/AeroLLM/#courses">Về danh sách khóa học</a></p></main>
+  <script>
+    const path = location.pathname;
+    if (path.toLowerCase().endsWith('.md')) {
+      const target = `${path.slice(0, -3)}.html${location.search}${location.hash}`;
+      document.querySelector('#message').textContent = 'Đang mở phiên bản bài học…';
+      location.replace(target);
+    } else {
+      document.querySelector('#message').textContent = 'Không tìm thấy tài liệu yêu cầu.';
+    }
+  </script>
+</body>
+</html>
