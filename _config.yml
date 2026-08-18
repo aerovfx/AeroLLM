@@ -25,7 +25,8 @@ exclude:
   - nanoGPTsource
   - nanogpt_course
   - public
-  - styles
+  - styles/main.css
+  - styles/variables.scss
   - fonts
   - icons
   - scripts
