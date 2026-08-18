@@ -32,15 +32,20 @@ Các công cụ lưu dữ liệu trong trình duyệt theo mặc định. Giáo 
 
 ## Mở nhanh các khoá học
 
-| Khoá học | Mục lục | Tuần 1 | Lịch học / bài tập |
+| Khoá học | Mục lục | Tuần 1 | Lịch học |
 |---|---|---|---|
-| nanoGPT cho lớp học | [Mở khoá](nanogpt_course/README.md) | [Bắt đầu](nanogpt_course/02_HOC_SINH/Tuan_01_Intro/01_Topic.md) | [Bài tập mã nguồn](nanogpt_course/06_BAI_TAP_MA_NGUON/index.md) |
-| Xây LLM từ đầu | [Mở khoá](courses/llm-from-scratch/INDEX.md) | [Tuần 1](courses/llm-from-scratch/lessons/week01.md) | [Lịch 20 buổi](courses/llm-from-scratch/schedule.md) |
-| Fine-tuning open-weight | [Mở khoá](courses/openweight-finetuning/INDEX.md) | [Tuần 1](courses/openweight-finetuning/lessons/week01.md) | [Lịch 20 buổi](courses/openweight-finetuning/schedule.md) |
-| Pipeline huấn luyện open-weight | [Mở khoá](courses/openweight-training-pipeline/INDEX.md) | [Tuần 1](courses/openweight-training-pipeline/lessons/week01.md) | [Lịch 20 buổi](courses/openweight-training-pipeline/schedule.md) |
-| Kimi K3 frontier systems | [Mở khoá](courses/kimi-k3-frontier-systems/INDEX.md) | [Tuần 1](courses/kimi-k3-frontier-systems/lessons/week01.md) | [Lịch 20 buổi](courses/kimi-k3-frontier-systems/schedule.md) |
+| Python & Toán cho LLM | [Mở khoá](1_Foundations/python-math-foundations-10weeks/INDEX.md) | [Tuần 1](1_Foundations/python-math-foundations-10weeks/lessons/week01.md) | [Lịch](1_Foundations/python-math-foundations-10weeks/schedule.md) |
+| Xây LLM từ đầu | [Mở khoá](2_LLM_Core/llm-from-scratch-10weeks/INDEX.md) | [Tuần 1](2_LLM_Core/llm-from-scratch-10weeks/lessons/week01.md) | [Lịch](2_LLM_Core/llm-from-scratch-10weeks/schedule.md) |
+| Fine-tuning open-weight | [Mở khoá](3_FineTuning/openweight-finetuning-10weeks/INDEX.md) | [Tuần 1](3_FineTuning/openweight-finetuning-10weeks/lessons/week01.md) | [Lịch](3_FineTuning/openweight-finetuning-10weeks/schedule.md) |
+| Pipeline huấn luyện open-weight | [Mở khoá](4_Training/openweight-training-pipeline-10weeks/INDEX.md) | [Tuần 1](4_Training/openweight-training-pipeline-10weeks/lessons/week01.md) | [Lịch](4_Training/openweight-training-pipeline-10weeks/schedule.md) |
+| AI Thực Chiến | [Mở khoá](4_Training/ai-thuc-chien-10weeks/INDEX.md) | [Tuần 1](4_Training/ai-thuc-chien-10weeks/lessons/week01.md) | [Lịch](4_Training/ai-thuc-chien-10weeks/schedule.md) |
+| Ứng dụng LLM | [Mở khoá](5_Applications/llm-applications-10weeks/INDEX.md) | [Tuần 1](5_Applications/llm-applications-10weeks/lessons/week01.md) | [Lịch](5_Applications/llm-applications-10weeks/schedule.md) |
+| Interpretability | [Mở khoá](6_Interpretability/interpretability-10weeks/INDEX.md) | [Tuần 1](6_Interpretability/interpretability-10weeks/lessons/week01.md) | [Lịch](6_Interpretability/interpretability-10weeks/schedule.md) |
+| Kimi K3 frontier systems | [Mở khoá](7_Frontier/kimi-k3-frontier-systems-10weeks/INDEX.md) | [Tuần 1](7_Frontier/kimi-k3-frontier-systems-10weeks/lessons/week01.md) | [Lịch](7_Frontier/kimi-k3-frontier-systems-10weeks/schedule.md) |
 
-[Xem toàn bộ 40 tuần của bốn khoá chuyên đề](courses/WEEK_INDEX.md) · [Yêu cầu máy tính](courses/COMPUTER_REQUIREMENTS.md)
+Ngoài ra còn khoá **nanoGPT 10 tuần** cho lớp học / học sinh THPT: [mở khoá](nanogpt_course/README.md).
+
+[Xem chỉ mục 80 tuần](courses/WEEK_INDEX.md) · [Yêu cầu máy tính](courses/COMPUTER_REQUIREMENTS.md)
 
 ## Ba cách học
 
@@ -57,8 +62,8 @@ Các công cụ lưu dữ liệu trong trình duyệt theo mặc định. Giáo 
 | [`docs/`](docs/index.md) | Bài giảng lý thuyết, bài tập và chuyên đề |
 | [`src/`](src/README.md) | Notebook, mã Python và ứng dụng trực quan |
 | [`nanogpt_course/`](nanogpt_course/README.md) | Giáo án và học liệu 10 tuần |
-| [`courses/`](courses/README.md) | Bốn khoá chuyên đề 10 tuần, code lab và đồ án |
-| [`aithucchien/`](aithucchien/README.md) | Nhánh thực chiến: dữ liệu, training, alignment, submission |
+| [`1_Foundations/` … `7_Frontier/`](courses/README.md) | Tám gói khoá `*-10weeks`, code lab, bài tập và đồ án |
+| [`tools/`](tools/) | Demo & công cụ: classroom (`khao-sat/`), web AI Thực Chiến (`ai-thuc-chien-web/`), script khoá (`course-scripts/`) |
 | [`docs/project_logs/`](docs/project_logs/) | Nhật ký và thiết kế dự án; tài liệu tham khảo, không thuộc luồng học bắt buộc |
 
 ## Vỏ site (GitHub Pages)

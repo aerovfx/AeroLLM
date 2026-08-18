@@ -40,8 +40,8 @@
           <a class="button button-ghost" href="https://github.com/aerovfx/AeroLLM" target="_blank" rel="noreferrer">Xem mã nguồn <span aria-hidden="true">↗</span></a>
         </div>
         <div class="trust-row" aria-label="Thông tin khóa học">
-          <div><strong>05</strong><span>lộ trình</span></div>
-          <div><strong>40</strong><span>tuần học</span></div>
+          <div><strong>08</strong><span>lộ trình</span></div>
+          <div><strong>80</strong><span>tuần học</span></div>
           <div><strong>100+</strong><span>bài thực hành</span></div>
         </div>
       </div>
@@ -78,9 +78,112 @@
         </div>
       </div>
       <div class="course-grid" id="course-grid">
-        <!-- Thẻ khóa học sẽ được thêm khi có nội dung lộ trình. -->
+        <article class="course-card featured" data-level="foundation" data-search="python pytorch math nền tảng foundations toan">
+          <div class="card-top"><span class="course-index">01</span><span class="badge">Nên bắt đầu</span></div>
+          <div class="course-icon">⌁</div><p class="course-meta">Nền tảng · 10 tuần</p>
+          <h3>Python & Toán cho LLM</h3><p>Đủ Python, PyTorch và toán (đạo hàm, gradient descent) để đọc và tự viết notebook mô hình ngôn ngữ.</p>
+          <div class="tags"><span>Python</span><span>PyTorch</span><span>Math</span></div>
+          <div class="learning-links" aria-label="Nội dung khóa Python & Toán cho LLM">
+            <a href="1_Foundations/python-math-foundations-10weeks/lessons/week01.html"><b>01</b><span>Lesson</span></a>
+            <a href="1_Foundations/python-math-foundations-10weeks/code/week01/README.html"><b>02</b><span>Code</span></a>
+            <a href="1_Foundations/python-math-foundations-10weeks/exercises/week01/README.html"><b>03</b><span>Exercise</span></a>
+            <a href="1_Foundations/python-math-foundations-10weeks/projects/final_project.html"><b>04</b><span>Project</span></a>
+          </div>
+          <a class="roadmap-link" href="1_Foundations/python-math-foundations-10weeks/INDEX.html">Xem toàn bộ lộ trình <span>→</span></a>
+        </article>
+        <article class="course-card" data-level="foundation" data-search="gpt transformer build từ đầu llm from scratch attention">
+          <div class="card-top"><span class="course-index">02</span><span class="badge badge-dark">Cốt lõi</span></div>
+          <div class="course-icon">⌬</div><p class="course-meta">Nền tảng · 10 tuần</p>
+          <h3>Xây LLM từ đầu</h3><p>Tự cài đặt GPT từ tokenization, embedding, causal attention đến huấn luyện và sinh văn bản.</p>
+          <div class="tags"><span>GPT</span><span>Transformer</span><span>Training</span></div>
+          <div class="learning-links" aria-label="Nội dung khóa Xây LLM từ đầu">
+            <a href="2_LLM_Core/llm-from-scratch-10weeks/lessons/week01.html"><b>01</b><span>Lesson</span></a>
+            <a href="2_LLM_Core/llm-from-scratch-10weeks/code/README.html"><b>02</b><span>Code</span></a>
+            <a href="2_LLM_Core/llm-from-scratch-10weeks/exercises/week01/README.html"><b>03</b><span>Exercise</span></a>
+            <a href="2_LLM_Core/llm-from-scratch-10weeks/projects/final_project.html"><b>04</b><span>Project</span></a>
+          </div>
+          <a class="roadmap-link" href="2_LLM_Core/llm-from-scratch-10weeks/INDEX.html">Xem toàn bộ lộ trình <span>→</span></a>
+        </article>
+        <article class="course-card" data-level="advanced" data-search="fine tuning lora qlora sft open weight">
+          <div class="card-top"><span class="course-index">03</span><span class="badge badge-dark">Thực hành</span></div>
+          <div class="course-icon">◇</div><p class="course-meta">Chuyên sâu · 10 tuần</p>
+          <h3>Fine-tuning open-weight</h3><p>Thích nghi mô hình có sẵn bằng LoRA/QLoRA, SFT, DPO và đóng gói GGUF để triển khai.</p>
+          <div class="tags"><span>LoRA</span><span>QLoRA</span><span>SFT</span></div>
+          <div class="learning-links" aria-label="Nội dung khóa Fine-tuning open-weight">
+            <a href="3_FineTuning/openweight-finetuning-10weeks/lessons/week01.html"><b>01</b><span>Lesson</span></a>
+            <a href="3_FineTuning/openweight-finetuning-10weeks/code/README.html"><b>02</b><span>Code</span></a>
+            <a href="3_FineTuning/openweight-finetuning-10weeks/exercises/week01/README.html"><b>03</b><span>Exercise</span></a>
+            <a href="3_FineTuning/openweight-finetuning-10weeks/projects/final_project.html"><b>04</b><span>Project</span></a>
+          </div>
+          <a class="roadmap-link" href="3_FineTuning/openweight-finetuning-10weeks/INDEX.html">Xem toàn bộ lộ trình <span>→</span></a>
+        </article>
+        <article class="course-card" data-level="advanced" data-search="training pipeline cpt sft alignment data governance">
+          <div class="card-top"><span class="course-index">04</span><span class="badge badge-dark">Vận hành</span></div>
+          <div class="course-icon">▦</div><p class="course-meta">Chuyên sâu · 10 tuần</p>
+          <h3>Pipeline huấn luyện open-weight</h3><p>Quy trình dữ liệu → CPT/SFT → alignment → đánh giá → đóng gói và phát hành mô hình.</p>
+          <div class="tags"><span>CPT</span><span>SFT</span><span>Alignment</span></div>
+          <div class="learning-links" aria-label="Nội dung khóa Pipeline huấn luyện open-weight">
+            <a href="4_Training/openweight-training-pipeline-10weeks/lessons/week01.html"><b>01</b><span>Lesson</span></a>
+            <a href="4_Training/openweight-training-pipeline-10weeks/code/README.html"><b>02</b><span>Code</span></a>
+            <a href="4_Training/openweight-training-pipeline-10weeks/exercises/week01/README.html"><b>03</b><span>Exercise</span></a>
+            <a href="4_Training/openweight-training-pipeline-10weeks/projects/final_project.html"><b>04</b><span>Project</span></a>
+          </div>
+          <a class="roadmap-link" href="4_Training/openweight-training-pipeline-10weeks/INDEX.html">Xem toàn bộ lộ trình <span>→</span></a>
+        </article>
+        <article class="course-card" data-level="advanced" data-search="ai thuc chien training synthetic data distributed competition">
+          <div class="card-top"><span class="course-index">05</span><span class="badge badge-dark">Thực chiến</span></div>
+          <div class="course-icon">✣</div><p class="course-meta">Chuyên sâu · 10 tuần</p>
+          <h3>AI Thực Chiến</h3><p>Huấn luyện phân tán, post-training và đóng gói mô hình cho cuộc thi, kèm tài liệu Round 2–4.</p>
+          <div class="tags"><span>Training</span><span>Distributed</span><span>Competition</span></div>
+          <div class="learning-links" aria-label="Nội dung khóa AI Thực Chiến">
+            <a href="4_Training/ai-thuc-chien-10weeks/lessons/week01.html"><b>01</b><span>Lesson</span></a>
+            <a href="4_Training/ai-thuc-chien-10weeks/code/README.html"><b>02</b><span>Code</span></a>
+            <a href="4_Training/ai-thuc-chien-10weeks/projects/final_project.html"><b>03</b><span>Project</span></a>
+            <a href="4_Training/ai-thuc-chien-10weeks/references/round-2.html"><b>04</b><span>Round</span></a>
+          </div>
+          <a class="roadmap-link" href="4_Training/ai-thuc-chien-10weeks/INDEX.html">Xem toàn bộ lộ trình <span>→</span></a>
+        </article>
+        <article class="course-card" data-level="advanced" data-search="rag retrieval evaluation safety ứng dụng application">
+          <div class="card-top"><span class="course-index">06</span><span class="badge badge-dark">Ứng dụng</span></div>
+          <div class="course-icon">◉</div><p class="course-meta">Chuyên sâu · 10 tuần</p>
+          <h3>Ứng dụng LLM</h3><p>Đánh giá định lượng, xây RAG có kiểm chứng và kỹ thuật an toàn AI (red teaming, guardrails).</p>
+          <div class="tags"><span>RAG</span><span>Evaluation</span><span>Safety</span></div>
+          <div class="learning-links" aria-label="Nội dung khóa Ứng dụng LLM">
+            <a href="5_Applications/llm-applications-10weeks/lessons/week01.html"><b>01</b><span>Lesson</span></a>
+            <a href="5_Applications/llm-applications-10weeks/code/week01/README.html"><b>02</b><span>Code</span></a>
+            <a href="5_Applications/llm-applications-10weeks/exercises/week01/README.html"><b>03</b><span>Exercise</span></a>
+            <a href="5_Applications/llm-applications-10weeks/projects/final_project.html"><b>04</b><span>Project</span></a>
+          </div>
+          <a class="roadmap-link" href="5_Applications/llm-applications-10weeks/INDEX.html">Xem toàn bộ lộ trình <span>→</span></a>
+        </article>
+        <article class="course-card" data-level="advanced" data-search="interpretability circuits probing attention neurons mlp">
+          <div class="card-top"><span class="course-index">07</span><span class="badge badge-dark">Nghiên cứu</span></div>
+          <div class="course-icon">⬡</div><p class="course-meta">Chuyên sâu · 10 tuần</p>
+          <h3>Interpretability</h3><p>Khảo sát hành vi bên trong mô hình: circuits, probing, can thiệp attention/MLP và báo cáo nghiên cứu.</p>
+          <div class="tags"><span>Circuits</span><span>Probing</span><span>Attention</span></div>
+          <div class="learning-links" aria-label="Nội dung khóa Interpretability">
+            <a href="6_Interpretability/interpretability-10weeks/lessons/week01.html"><b>01</b><span>Lesson</span></a>
+            <a href="6_Interpretability/interpretability-10weeks/code/week01/README.html"><b>02</b><span>Code</span></a>
+            <a href="6_Interpretability/interpretability-10weeks/exercises/week01/README.html"><b>03</b><span>Exercise</span></a>
+            <a href="6_Interpretability/interpretability-10weeks/projects/final_project.html"><b>04</b><span>Project</span></a>
+          </div>
+          <a class="roadmap-link" href="6_Interpretability/interpretability-10weeks/INDEX.html">Xem toàn bộ lộ trình <span>→</span></a>
+        </article>
+        <article class="course-card" data-level="advanced" data-search="kimi k3 frontier architecture agents reinforcement">
+          <div class="card-top"><span class="course-index">08</span><span class="badge badge-dark">Frontier</span></div>
+          <div class="course-icon">✦</div><p class="course-meta">Chuyên sâu · 10 tuần</p>
+          <h3>Kimi K3 frontier systems</h3><p>Đọc technical report frontier, tái hiện kiến trúc KDA/AttnRes/QB và môi trường agent có verifier.</p>
+          <div class="tags"><span>Frontier</span><span>Agents</span><span>Architecture</span></div>
+          <div class="learning-links" aria-label="Nội dung khóa Kimi K3 frontier systems">
+            <a href="7_Frontier/kimi-k3-frontier-systems-10weeks/lessons/week01.html"><b>01</b><span>Lesson</span></a>
+            <a href="7_Frontier/kimi-k3-frontier-systems-10weeks/code/README.html"><b>02</b><span>Code</span></a>
+            <a href="7_Frontier/kimi-k3-frontier-systems-10weeks/exercises/week01/README.html"><b>03</b><span>Exercise</span></a>
+            <a href="7_Frontier/kimi-k3-frontier-systems-10weeks/projects/final_project.html"><b>04</b><span>Project</span></a>
+          </div>
+          <a class="roadmap-link" href="7_Frontier/kimi-k3-frontier-systems-10weeks/INDEX.html">Xem toàn bộ lộ trình <span>→</span></a>
+        </article>
       </div>
-      <p class="empty-state" id="empty-state">Lộ trình đang được chuẩn bị — nội dung sẽ sớm được bổ sung.</p>
+      <p class="empty-state" id="empty-state" hidden>Không tìm thấy lộ trình phù hợp.</p>
     </section>
 
     <section class="classroom section" id="classroom" aria-labelledby="classroom-title">

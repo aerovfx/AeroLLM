@@ -71,7 +71,7 @@ Học theo thứ tự: embedding → positional embedding → causal attention �
 3. [Instruction tuning](docs/08_instruction_tuning/index.md)
 4. [Instruction fine-tuning, evaluation và DPO code](src/finetune/ch07/README.md)
 5. [Khoá thực hành Unsloth: QLoRA → SFT → deployment](docs/30_unsloth_finetuning/index.md)
-6. Mở rộng thực chiến: [training pipeline](aithucchien/README.md)
+6. Mở rộng thực chiến: [training pipeline](4_Training/ai-thuc-chien-10weeks/INDEX.md)
 
 **Đầu ra:** chuẩn bị dataset, fine-tune một mô hình, đánh giá baseline và mô tả khác biệt giữa SFT, PEFT/LoRA và preference optimization.
 
@@ -117,6 +117,6 @@ Sản phẩm tối thiểu gồm README tái lập được, notebook/script ch�
 ## Lộ trình rút gọn
 
 - **10 tuần cho lớp học:** [nanoGPT Course](nanogpt_course/README.md).
-- **Bốn khoá nghề nghiệp, 10 tuần/20 buổi:** [Xây LLM từ đầu, fine-tuning open-weight, pipeline training và Kimi K3 frontier systems](courses/README.md).
-- **Training thực chiến:** [AI Thực Chiến](aithucchien/README.md).
+- **Tám khoá 10 tuần:** [Python & Toán, Xây LLM từ đầu, fine-tuning open-weight, pipeline training, AI Thực Chiến, ứng dụng LLM, interpretability và Kimi K3 frontier systems](courses/README.md).
+- **Training thực chiến:** [AI Thực Chiến](4_Training/ai-thuc-chien-10weeks/INDEX.md).
 - **Tra cứu từng tài sản:** [Chỉ mục toàn bộ nội dung](CONTENT_INDEX.md).

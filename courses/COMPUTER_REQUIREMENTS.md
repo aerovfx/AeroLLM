@@ -52,7 +52,7 @@ Dung lượng thực tế phụ thuộc model, precision, sequence length, batch
 ## Kiểm tra nhanh
 
 ```bash
-python courses/tools/check_environment.py
+python tools/course-scripts/check_environment.py
 ```
 
 Script chỉ thu thập thông tin và đưa khuyến nghị; không cài package, tải model hoặc thay đổi hệ thống.

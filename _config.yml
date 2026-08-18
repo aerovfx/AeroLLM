@@ -17,4 +17,35 @@ exclude:
   - .git
   - .github
   - .next
+  - node_modules
+  - skills
+  - docs
+  - src
+  - minGPT
+  - nanoGPTsource
+  - nanogpt_course
+  - public
+  - styles
+  - fonts
+  - icons
+  - scripts
+  - progress
+  - courses
+  - package.json
+  - package-lock.json
+  - tsconfig.json
+  - next.config.js
+  - next-env.d.ts
+  - postcss.config.js
+  - tailwind.config.js
+  - .gitignore
+  - .npmrc
+  - requirements.txt
+  - reward_functions.py
+  - create-font-atlas.jsm
+  - create-symbol-font.jsm
+  - LICENSE.txt
+  - CONTENT_INDEX.md
+  - COURSE.md
+  - README.md
 
